@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Zap, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -11,22 +11,23 @@ const Vente = () => {
     ];
 
     return (
-        <div className="pt-64 pb-32">
-            <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
+        <div className="pt-64 md:pt-80 pb-32">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
-                    className="max-w-4xl mb-32"
+                    className="max-w-4xl mx-auto text-center mb-32"
                 >
-                    <div className="flex items-center gap-4 mb-10">
-                        <span className="h-[2px] w-12 bg-accent-gold"></span>
+                    <div className="flex items-center justify-center gap-4 mb-10">
+                        <span className="h-[2px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                         <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Stock Direct</span>
+                        <span className="h-[2px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                     </div>
-                    <h1 className="text-6xl md:text-8xl font-black mb-12 uppercase leading-[0.85] tracking-tighter">
+                    <h1 className="text-5xl md:text-8xl font-black mb-12 uppercase leading-[1.1] tracking-tighter">
                         DÉCOUVREZ LE <br /><span className="gold-gradient">CATALOGUE</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-white/50 max-w-2xl font-light leading-relaxed">
+                    <p className="text-lg md:text-xl text-white/50 mx-auto max-w-2xl font-light leading-relaxed">
                         Consultez notre stock de véhicules d'exception, certifiés par notre laboratoire de précision.
                     </p>
                 </motion.div>
@@ -102,4 +103,4 @@ const Vente = () => {
     );
 };
 
-export default Vente;
+export default memo(Vente);

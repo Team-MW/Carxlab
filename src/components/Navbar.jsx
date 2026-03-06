@@ -29,14 +29,14 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-black/95 backdrop-blur-2xl border-b border-white/5 py-3' : 'bg-transparent py-10'}`}>
-                <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex justify-between items-center">
+            <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${isScrolled ? 'bg-black/95 backdrop-blur-3xl border-b border-white/5 py-3' : 'bg-transparent py-8'}`}>
+                <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
                     <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        <img src={logo} alt="Carxlab" className="h-10 md:h-12 object-contain" />
+                        <img src={logo} alt="Carxlab" className="h-8 md:h-10 object-contain" />
                     </Link>
 
                     {/* Desktop Nav */}
-                    <div className="hidden md:flex items-center gap-10">
+                    <div className="hidden md:flex items-center gap-8">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
@@ -46,7 +46,7 @@ const Navbar = () => {
                                 {link.name}
                             </Link>
                         ))}
-                        <button className="gold-button">Stock live</button>
+                        <button className="gold-button scale-90">Stock live</button>
                     </div>
 
                     {/* Mobile Toggle */}
