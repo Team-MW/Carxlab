@@ -1,0 +1,177 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;500;600;700;800;900&display=swap');
+
+@theme {
+  --color-accent-gold: #d4af37;
+  --font-sans: 'Outfit', sans-serif;
+}
+
+:root {
+  --bg-color: #050505;
+  --bg-card: #0a0a0a;
+  --accent-gold: #d4af37;
+  --accent-gold-glow: 0 0 15px rgba(212, 175, 55, 0.4), 0 0 40px rgba(212, 175, 55, 0.1);
+  --text-main: #ffffff;
+  --text-dim: rgba(255, 255, 255, 0.6);
+  --glass-bg: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --neon-gold-glow: 0 0 20px rgba(212, 175, 55, 0.5), 0 0 40px rgba(212, 175, 55, 0.1);
+}
+
+/* Global Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Utility */
+.gold-gradient {
+  background: linear-gradient(135deg, #f1c40f 0%, #d4af37 50%, #b28e0e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Layout Components */
+.section-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 100px 24px;
+}
+
+/* UI Elements */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+}
+
+.neon-border {
+  border: 1px solid var(--accent-gold);
+  box-shadow: var(--neon-gold-glow);
+}
+
+.gold-button {
+  background: linear-gradient(135deg, #f1c40f 0%, #d4af37 100%);
+  color: #000;
+  padding: 18px 40px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+  border: none;
+  cursor: pointer;
+}
+
+.gold-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+}
+
+.gold-button-outline {
+  background: transparent;
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+  padding: 18px 40px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.gold-button-outline:hover {
+  background: var(--accent-gold);
+  color: #000;
+  box-shadow: var(--neon-gold-glow);
+}
+
+/* Lab Aesthetics */
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.scan-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  box-shadow: 0 0 10px var(--accent-gold);
+  z-index: 99;
+  opacity: 0.1;
+  pointer-events: none;
+  animation: scan-line 8s linear infinite;
+}
+
+.lab-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(212, 175, 55, 0.03) 1px, transparent 0);
+  background-size: 60px 60px;
+}
+
+/* Transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 600ms, transform 600ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 600ms, transform 600ms;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
