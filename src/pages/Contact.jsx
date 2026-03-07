@@ -1,89 +1,104 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
+import FAQ from '../components/FAQ';
 
 const Contact = () => {
+    const MotionDiv = motion.div;
     return (
-        <div className="pt-64 md:pt-80 pb-32">
-            <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1 }}
-                    className="max-w-4xl mx-auto text-center mb-32"
-                >
-                    <div className="flex items-center justify-center gap-4 mb-10">
-                        <span className="h-[2px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
-                        <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Communication Hub</span>
-                        <span className="h-[2px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
-                    </div>
-                    <h1 className="text-5xl md:text-8xl font-black mb-12 uppercase leading-[1.1] tracking-tighter">
-                        ENTREZ DANS LE <br /><span className="gold-gradient">LABORATOIRE</span>
-                    </h1>
-                    <p className="text-lg md:text-xl text-white/50 mx-auto max-w-2xl font-light leading-relaxed">
-                        Besoin d'une expertise ? D'une estimation ? Ou d'une recherche personnalisée ? Nos experts vous répondent sous 24h.
-                    </p>
-                </motion.div>
+        <div className="relative">
+            <section className="page-hero">
+                <div className="absolute top-0 right-0 w-[60%] h-[100%] bg-accent-gold/5 blur-[150px] -translate-y-1/2 pointer-events-none" />
 
-                <div className="flex flex-col items-center">
-                    {/* Centered Info & Form */}
-                    <div className="w-full max-w-5xl space-y-24">
-                        <div className="grid md:grid-cols-3 gap-8">
-                            {[
-                                { label: 'Prendre RDV', value: '+33 1 42 67 89 00', icon: <Phone size={24} /> },
-                                { label: 'Support & Expertise', value: 'contact@carxlab.fr', icon: <Mail size={24} /> },
-                                { label: 'Notre Bureau', value: '75008 Paris, France', icon: <MapPin size={24} /> }
-                            ].map((item, i) => (
-                                <div key={i} className="glass-panel p-10 flex flex-col items-center text-center group hover:neon-border transition-all">
-                                    <div className="w-16 h-16 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold mb-6 group-hover:scale-110 transition-transform">
-                                        {item.icon}
-                                    </div>
-                                    <div className="text-[10px] uppercase tracking-[0.4em] font-black text-white/20 mb-2">{item.label}</div>
-                                    <div className="text-xl font-black text-white group-hover:text-accent-gold transition-colors">{item.value}</div>
-                                </div>
-                            ))}
+                <div className="main-container relative z-10 flex-center-col">
+                    <MotionDiv
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1 }}
+                        className="max-w-6xl"
+                    >
+                        <div className="flex-center gap-4 mb-10">
+                            <span className="h-[1px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
+                            <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Communication Hub</span>
+                            <span className="h-[1px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                         </div>
+                        <h1 className="hero-title mb-12">
+                            REJOINDRE LE <br /><span className="gold-gradient">LABORATOIRE</span>
+                        </h1>
+                        <p className="text-lg md:text-2xl text-white/40 mx-auto max-w-2xl font-light leading-relaxed">
+                            Besoin d'une expertise ? D'une estimation ? Ou d'une recherche personnalisée ? Nos ingénieurs vous répondent sous 24h.
+                        </p>
+                    </MotionDiv>
+                </div>
+            </section>
 
-                        <div className="grid lg:grid-cols-2 gap-12">
-                            <div className="glass-panel p-12 border-l-4 border-l-accent-gold bg-black/40">
-                                <h4 className="text-xl font-black mb-8 uppercase tracking-[0.2em]">Horaires du Lab</h4>
-                                <div className="space-y-4">
-                                    {['Lundi - Vendredi', 'Samedi', 'Dimanche'].map((day, i) => (
-                                        <div key={i} className="flex justify-between items-center text-lg border-b border-white/5 pb-4">
-                                            <span className="text-white font-bold">{day}</span>
-                                            <span className="text-white/40">{day === 'Dimanche' ? 'Fermé' : '09h - 19h'}</span>
+            <section className="section-padding">
+                <div className="main-container">
+                    <div className="grid lg:grid-cols-12 gap-16 items-start">
+                        {/* Left Side: Contact Info & Schedule */}
+                        <div className="lg:col-span-12 xl:col-span-5 space-y-12">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-6">
+                                {[
+                                    { label: 'Prendre RDV', value: '+33 1 42 67 89 00', icon: <Phone size={20} /> },
+                                    { label: 'Support & Expertise', value: 'contact@carxlab.fr', icon: <Mail size={20} /> },
+                                    { label: 'Notre Bureau', value: '75008 Paris, France', icon: <MapPin size={20} /> }
+                                ].map((item, i) => (
+                                    <div key={i} className="glass-panel p-8 flex items-center gap-8 group hover:neon-border transition-all duration-500 rounded-2xl">
+                                        <div className="w-14 h-14 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold flex-shrink-0 group-hover:scale-110 transition-transform">
+                                            {item.icon}
+                                        </div>
+                                        <div>
+                                            <div className="text-[9px] uppercase tracking-[0.4em] font-black text-white/20 mb-1">{item.label}</div>
+                                            <div className="text-lg font-black text-white group-hover:text-accent-gold transition-colors">{item.value}</div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="glass-panel p-10 md:p-12 border-l-4 border-l-accent-gold bg-black/40 rounded-2xl">
+                                <h4 className="text-xl font-black mb-10 uppercase tracking-[0.3em]">Horaires d'Accès</h4>
+                                <div className="space-y-6">
+                                    {[
+                                        { day: 'Lundi - Vendredi', time: '09h - 19h' },
+                                        { day: 'Samedi', time: '10h - 18h' },
+                                        { day: 'Dimanche', time: 'Fermé', highlight: true }
+                                    ].map((item, i) => (
+                                        <div key={i} className="flex justify-between items-center text-lg border-b border-white/5 pb-5">
+                                            <span className="text-white font-bold">{item.day}</span>
+                                            <span className={item.highlight ? "text-accent-gold/50" : "text-white/30"}>{item.time}</span>
                                         </div>
                                     ))}
                                 </div>
                             </div>
+                        </div>
 
-                            <div className="glass-panel p-12 neon-border bg-black/40">
-                                <div className="mb-10">
-                                    <h2 className="text-2xl font-black mb-4 uppercase tracking-widest">Lancez le Protocole</h2>
-                                    <p className="text-white/40 leading-relaxed">Remplissez le formulaire ci-dessous pour une demande de contact générale.</p>
+                        {/* Right Side: Contact Form */}
+                        <div className="lg:col-span-12 xl:col-span-7">
+                            <div className="glass-panel p-10 md:p-16 neon-border bg-black/40 rounded-[3rem]">
+                                <div className="mb-12">
+                                    <h2 className="text-3xl font-black mb-4 uppercase tracking-[0.2em]">Lancer le Protocole</h2>
+                                    <p className="text-white/30 text-lg font-light leading-relaxed">Remplissez le formulaire ci-dessous pour initier une demande de service ou d'information.</p>
                                 </div>
 
-                                <form className="space-y-8">
+                                <form className="space-y-10">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                        <div className="space-y-4">
-                                            <input type="text" className="w-full bg-white/5 border border-white/10 p-5 rounded-lg focus:border-accent-gold outline-none text-white/80 transition-all" placeholder="Nom Complet" />
-                                        </div>
-                                        <div className="space-y-4">
-                                            <select className="w-full bg-white/5 border border-white/10 p-5 rounded-lg focus:border-accent-gold outline-none text-white/80 transition-all appearance-none">
-                                                <option className="bg-[#0a0a0a]">Expertise Véhicule</option>
-                                                <option className="bg-[#0a0a0a]">Achat / Reprise</option>
-                                            </select>
-                                        </div>
+                                        <input type="text" className="w-full bg-white/5 border border-white/10 p-6 rounded-xl focus:border-accent-gold outline-none text-white transition-all text-sm uppercase tracking-widest" placeholder="votre nom" />
+                                        <select className="w-full bg-[#111] border border-white/10 p-6 rounded-xl focus:border-accent-gold outline-none text-white/60 transition-all appearance-none text-sm uppercase tracking-widest bg-white/5">
+                                            <option>Expertise complète</option>
+                                            <option>Achat / Sourcing</option>
+                                            <option>Vente / Reprise</option>
+                                        </select>
                                     </div>
-                                    <input type="email" className="w-full bg-white/5 border border-white/10 p-5 rounded-lg focus:border-accent-gold outline-none text-white/80 transition-all" placeholder="Votre Email" />
-                                    <textarea rows="4" className="w-full bg-white/5 border border-white/10 p-5 rounded-lg focus:border-accent-gold outline-none text-white/80 transition-all" placeholder="Votre message détaillé..."></textarea>
-                                    <button type="submit" className="gold-button w-full py-5 text-lg tracking-[0.2em] font-black">LANCER LE PROTOCOLE</button>
+                                    <input type="email" className="w-full bg-white/5 border border-white/10 p-6 rounded-xl focus:border-accent-gold outline-none text-white transition-all text-sm uppercase tracking-widest" placeholder="votre email" />
+                                    <textarea rows="4" className="w-full bg-white/5 border border-white/10 p-6 rounded-xl focus:border-accent-gold outline-none text-white transition-all text-sm uppercase tracking-widest" placeholder="votre message..."></textarea>
+                                    <button type="submit" className="gold-button w-full py-8 text-sm tracking-[0.4em] font-black mt-4">INITIER LE PROTOCOLE</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
+            <FAQ />
         </div>
     );
 };
