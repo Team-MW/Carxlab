@@ -91,7 +91,31 @@ const Expertise = () => {
                     </div>
                 </div>
             </section>
-            <FAQ />
+            <FAQ
+                subtitle="Questions sur notre protocole d'expertise automobile unique."
+                items={[
+                    {
+                        question: "En quoi consiste le protocole d'expertise CarXLab en 256 points ?",
+                        answer: "Notre protocole analyse exhaustivement chaque véhicule : structure de carrosserie par mesure d'épaisseur de peinture, lecture complète des calculateurs électroniques, diagnostic mécanique du moteur et de la transmission, contrôle du châssis et des trains roulants. Chaque point est documenté photographiquement dans un dossier digital sécurisé."
+                    },
+                    {
+                        question: "Comment détectez-vous les accidents non déclarés ?",
+                        answer: "Nous utilisons des jauges d'épaisseur de peinture à induction magnétique pour détecter les zones repeintes ou résiniées. Combiné à l'analyse structurelle par points de mesure multi-axes, il est impossible de dissimuler un choc significatif. Nous croisons également ces données avec l'historique VIN du véhicule."
+                    },
+                    {
+                        question: "Qu'est-ce que le séquençage électronique et pourquoi est-il essentiel ?",
+                        answer: "Le séquençage électronique consiste à connecter nos outils de diagnostic professionnels à l'ensemble des calculateurs du véhicule (moteur, ABS, airbags, boîte de vitesses, etc.) pour vérifier la cohérence des données, détecter les falsifications de kilométrage et identifier les pannes cachées ou les témoins lumineux réinitialisés."
+                    },
+                    {
+                        question: "Combien de temps dure une expertise CarXLab ?",
+                        answer: "Une expertise complète dure entre 3 et 6 heures selon la complexité du véhicule. Nous ne prenons aucun raccourci : chaque point de contrôle est réalisé avec la même rigueur. Le rapport complet est remis sous 48h après l'expertise physique."
+                    },
+                    {
+                        question: "Le certificat d'expertise CarXLab est-il reconnu par les assureurs ?",
+                        answer: "Notre certificat Lab est reconnu par plusieurs compagnies d'assurance partenaires qui proposent des tarifs préférentiels aux véhicules certifiés CarXLab. Il constitue également un argument de revente fort qui justifie une valorisation supérieure du prix de marché."
+                    }
+                ]}
+            />
         </div>
     );
 };

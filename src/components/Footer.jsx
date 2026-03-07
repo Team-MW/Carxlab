@@ -61,9 +61,9 @@ const Footer = () => {
                     © 2024 CARXLAB. ALL RIGHTS RESERVED. LAB PROTOCOL VERIFIED.
                 </p>
                 <div className="flex gap-8">
-                    {['Privacy', 'Terms', 'Legal'].map((item) => (
-                        <a key={item} href="#" className="text-[10px] uppercase tracking-[0.3em] text-white/20 hover:text-accent-gold transition-all font-bold">{item}</a>
-                    ))}
+                    <Link to="/mentions-legales" className="text-[10px] uppercase tracking-[0.3em] text-white/20 hover:text-accent-gold transition-all font-bold">Mentions Légales</Link>
+                    <Link to="/mentions-legales" className="text-[10px] uppercase tracking-[0.3em] text-white/20 hover:text-accent-gold transition-all font-bold">Confidentialité</Link>
+                    <Link to="/mentions-legales" className="text-[10px] uppercase tracking-[0.3em] text-white/20 hover:text-accent-gold transition-all font-bold">CGV</Link>
                 </div>
             </div>
         </footer>

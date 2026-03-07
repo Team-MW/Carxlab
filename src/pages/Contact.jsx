@@ -98,7 +98,31 @@ const Contact = () => {
                     </div>
                 </div>
             </section>
-            <FAQ />
+            <FAQ
+                subtitle="Réponses à vos questions pratiques pour nous contacter."
+                items={[
+                    {
+                        question: "Quel est le délai de réponse à une demande de contact ?",
+                        answer: "Nos ingénieurs répondent à toutes les demandes sous 24 heures ouvrées. Pour les demandes urgentes ou les projets avec une contrainte de temps particulière (achat imminent, vente urgente), précisez-le dans votre message et nous prioriserons votre dossier."
+                    },
+                    {
+                        question: "Comment prendre rendez-vous au laboratoire CarXLab ?",
+                        answer: "Remplissez le formulaire de contact en sélectionnant le service souhaité (expertise, achat ou vente). Vous pouvez également nous appeler directement au +33 1 42 67 89 00 du lundi au vendredi de 9h à 19h et le samedi de 10h à 18h. Un conseiller vous confirmera votre créneau dans les meilleurs délais."
+                    },
+                    {
+                        question: "Le laboratoire CarXLab est-il ouvert au grand public ?",
+                        answer: "Notre laboratoire reçoit exclusivement sur rendez-vous. Cela nous permet de dédier un expert à chaque client lors de sa visite et de garantir une qualité de service irréprochable. Les visites impromptues ne peuvent pas être garanties en termes de disponibilité."
+                    },
+                    {
+                        question: "Peut-on effectuer une expertise sur un véhicule qui n'est pas chez CarXLab ?",
+                        answer: "Oui. Nous proposons un service d'expertise indépendante : vous souhaitez acheter un véhicule d'un particulier ou d'un autre vendeur ? Nous nous déplaçons ou prenons en charge le véhicule pour un contrôle complet. Contactez-nous pour un devis personnalisé selon la localisation et le type de véhicule."
+                    },
+                    {
+                        question: "Acceptez-vous les demandes de partenariat professionnel ?",
+                        answer: "Nous sommes ouverts aux partenariats avec des professionnels de l'automobile (concessionnaires, courtiers, marchands), des sociétés de gestion de flotte et des family offices. Contactez-nous via le formulaire en sélectionnant 'Expertise complète' et précisez la nature du partenariat envisagé dans votre message."
+                    }
+                ]}
+            />
         </div>
     );
 };

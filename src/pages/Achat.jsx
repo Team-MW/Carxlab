@@ -88,7 +88,31 @@ const Achat = () => {
                     </div>
                 </div>
             </section>
-            <FAQ />
+            <FAQ
+                subtitle="Vos questions sur la vente et le rachat de votre véhicule."
+                items={[
+                    {
+                        question: "Comment obtenir une estimation de mon véhicule avec CarXLab ?",
+                        answer: "Commencez par remplir notre formulaire en ligne en décrivant votre véhicule (marque, modèle, année, kilométrage, état général). Nos experts vous contactent sous 24h avec une première offre indicative. Si elle vous convient, nous organisons un rendez-vous au laboratoire pour l'expertise physique finale."
+                    },
+                    {
+                        question: "CarXLab rachète-t-il tous types de véhicules ?",
+                        answer: "Nous nous spécialisons dans les véhicules premium et de prestige : sportives, berlines de luxe, SUV haut de gamme. Nous travaillons principalement avec des marques comme Porsche, Ferrari, Lamborghini, Mercedes AMG, BMW M, Audi RS, Range Rover et équivalents. Pour les véhicules standards, nous pouvons vous orienter vers nos partenaires."
+                    },
+                    {
+                        question: "En combien de temps suis-je payé après la vente de mon véhicule ?",
+                        answer: "Une fois l'expertise validée et le dossier administratif complété (carte grise, contrôle technique, etc.), le virement bancaire est effectué dans un délai maximum de 48 heures ouvrées. Nous nous occupons de l'intégralité des démarches administratives à votre place, sans frais supplémentaires."
+                    },
+                    {
+                        question: "Dois-je effectuer des réparations avant de vendre mon véhicule à CarXLab ?",
+                        answer: "Non. Nous rachetons les véhicules en l'état, quelle que soit leur condition. Notre offre tient compte de l'état réel du véhicule, diagnostiqué par nos experts. Il est inutile d'investir dans des réparations avant la vente : notre estimation intègre les travaux éventuels et reste toujours juste et transparente."
+                    },
+                    {
+                        question: "Quels documents dois-je fournir pour vendre mon véhicule ?",
+                        answer: "Vous aurez besoin de la carte grise du véhicule, d'un contrôle technique de moins de 6 mois (pour les véhicules de plus de 4 ans), de votre pièce d'identité et d'un relevé d'identité bancaire (RIB) pour le virement. CarXLab se charge du certificat de cession et de la déclaration de cession en ligne."
+                    }
+                ]}
+            />
         </div>
     );
 };

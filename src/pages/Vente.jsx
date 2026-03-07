@@ -103,7 +103,31 @@ const Vente = () => {
                     </div>
                 </div>
             </section>
-            <FAQ />
+            <FAQ
+                subtitle="Tout savoir sur l'achat d'un véhicule d'exception chez CarXLab."
+                items={[
+                    {
+                        question: "Comment CarXLab sélectionne-t-il les véhicules de son catalogue ?",
+                        answer: "Chaque véhicule de notre catalogue passe obligatoirement par notre Protocole Lab : expertise en 256 points, séquençage électronique complet, contrôle structural de carrosserie. Seuls les véhicules qui passent l'intégralité de notre grille d'exigence sont intégrés au stock. L'objectif est zéro mauvaise surprise pour l'acheteur."
+                    },
+                    {
+                        question: "Puis-je visiter un véhicule du catalogue avant de l'acheter ?",
+                        answer: "Absolument. Chaque achat commence par une visite au laboratoire, sur rendez-vous, pour voir et essayer le véhicule. Vous aurez également accès à son dossier digital complet (photos HD, rapports d'expertise, historique d'entretien) avant même de vous déplacer."
+                    },
+                    {
+                        question: "CarXLab propose-t-il un service de sourcing pour trouver un véhicule spécifique ?",
+                        answer: "Oui. Remplissez votre demande via notre formulaire de contact en décrivant précisément le véhicule recherché (modèle, motorisation, couleur, options, budget). Nos experts activent leur réseau européen de partenaires et de marchands pour localiser la perle rare. Ce service est sans engagement et sans frais jusqu'à ce que le véhicule soit trouvé."
+                    },
+                    {
+                        question: "Quelle garantie accompagne les véhicules achetés chez CarXLab ?",
+                        answer: "Tous nos véhicules sont livrés avec une garantie constructeur ou CarXLab minimum de 6 mois, extensible jusqu'à 24 mois. Cette garantie couvre les pièces mécaniques essentielles et vous protège contre tout vice caché non révélé par notre expertise (ce qui est extrêmement rare étant donné la rigueur de notre protocole)."
+                    },
+                    {
+                        question: "Proposez-vous des solutions de financement pour l'achat d'un véhicule ?",
+                        answer: "Oui. Nous travaillons avec des établissements financiers spécialisés dans les véhicules premium pour vous proposer des crédits classiques ou des solutions de Location avec Option d'Achat (LOA) sur mesure. Nos conseillers peuvent vous accompagner dans le montage de votre dossier financier lors de votre visite au laboratoire."
+                    }
+                ]}
+            />
         </div>
     );
 };
