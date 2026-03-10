@@ -41,28 +41,25 @@ export const processCarImage = async (carFile, backgroundUrl) => {
         ctx.drawImage(bgImg, 0, 0);
 
         // Calculer la taille et la position de la voiture
-        // On veut qu'elle occupe environ 75% de la largeur du garage
-        const targetWidth = bgImg.width * 0.75;
+        // On réduit la taille pour un rendu plus réaliste (65% de la largeur)
+        const targetWidth = bgImg.width * 0.65;
         const scale = targetWidth / carImg.width;
         const targetHeight = carImg.height * scale;
 
         // Positionner la voiture horizontalement au centre
         const x = (bgImg.width - targetWidth) / 2;
 
-        // Positionner la voiture verticalement sur le sol
-        // Le sol dans Carxlab.png commence vers le bas (environ 70% de la hauteur)
-        // On ajuste pour que les roues touchent le sol
-        const y = (bgImg.height * 0.88) - targetHeight;
+        // Positionner la voiture verticalement plus bas (94% du bas)
+        // On ajuste pour que les roues "mordent" bien sur le sol réfléchi
+        const y = (bgImg.height * 0.94) - targetHeight;
+
+        // Ajouter une ombre portée plus réaliste sous la voiture
+        ctx.shadowBlur = 40;
+        ctx.shadowColor = "rgba(0,0,0,0.6)";
+        ctx.shadowOffsetY = 15;
 
         // Dessiner la voiture par-dessus
         ctx.drawImage(carImg, x, y, targetWidth, targetHeight);
-
-        // Ajouter une petite ombre sous la carrosserie pour plus de réalisme
-        ctx.shadowBlur = 50;
-        ctx.shadowColor = "rgba(0,0,0,0.8)";
-        ctx.shadowOffsetY = 10;
-        // On redessine la voiture pour que l'ombre s'applique (optionnel mais sympa)
-        // ctx.drawImage(carImg, x, y, targetWidth, targetHeight);
 
         // 4. Convertir le canvas en File pour Cloudinary
         return new Promise((resolve) => {
