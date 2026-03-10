@@ -84,11 +84,10 @@ const AnnonceCard = ({ annonce, index = 0 }) => {
                 )}
 
                 <Link
-                    to="/contact"
+                    to={`/stock/${encodeURIComponent(annonce.id)}`}
                     className="gold-button w-full py-4 text-xs tracking-[0.3em] font-black flex items-center justify-center gap-3 rounded-xl"
                 >
-                    <Phone size={14} />
-                    NOUS CONTACTER
+                    VOIR L'ANNONCE
                 </Link>
             </div>
         </motion.div>

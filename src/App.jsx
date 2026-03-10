@@ -13,6 +13,7 @@ const Vente = lazy(() => import('./pages/Vente'));
 const Contact = lazy(() => import('./pages/Contact'));
 const MentionsLegales = lazy(() => import('./pages/MentionsLegales'));
 const Stock = lazy(() => import('./pages/Stock'));
+const AnnonceDetail = lazy(() => import('./pages/AnnonceDetail'));
 const Admin = lazy(() => import('./pages/Admin'));
 
 // Scroll to top component
@@ -44,6 +45,7 @@ const AppRoutes = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/stock" element={<Stock />} />
+        <Route path="/stock/:id" element={<AnnonceDetail />} />
         <Route path="/admin" element={<Admin />} />
       </Routes>
     </Suspense>

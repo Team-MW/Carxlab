@@ -1,4 +1,4 @@
-import removeBackground from '@imgly/background-removal';
+import { removeBackground } from '@imgly/background-removal';
 
 /**
  * Charge une image à partir d'un fichier ou d'une URL
