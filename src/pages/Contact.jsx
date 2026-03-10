@@ -17,12 +17,12 @@ const Contact = () => {
                         transition={{ duration: 1 }}
                         className="max-w-6xl"
                     >
-                        <div className="flex-center gap-4 mb-10">
-                            <span className="h-[1px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
+                        <div className="flex-center gap-6 mb-16">
+                            <span className="h-[1px] w-16 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                             <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Communication Hub</span>
-                            <span className="h-[1px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
+                            <span className="h-[1px] w-16 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                         </div>
-                        <h1 className="hero-title mb-12">
+                        <h1 className="hero-title mb-16">
                             REJOINDRE LE <br /><span className="gold-gradient">LABORATOIRE</span>
                         </h1>
                         <p className="text-lg md:text-2xl text-white/40 mx-auto max-w-2xl font-light leading-relaxed">
@@ -37,14 +37,14 @@ const Contact = () => {
                     <div className="grid lg:grid-cols-12 gap-16 items-start">
                         {/* Left Side: Contact Info & Schedule */}
                         <div className="lg:col-span-12 xl:col-span-5 space-y-12">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-8">
                                 {[
                                     { label: 'Prendre RDV', value: '+33 1 42 67 89 00', icon: <Phone size={20} /> },
                                     { label: 'Support & Expertise', value: 'contact@carxlab.fr', icon: <Mail size={20} /> },
                                     { label: 'Notre Bureau', value: '75008 Paris, France', icon: <MapPin size={20} /> }
                                 ].map((item, i) => (
                                     <div key={i} className="glass-panel p-8 flex items-center gap-8 group hover:neon-border transition-all duration-500 rounded-2xl">
-                                        <div className="w-14 h-14 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold flex-shrink-0 group-hover:scale-110 transition-transform">
+                                        <div className="w-16 h-16 rounded-2xl bg-accent-gold/10 flex items-center justify-center text-accent-gold flex-shrink-0 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(212,175,55,0.1)]">
                                             {item.icon}
                                         </div>
                                         <div>
@@ -55,8 +55,8 @@ const Contact = () => {
                                 ))}
                             </div>
 
-                            <div className="glass-panel p-10 md:p-12 border-l-4 border-l-accent-gold bg-black/40 rounded-2xl">
-                                <h4 className="text-xl font-black mb-10 uppercase tracking-[0.3em]">Horaires d'Accès</h4>
+                            <div className="glass-panel p-12 md:p-16 border-l-4 border-l-accent-gold bg-black/40 rounded-3xl mt-10">
+                                <h4 className="text-2xl font-black mb-12 uppercase tracking-[0.3em]">Horaires d'Accès</h4>
                                 <div className="space-y-6">
                                     {[
                                         { day: 'Lundi - Vendredi', time: '09h - 19h' },
@@ -74,10 +74,10 @@ const Contact = () => {
 
                         {/* Right Side: Contact Form */}
                         <div className="lg:col-span-12 xl:col-span-7">
-                            <div className="glass-panel p-10 md:p-16 neon-border bg-black/40 rounded-[3rem]">
-                                <div className="mb-12">
-                                    <h2 className="text-3xl font-black mb-4 uppercase tracking-[0.2em]">Lancer le Protocole</h2>
-                                    <p className="text-white/30 text-lg font-light leading-relaxed">Remplissez le formulaire ci-dessous pour initier une demande de service ou d'information.</p>
+                            <div className="glass-panel p-12 md:p-20 neon-border bg-black/40 rounded-[3rem]">
+                                <div className="mb-16">
+                                    <h2 className="text-4xl font-black mb-6 uppercase tracking-[0.2em]">Lancer le Protocole</h2>
+                                    <p className="text-white/30 text-xl font-light leading-loose">Remplissez le formulaire ci-dessous pour initier une demande de service ou d'information.</p>
                                 </div>
 
                                 <form className="space-y-10">
@@ -91,7 +91,7 @@ const Contact = () => {
                                     </div>
                                     <input type="email" className="w-full bg-white/5 border border-white/10 p-6 rounded-xl focus:border-accent-gold outline-none text-white transition-all text-sm uppercase tracking-widest" placeholder="votre email" />
                                     <textarea rows="4" className="w-full bg-white/5 border border-white/10 p-6 rounded-xl focus:border-accent-gold outline-none text-white transition-all text-sm uppercase tracking-widest" placeholder="votre message..."></textarea>
-                                    <button type="submit" className="gold-button w-full py-8 text-sm tracking-[0.4em] font-black mt-4">INITIER LE PROTOCOLE</button>
+                                    <button type="submit" className="gold-button w-full py-8 text-lg tracking-[0.4em] font-black mt-8">INITIER LE PROTOCOLE</button>
                                 </form>
                             </div>
                         </div>

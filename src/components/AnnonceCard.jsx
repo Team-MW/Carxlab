@@ -53,13 +53,13 @@ const AnnonceCard = ({ annonce, index = 0 }) => {
             </div>
 
             {/* Infos */}
-            <div className="p-6">
-                <h3 className="font-black text-xl uppercase tracking-tight mb-1">
+            <div className="p-8">
+                <h3 className="font-black text-2xl uppercase tracking-tight mb-2">
                     {marque} <span className="text-white/60 font-semibold">{modele}</span>
                 </h3>
 
                 {/* Specs */}
-                <div className="flex flex-wrap gap-2 my-4">
+                <div className="flex flex-wrap gap-3 my-6">
                     {km && (
                         <span className="flex items-center gap-1.5 text-[10px] tracking-widest uppercase text-white/40 bg-white/5 px-3 py-1.5 rounded-full">
                             <Gauge size={10} /> {formatKm(km)}
@@ -78,14 +78,14 @@ const AnnonceCard = ({ annonce, index = 0 }) => {
                 </div>
 
                 {description && (
-                    <p className="text-white/30 text-sm leading-relaxed line-clamp-2 mb-5 font-light">
+                    <p className="text-white/40 text-[15px] leading-loose line-clamp-2 mb-8 font-light">
                         {description}
                     </p>
                 )}
 
                 <Link
                     to="/contact"
-                    className="gold-button w-full py-3.5 text-xs tracking-[0.2em] font-black flex items-center justify-center gap-2 rounded-xl"
+                    className="gold-button w-full py-4 text-xs tracking-[0.3em] font-black flex items-center justify-center gap-3 rounded-xl"
                 >
                     <Phone size={14} />
                     NOUS CONTACTER

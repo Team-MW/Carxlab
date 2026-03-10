@@ -19,7 +19,9 @@ const Admin = lazy(() => import('./pages/Admin'));
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   React.useEffect(() => {
-    window.scrollTo(0, 0);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }, 10);
   }, [pathname]);
   return null;
 };
@@ -32,23 +34,19 @@ const PageLoader = () => (
 );
 
 const AppRoutes = () => {
-  const location = useLocation();
-
   return (
-    <AnimatePresence mode="wait">
-      <Suspense fallback={<PageLoader />}>
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
-          <Route path="/expertise" element={<Expertise />} />
-          <Route path="/achat" element={<Achat />} />
-          <Route path="/vente" element={<Vente />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/mentions-legales" element={<MentionsLegales />} />
-          <Route path="/stock" element={<Stock />} />
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
-      </Suspense>
-    </AnimatePresence>
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/expertise" element={<Expertise />} />
+        <Route path="/achat" element={<Achat />} />
+        <Route path="/vente" element={<Vente />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/mentions-legales" element={<MentionsLegales />} />
+        <Route path="/stock" element={<Stock />} />
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
+    </Suspense>
   );
 };
 

@@ -39,7 +39,6 @@ body,
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth;
 }
 
 body {
@@ -90,14 +89,21 @@ body {
 }
 
 .section-padding {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 @media (min-width: 768px) {
   .section-padding {
     padding-top: 10rem;
     padding-bottom: 10rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 14rem;
+    padding-bottom: 14rem;
   }
 }
 

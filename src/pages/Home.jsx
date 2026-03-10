@@ -65,8 +65,8 @@ const Home = () => {
                         transition={{ duration: 1.2, ease: "easeOut" }}
                         className="max-w-6xl"
                     >
-                        <div className="flex-center gap-4 mb-10">
-                            <span className="h-[1px] w-12 md:w-20 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
+                        <div className="flex-center gap-6 mb-16">
+                            <span className="h-[1px] w-16 md:w-32 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                             <span className="text-accent-gold tracking-[0.6em] font-black text-[10px] md:text-sm uppercase">Prototype V4 // Lab</span>
                             <span className="h-[1px] w-12 md:w-20 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                         </div>
@@ -76,7 +76,7 @@ const Home = () => {
                             <span className="gold-gradient">PERFECTION</span>
                         </h1>
 
-                        <div className="flex-center flex-wrap gap-6 md:gap-10">
+                        <div className="flex-center flex-wrap gap-8 md:gap-16">
                             <Link to="/vente">
                                 <button className="gold-button group gap-4">
                                     EXPLORER LE STOCK
@@ -129,11 +129,11 @@ const Home = () => {
                                 LE CONCEPT <br /><span className="gold-gradient">LAB PROTOCOL</span>
                             </h2>
 
-                            <p className="text-lg md:text-xl text-white/40 mb-14 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+                            <p className="text-lg md:text-2xl text-white/40 mb-20 font-light leading-loose max-w-xl mx-auto lg:mx-0">
                                 Un écosystème en 3 étapes conçu pour éradiquer le doute et documenter l'invisible par la donnée.
                             </p>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 md:gap-14">
                                 {[
                                     { title: "Séquençage", desc: "Lecture & cohérence des calculateurs.", icon: <Zap size={20} /> },
                                     { title: "Moléculaire", desc: "Mesure de structure et peinture.", icon: <ShieldCheck size={20} /> },
@@ -142,7 +142,7 @@ const Home = () => {
                                 ].map((feature, i) => (
                                     <div
                                         key={i}
-                                        className="glass-panel rounded-2xl border border-white/5 p-8 flex flex-col gap-5 hover:border-accent-gold/30 transition-all group"
+                                        className="glass-panel rounded-[2rem] border border-white/5 p-10 flex flex-col gap-6 hover:border-accent-gold/30 transition-all group"
                                     >
                                         <div className="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold group-hover:scale-110 transition-transform">
                                             {feature.icon}
@@ -155,7 +155,7 @@ const Home = () => {
                                 ))}
                             </div>
 
-                            <div className="mt-16 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-8">
+                            <div className="mt-24 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-10">
                                 <Link to="/expertise">
                                     <button className="gold-button px-16">PROTOCOLE</button>
                                 </Link>
@@ -217,13 +217,13 @@ const Home = () => {
             <section className="section-padding bg-black/50 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-gold/5 blur-[150px] rounded-full pointer-events-none" />
                 <div className="main-container relative z-10">
-                    <div className="flex flex-col md:flex-row items-center gap-20">
+                    <div className="flex flex-col md:flex-row items-center gap-24 xl:gap-32">
                         <div className="w-full md:w-1/2">
-                            <div className="flex items-center gap-4 mb-8">
-                                <span className="h-[2px] w-12 bg-accent-gold"></span>
+                            <div className="flex items-center gap-6 mb-12">
+                                <span className="h-[2px] w-20 bg-accent-gold"></span>
                                 <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Localisation</span>
                             </div>
-                            <h2 className="text-5xl md:text-7xl font-black mb-12 uppercase tracking-tighter leading-none">
+                            <h2 className="text-5xl md:text-7xl font-black mb-16 uppercase tracking-tighter leading-none">
                                 OÙ NOUS <br /><span className="gold-gradient">TROUVER</span>
                             </h2>
                             <div className="space-y-10">
@@ -246,7 +246,7 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="mt-16">
+                            <div className="mt-20">
                                 <a
                                     href="https://maps.google.com"
                                     target="_blank"

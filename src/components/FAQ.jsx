@@ -6,10 +6,10 @@ const FAQItem = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="border-b border-white/5 last:border-0">
+        <div className="border-b border-white/5 last:border-0 border-opacity-70">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full py-8 flex items-center justify-between text-left group transition-all"
+                className="w-full py-10 flex items-center justify-between text-left group transition-all"
                 aria-expanded={isOpen}
             >
                 <span className={`text-lg md:text-xl font-bold uppercase tracking-widest transition-colors duration-300 ${isOpen ? 'text-accent-gold' : 'text-white/70 group-hover:text-white'}`}>
@@ -28,7 +28,7 @@ const FAQItem = ({ question, answer }) => {
                         transition={{ duration: 0.4, ease: "circOut" }}
                         className="overflow-hidden"
                     >
-                        <p className="pb-10 text-white/40 leading-relaxed font-light text-lg max-w-4xl">
+                        <p className="pb-12 text-white/40 leading-loose font-light text-lg max-w-4xl">
                             {answer}
                         </p>
                     </motion.div>
@@ -81,7 +81,7 @@ const FAQ = ({ items, subtitle }) => {
                     </p>
                 </div>
 
-                <div className="max-w-5xl mx-auto glass-panel p-6 md:p-12 rounded-[3rem] border border-white/5">
+                <div className="max-w-5xl mx-auto glass-panel p-8 md:p-16 rounded-[3rem] border border-white/5 shadow-2xl">
                     {displayItems.map((item, index) => (
                         <FAQItem key={index} {...item} />
                     ))}

@@ -60,10 +60,10 @@ const Stock = () => {
                             <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Inventaire Exclusif</span>
                             <span className="h-[2px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]" />
                         </div>
-                        <h1 className="hero-title mb-8">
+                        <h1 className="hero-title mb-12">
                             STOCK <span className="gold-gradient">RÉEL</span>
                         </h1>
-                        <p className="text-white/40 text-lg font-light">
+                        <p className="text-white/40 text-xl font-light leading-relaxed">
                             Notre sélection de véhicules d'exception, disponibles immédiatement.
                         </p>
                         {!loading && (
@@ -100,8 +100,8 @@ const Stock = () => {
                         <button
                             onClick={() => setShowFilters(!showFilters)}
                             className={`flex items-center gap-2 px-4 py-3 border rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${showFilters || hasFilters
-                                    ? 'border-accent-gold/40 text-accent-gold bg-accent-gold/5'
-                                    : 'border-white/10 text-white/40 hover:border-white/20 hover:text-white/60'
+                                ? 'border-accent-gold/40 text-accent-gold bg-accent-gold/5'
+                                : 'border-white/10 text-white/40 hover:border-white/20 hover:text-white/60'
                                 }`}
                         >
                             <SlidersHorizontal size={14} />
@@ -188,7 +188,7 @@ const Stock = () => {
                                     {filtered.length} résultat{filtered.length !== 1 ? 's' : ''}
                                 </p>
                             )}
-                            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+                            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-12">
                                 {filtered.map((annonce, i) => (
                                     <AnnonceCard key={annonce.id} annonce={annonce} index={i} />
                                 ))}

@@ -24,12 +24,12 @@ const Vente = () => {
                         transition={{ duration: 1 }}
                         className="max-w-6xl"
                     >
-                        <div className="flex-center gap-4 mb-10">
-                            <span className="h-[1px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
+                        <div className="flex-center gap-6 mb-16">
+                            <span className="h-[1px] w-16 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                             <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Stock Direct</span>
-                            <span className="h-[1px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
+                            <span className="h-[1px] w-16 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                         </div>
-                        <h1 className="hero-title mb-12">
+                        <h1 className="hero-title mb-16">
                             DÉCOUVREZ LE <br /><span className="gold-gradient">CATALOGUE</span>
                         </h1>
                         <p className="text-lg md:text-2xl text-white/40 mx-auto max-w-2xl font-light leading-relaxed">
@@ -41,7 +41,7 @@ const Vente = () => {
 
             <section className="section-padding">
                 <div className="main-container">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-16">
                         {cars.map((car, i) => (
                             <MotionDiv
                                 key={i}
@@ -92,13 +92,13 @@ const Vente = () => {
                     </div>
 
                     {/* Sourcing CTA */}
-                    <div className="mt-40 p-16 md:p-24 glass-panel border-l-8 border-l-accent-gold backdrop-blur-3xl bg-black/40 text-center flex flex-col items-center gap-12 rounded-[2rem]">
+                    <div className="mt-48 p-20 md:p-32 glass-panel border-l-8 border-l-accent-gold backdrop-blur-3xl bg-black/40 text-center flex flex-col items-center gap-16 rounded-[3rem]">
                         <div className="max-w-4xl">
-                            <h2 className="text-4xl md:text-6xl font-black mb-8 uppercase tracking-tighter leading-none">VOTRE CHERCHEUR DE <span className="gold-gradient">PÉPITES</span></h2>
-                            <p className="text-xl text-white/30 font-light leading-relaxed">Vous ne trouvez pas votre bonheur dans notre catalogue ? Nos experts activent leur réseau européen pour sourcer le véhicule de vos rêves.</p>
+                            <h2 className="text-5xl md:text-7xl font-black mb-10 uppercase tracking-tighter leading-none">VOTRE CHERCHEUR DE <span className="gold-gradient">PÉPITES</span></h2>
+                            <p className="text-xl md:text-2xl text-white/30 font-light leading-loose">Vous ne trouvez pas votre bonheur dans notre catalogue ? Nos experts activent leur réseau européen pour sourcer le véhicule de vos rêves.</p>
                         </div>
                         <Link to="/contact">
-                            <button className="gold-button px-20 py-8 text-sm">LANCER UNE RECHERCHE</button>
+                            <button className="gold-button px-24 py-8 text-sm">LANCER UNE RECHERCHE</button>
                         </Link>
                     </div>
                 </div>

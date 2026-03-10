@@ -17,12 +17,12 @@ const Achat = () => {
                         transition={{ duration: 1 }}
                         className="max-w-6xl"
                     >
-                        <div className="flex-center gap-4 mb-10">
-                            <span className="h-[2px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
+                        <div className="flex-center gap-6 mb-16">
+                            <span className="h-[2px] w-16 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                             <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Estimation Lab</span>
-                            <span className="h-[2px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
+                            <span className="h-[2px] w-16 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                         </div>
-                        <h1 className="hero-title mb-12">
+                        <h1 className="hero-title mb-16">
                             VENDEZ VOTRE <br /><span className="gold-gradient">VÉHICULE</span>
                         </h1>
 
@@ -32,7 +32,7 @@ const Achat = () => {
 
             <section className="section-padding">
                 <div className="main-container">
-                    <div className="grid md:grid-cols-3 gap-8 mb-40">
+                    <div className="grid md:grid-cols-3 gap-12 mb-40">
                         {[
                             { title: "Estimation en ligne", desc: "Décrivez votre véhicule en quelques clics via notre formulaire dédié.", icon: <Search size={24} /> },
                             { title: "Expertise physique", desc: "Prenez rendez-vous dans notre laboratoire pour une validation finale.", icon: <Zap size={24} /> },
@@ -44,20 +44,20 @@ const Achat = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                                className="glass-panel p-12 hover:-translate-y-2 transition-transform duration-500 group border-t-2 border-accent-gold/20"
+                                className="glass-panel p-16 hover:-translate-y-2 transition-transform duration-500 group border-t-2 border-accent-gold/20 flex flex-col items-center text-center rounded-[2rem]"
                             >
-                                <div className="text-accent-gold mb-8 group-hover:scale-110 transition-transform duration-300 bg-accent-gold/10 w-fit p-4 rounded-xl">{feature.icon}</div>
-                                <h3 className="text-2xl font-black mb-4 uppercase tracking-tight">{feature.title}</h3>
-                                <p className="text-white/40 leading-relaxed font-light">{feature.desc}</p>
+                                <div className="text-accent-gold mb-10 group-hover:scale-110 transition-transform duration-300 bg-accent-gold/10 w-fit p-5 rounded-2xl">{feature.icon}</div>
+                                <h3 className="text-2xl font-black mb-6 uppercase tracking-tight">{feature.title}</h3>
+                                <p className="text-white/40 leading-loose font-light text-lg">{feature.desc}</p>
                             </MotionDiv>
                         ))}
                     </div>
 
                     {/* Form Section */}
-                    <div className="max-w-5xl mx-auto glass-panel p-10 md:p-16 neon-border bg-black/40 rounded-[3rem]">
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl font-black mb-4 uppercase tracking-widest">Lancez le Protocole d'Estimation</h2>
-                            <p className="text-white/40 max-w-lg mx-auto leading-relaxed">Remplissez ce formulaire préliminaire pour recevoir une première offre d'achat indicative de la part de nos experts.</p>
+                    <div className="max-w-5xl mx-auto glass-panel p-12 md:p-24 neon-border bg-black/40 rounded-[3rem]">
+                        <div className="text-center mb-20">
+                            <h2 className="text-4xl font-black mb-6 uppercase tracking-widest">Lancez le Protocole d'Estimation</h2>
+                            <p className="text-white/40 max-w-2xl mx-auto leading-loose text-lg">Remplissez ce formulaire préliminaire pour recevoir une première offre d'achat indicative de la part de nos experts.</p>
                         </div>
 
                         <form className="grid grid-cols-1 md:grid-cols-2 gap-10">

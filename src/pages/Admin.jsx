@@ -38,7 +38,7 @@ const Login = ({ onLogin }) => {
     };
 
     return (
-        <div className="min-h-screen bg-[var(--bg-color)] flex items-center justify-center relative overflow-hidden">
+        <div className="min-h-screen bg-[var(--bg-color)] flex items-center justify-center relative overflow-hidden pt-[var(--header-height)]">
             <div className="absolute inset-0 lab-grid opacity-50 pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent-gold/5 blur-[120px] rounded-full pointer-events-none" />
             <div className="scan-overlay" />
@@ -201,43 +201,66 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
             <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                     <div>
-                        <label className={labelCls}>Marque *</label>
-                        <select value={form.marque} onChange={set('marque')} required className={inputCls}>
-                            <option value="">Sélectionner</option>
-                            {MARQUES.map((m) => <option key={m} value={m}>{m}</option>)}
-                        </select>
+                        <label className={labelCls}>Marque</label>
+                        <input
+                            type="text"
+                            value={form.marque}
+                            onChange={set('marque')}
+                            list="marques-list"
+                            placeholder="Ex: Porsche"
+                            className={inputCls}
+                        />
+                        <datalist id="marques-list">
+                            {MARQUES.map((m) => <option key={m} value={m} />)}
+                        </datalist>
                     </div>
                     <div>
-                        <label className={labelCls}>Modèle *</label>
-                        <input type="text" value={form.modele} onChange={set('modele')} required placeholder="911 GT3" className={inputCls} />
+                        <label className={labelCls}>Modèle</label>
+                        <input type="text" value={form.modele} onChange={set('modele')} placeholder="Ex: 911 GT3" className={inputCls} />
                     </div>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                     <div>
-                        <label className={labelCls}>Année *</label>
-                        <input type="number" value={form.annee} onChange={set('annee')} required placeholder="2022" min="1990" max="2026" className={inputCls} />
+                        <label className={labelCls}>Année</label>
+                        <input type="number" value={form.annee} onChange={set('annee')} placeholder="Ex: 2022" className={inputCls} />
                     </div>
                     <div>
-                        <label className={labelCls}>Kilométrage *</label>
-                        <input type="number" value={form.km} onChange={set('km')} required placeholder="15000" className={inputCls} />
+                        <label className={labelCls}>Kilométrage</label>
+                        <input type="number" value={form.km} onChange={set('km')} placeholder="Ex: 15000" className={inputCls} />
                     </div>
                 </div>
                 <div>
                     <label className={labelCls}>Prix (€) *</label>
-                    <input type="number" value={form.prix} onChange={set('prix')} required placeholder="120000" className={inputCls} />
+                    <input type="number" value={form.prix} onChange={set('prix')} required placeholder="Ex: 120000" className={inputCls} />
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                     <div>
                         <label className={labelCls}>Carburant</label>
-                        <select value={form.carburant} onChange={set('carburant')} className={inputCls}>
-                            {CARBURANTS.map((c) => <option key={c} value={c}>{c}</option>)}
-                        </select>
+                        <input
+                            type="text"
+                            value={form.carburant}
+                            onChange={set('carburant')}
+                            list="carburants-list"
+                            placeholder="Ex: Essence"
+                            className={inputCls}
+                        />
+                        <datalist id="carburants-list">
+                            {CARBURANTS.map((c) => <option key={c} value={c} />)}
+                        </datalist>
                     </div>
                     <div>
                         <label className={labelCls}>Boîte</label>
-                        <select value={form.transmission} onChange={set('transmission')} className={inputCls}>
-                            {TRANSMISSIONS.map((t) => <option key={t} value={t}>{t}</option>)}
-                        </select>
+                        <input
+                            type="text"
+                            value={form.transmission}
+                            onChange={set('transmission')}
+                            list="transmissions-list"
+                            placeholder="Ex: Automatique"
+                            className={inputCls}
+                        />
+                        <datalist id="transmissions-list">
+                            {TRANSMISSIONS.map((t) => <option key={t} value={t} />)}
+                        </datalist>
                     </div>
                 </div>
                 <div>
@@ -321,12 +344,12 @@ const AdminDashboard = ({ onLogout }) => {
     };
 
     return (
-        <div className="min-h-screen bg-[var(--bg-color)] relative">
+        <div className="min-h-screen bg-[var(--bg-color)] relative pt-[var(--header-height)]">
             <div className="absolute inset-0 lab-grid opacity-20 pointer-events-none" />
             <div className="scan-overlay" />
 
             {/* Header */}
-            <header className="sticky top-0 z-50 border-b border-white/5 bg-black/70 backdrop-blur-xl">
+            <header className="sticky top-[var(--header-height)] z-50 border-b border-white/5 bg-black/70 backdrop-blur-xl">
                 <div className="main-container py-4 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg bg-accent-gold/10 border border-accent-gold/30 flex-center">
