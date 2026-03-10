@@ -9,7 +9,6 @@ import MainLayout from './layouts/MainLayout';
 const Home = lazy(() => import('./pages/Home'));
 const Expertise = lazy(() => import('./pages/Expertise'));
 const Achat = lazy(() => import('./pages/Achat'));
-const Vente = lazy(() => import('./pages/Vente'));
 const Contact = lazy(() => import('./pages/Contact'));
 const MentionsLegales = lazy(() => import('./pages/MentionsLegales'));
 const Stock = lazy(() => import('./pages/Stock'));
@@ -41,7 +40,6 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/expertise" element={<Expertise />} />
         <Route path="/achat" element={<Achat />} />
-        <Route path="/vente" element={<Vente />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/stock" element={<Stock />} />

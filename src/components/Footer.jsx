@@ -47,7 +47,7 @@ const Footer = () => {
                             {[
                                 { name: 'Expertise Lab', path: '/expertise' },
                                 { name: 'Achat Express', path: '/achat' },
-                                { name: 'Vente Premium', path: '/vente' },
+                                { name: 'Stock Réel', path: '/stock' },
                                 { name: 'Solutions Financement', path: '/contact' }
                             ].map((item) => (
                                 <li key={item.name}>

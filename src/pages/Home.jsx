@@ -77,14 +77,14 @@ const Home = () => {
                         </h1>
 
                         <div className="flex-center flex-wrap gap-8 md:gap-16">
-                            <Link to="/vente">
-                                <button className="gold-button group gap-4">
+                            <Link to="/stock" className="flex-1 sm:flex-none">
+                                <button className="gold-button group gap-4 w-full">
                                     EXPLORER LE STOCK
                                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                 </button>
                             </Link>
-                            <Link to="/expertise">
-                                <button className="gold-button-outline px-12">
+                            <Link to="/expertise" className="flex-1 sm:flex-none">
+                                <button className="gold-button-outline px-12 w-full">
                                     NOS MÉTHODES
                                 </button>
                             </Link>
@@ -242,7 +242,7 @@ const Home = () => {
                                     </div>
                                     <div>
                                         <h4 className="text-white font-black uppercase tracking-widest mb-2">Ligne Directe</h4>
-                                        <p className="text-white/40 text-lg font-light leading-relaxed">+33 1 42 67 89 00<br />Expertise & Vente</p>
+                                        <p className="text-white/40 text-lg font-light leading-relaxed">+33 1 42 67 89 00<br />Expertise & Stock</p>
                                     </div>
                                 </div>
                             </div>
@@ -302,7 +302,7 @@ const Home = () => {
                             <Link to="/contact" className="w-full md:w-auto">
                                 <button className="gold-button w-full px-24 py-8 text-sm">PRENDRE RENDEZ-VOUS</button>
                             </Link>
-                            <Link to="/vente" className="w-full md:w-auto">
+                            <Link to="/stock" className="w-full md:w-auto">
                                 <button className="gold-button-outline w-full px-24 py-8 text-sm">CATALOGUE LIVE</button>
                             </Link>
                         </div>

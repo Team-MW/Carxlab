@@ -114,7 +114,7 @@ const AnnonceDetail = () => {
 
                     {/* Droite : Infos & Achat */}
                     <div className="lg:col-span-5 space-y-8">
-                        <div className="sticky top-[calc(var(--header-height)+100px)]">
+                        <div className="lg:sticky lg:top-[calc(var(--header-height)+40px)]">
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
