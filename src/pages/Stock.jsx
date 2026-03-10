@@ -4,12 +4,16 @@ import { Search, SlidersHorizontal, X, Car } from 'lucide-react';
 import AnnonceCard from '../components/AnnonceCard';
 
 const CARBURANTS = ['Essence', 'Diesel', 'Hybride', 'Hybride Rechargeable', 'Électrique'];
+const TRANSMISSIONS = ['Automatique', 'Manuelle'];
 
 const Stock = () => {
     const [annonces, setAnnonces] = useState([]);
+    const [marquesDisponibles, setMarquesDisponibles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
+    const [filterMarque, setFilterMarque] = useState('');
     const [filterCarburant, setFilterCarburant] = useState('');
+    const [filterTransmission, setFilterTransmission] = useState('');
     const [filterMaxPrix, setFilterMaxPrix] = useState('');
     const [showFilters, setShowFilters] = useState(false);
 
@@ -18,7 +22,12 @@ const Stock = () => {
             try {
                 const res = await fetch('/api/annonces');
                 const data = await res.json();
-                setAnnonces(data.annonces || []);
+                const list = data.annonces || [];
+                setAnnonces(list);
+
+                // Extraire les marques uniques pour le filtre
+                const uniqueMarques = [...new Set(list.map(a => a.marque).filter(Boolean))].sort();
+                setMarquesDisponibles(uniqueMarques);
             } catch (err) {
                 console.error('Erreur chargement stock:', err);
             }
@@ -29,16 +38,20 @@ const Stock = () => {
 
     const filtered = annonces.filter((a) => {
         const matchSearch = !search || `${a.marque} ${a.modele}`.toLowerCase().includes(search.toLowerCase());
+        const matchMarque = !filterMarque || a.marque === filterMarque;
         const matchCarburant = !filterCarburant || a.carburant === filterCarburant;
+        const matchTransmission = !filterTransmission || a.transmission === filterTransmission;
         const matchPrix = !filterMaxPrix || Number(a.prix) <= Number(filterMaxPrix);
-        return matchSearch && matchCarburant && matchPrix;
+        return matchSearch && matchMarque && matchCarburant && matchTransmission && matchPrix;
     });
 
-    const hasFilters = search || filterCarburant || filterMaxPrix;
+    const hasFilters = search || filterMarque || filterCarburant || filterTransmission || filterMaxPrix;
 
     const clearFilters = () => {
         setSearch('');
+        setFilterMarque('');
         setFilterCarburant('');
+        setFilterTransmission('');
         setFilterMaxPrix('');
     };
 
@@ -125,14 +138,28 @@ const Stock = () => {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            className="flex flex-wrap gap-4 mt-4 pt-4 border-t border-white/5"
+                            className="flex flex-wrap gap-x-8 gap-y-4 mt-6 pt-6 border-t border-white/5"
                         >
-                            <div className="flex items-center gap-2">
-                                <label className="text-[10px] tracking-widest uppercase text-white/40">Carburant</label>
+                            <div className="flex flex-col gap-2 min-w-[140px]">
+                                <label className="text-[9px] tracking-[0.2em] font-black uppercase text-accent-gold/60 ml-1">Marque</label>
+                                <select
+                                    value={filterMarque}
+                                    onChange={(e) => setFilterMarque(e.target.value)}
+                                    className="bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl text-white/70 text-sm focus:border-accent-gold outline-none cursor-pointer transition-all hover:bg-white/10"
+                                >
+                                    <option value="">Toutes</option>
+                                    {marquesDisponibles.map((m) => (
+                                        <option key={m} value={m}>{m}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="flex flex-col gap-2 min-w-[140px]">
+                                <label className="text-[9px] tracking-[0.2em] font-black uppercase text-accent-gold/60 ml-1">Carburant</label>
                                 <select
                                     value={filterCarburant}
                                     onChange={(e) => setFilterCarburant(e.target.value)}
-                                    className="bg-white/5 border border-white/10 px-3 py-2 rounded-lg text-white/70 text-sm focus:border-accent-gold outline-none"
+                                    className="bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl text-white/70 text-sm focus:border-accent-gold outline-none cursor-pointer transition-all hover:bg-white/10"
                                 >
                                     <option value="">Tous</option>
                                     {CARBURANTS.map((c) => (
@@ -140,15 +167,30 @@ const Stock = () => {
                                     ))}
                                 </select>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <label className="text-[10px] tracking-widest uppercase text-white/40">Prix max</label>
+
+                            <div className="flex flex-col gap-2 min-w-[140px]">
+                                <label className="text-[9px] tracking-[0.2em] font-black uppercase text-accent-gold/60 ml-1">Boîte</label>
+                                <select
+                                    value={filterTransmission}
+                                    onChange={(e) => setFilterTransmission(e.target.value)}
+                                    className="bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl text-white/70 text-sm focus:border-accent-gold outline-none cursor-pointer transition-all hover:bg-white/10"
+                                >
+                                    <option value="">Toutes</option>
+                                    {TRANSMISSIONS.map((t) => (
+                                        <option key={t} value={t}>{t}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="flex flex-col gap-2 min-w-[140px]">
+                                <label className="text-[9px] tracking-[0.2em] font-black uppercase text-accent-gold/60 ml-1">Prix maximum</label>
                                 <select
                                     value={filterMaxPrix}
                                     onChange={(e) => setFilterMaxPrix(e.target.value)}
-                                    className="bg-white/5 border border-white/10 px-3 py-2 rounded-lg text-white/70 text-sm focus:border-accent-gold outline-none"
+                                    className="bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl text-white/70 text-sm focus:border-accent-gold outline-none cursor-pointer transition-all hover:bg-white/10"
                                 >
                                     <option value="">Illimité</option>
-                                    {[50000, 100000, 150000, 200000, 300000, 500000].map((p) => (
+                                    {[50000, 100000, 150000, 200000, 300000, 500000, 1000000].map((p) => (
                                         <option key={p} value={p}>{p.toLocaleString('fr-FR')} €</option>
                                     ))}
                                 </select>
