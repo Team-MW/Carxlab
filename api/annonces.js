@@ -62,7 +62,7 @@ export default async function handler(req, res) {
 
         try {
             const response = await fetch(
-                `${baseUrl}/resources/image?public_ids[]=${encodeURIComponent(publicId)}`,
+                `${baseUrl}/resources/image/upload?public_ids[]=${encodeURIComponent(publicId)}`,
                 { method: 'DELETE', headers: { Authorization: authHeader } }
             );
 

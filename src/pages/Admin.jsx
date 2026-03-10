@@ -466,26 +466,7 @@ const AdminDashboard = ({ onLogout }) => {
                                             {Number(annonce.prix).toLocaleString('fr-FR')} €
                                         </span>
 
-                                        {/* Delete */}
-                                        {deleteId === annonce.id ? (
-                                            <div className="absolute top-3 right-3 flex gap-2">
-                                                <button onClick={() => handleDelete(annonce.id)}
-                                                    className="px-3 py-1.5 bg-red-500 text-white text-xs font-bold rounded-lg">
-                                                    Confirmer
-                                                </button>
-                                                <button onClick={() => setDeleteId(null)}
-                                                    className="px-3 py-1.5 bg-black/60 text-white text-xs font-bold rounded-lg">
-                                                    Annuler
-                                                </button>
-                                            </div>
-                                        ) : (
-                                            <button
-                                                onClick={() => setDeleteId(annonce.id)}
-                                                className="absolute top-3 right-3 p-2 bg-black/60 backdrop-blur-sm text-white/30 hover:text-red-400 rounded-lg opacity-0 group-hover:opacity-100 transition-all"
-                                            >
-                                                <Trash2 size={13} />
-                                            </button>
-                                        )}
+
                                     </div>
 
                                     {/* Infos */}
@@ -506,6 +487,34 @@ const AdminDashboard = ({ onLogout }) => {
                                                 {annonce.description}
                                             </p>
                                         )}
+
+                                        {/* Nouveau bouton de suppression explicite */}
+                                        <div className="mt-6 pt-4 border-t border-white/5">
+                                            {deleteId === annonce.id ? (
+                                                <div className="flex gap-2">
+                                                    <button
+                                                        onClick={() => handleDelete(annonce.id)}
+                                                        className="flex-1 py-2.5 bg-red-500 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-lg transition-all"
+                                                    >
+                                                        Confirmer
+                                                    </button>
+                                                    <button
+                                                        onClick={() => setDeleteId(null)}
+                                                        className="flex-1 py-2.5 bg-white/5 hover:bg-white/10 text-white/40 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all"
+                                                    >
+                                                        Annuler
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <button
+                                                    onClick={() => setDeleteId(annonce.id)}
+                                                    className="w-full flex items-center justify-center gap-2 py-2.5 bg-white/5 hover:bg-white/10 text-white/40 hover:text-red-400 group/btn transition-all text-[10px] font-black uppercase tracking-widest rounded-lg"
+                                                >
+                                                    <Trash2 size={12} className="group-hover/btn:scale-110 transition-transform" />
+                                                    Supprimer l'annonce
+                                                </button>
+                                            )}
+                                        </div>
                                     </div>
                                 </motion.div>
                             ))}
