@@ -5,6 +5,8 @@ import {
     Car, AlertCircle, LogOut, RefreshCw,
 } from 'lucide-react';
 import { uploadToCloudinary } from '../services/cloudinary';
+import { processCarImage } from '../services/imageProcessor';
+import CarxlabBg from '../assets/Carxlab.png';
 
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'admin123';
 const MARQUES = ['Porsche', 'Ferrari', 'Lamborghini', 'McLaren', 'Bentley', 'Rolls-Royce',
@@ -116,24 +118,36 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
     const [imageFile, setImageFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const [uploading, setUploading] = useState(false);
+    const [processing, setProcessing] = useState(false);
     const [success, setSuccess] = useState(false);
     const fileInputRef = useRef();
 
     const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
-    const handleImageSelect = (e) => {
-        const file = e.target.files[0];
+    const handleImageChange = async (file) => {
         if (!file) return;
-        setImageFile(file);
-        setImagePreview(URL.createObjectURL(file));
+        setProcessing(true);
+        try {
+            // Traitement Magique : Suppression fond + Garage
+            const processedFile = await processCarImage(file, CarxlabBg);
+            setImageFile(processedFile);
+            setImagePreview(URL.createObjectURL(processedFile));
+        } catch (err) {
+            console.error(err);
+            alert("Erreur de traitement d'image. Utilisation de l'image originale.");
+            setImageFile(file);
+            setImagePreview(URL.createObjectURL(file));
+        }
+        setProcessing(false);
+    };
+
+    const handleImageSelect = (e) => {
+        handleImageChange(e.target.files[0]);
     };
 
     const handleDrop = (e) => {
         e.preventDefault();
-        const file = e.dataTransfer.files[0];
-        if (!file) return;
-        setImageFile(file);
-        setImagePreview(URL.createObjectURL(file));
+        handleImageChange(e.dataTransfer.files[0]);
     };
 
     const handleSubmit = async (e) => {
@@ -177,6 +191,13 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
                     className={`relative w-full aspect-[4/3] border-2 border-dashed rounded-2xl cursor-pointer transition-all overflow-hidden ${imagePreview ? 'border-accent-gold/40' : 'border-white/10 hover:border-accent-gold/30'
                         }`}
                 >
+                    {processing ? (
+                        <div className="absolute inset-0 flex-center-col gap-3 bg-black/40 backdrop-blur-sm z-50">
+                            <div className="w-10 h-10 border-2 border-accent-gold/20 border-t-accent-gold rounded-full animate-spin" />
+                            <p className="text-white font-bold text-xs uppercase tracking-widest">Détourage IA en cours...</p>
+                        </div>
+                    ) : null}
+
                     {imagePreview ? (
                         <>
                             <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
@@ -190,7 +211,7 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
                                 <Upload size={20} className="text-accent-gold" />
                             </div>
                             <p className="text-white/40 text-sm font-bold">Glissez ou cliquez</p>
-                            <p className="text-white/20 text-xs">JPG, PNG, WEBP — max 10MB</p>
+                            <p className="text-white/20 text-xs">Correction auto de l'arrière-plan active ✨</p>
                         </div>
                     )}
                 </div>
