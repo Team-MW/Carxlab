@@ -93,110 +93,102 @@ const Stock = () => {
                 </div>
             </section>
 
-            {/* Filters Bar */}
-            <div className="sticky top-[80px] md:top-[120px] z-40 bg-black/80 backdrop-blur-xl border-b border-white/5">
-                <div className="main-container py-4">
-                    <div className="flex items-center gap-3">
-                        {/* Search */}
-                        <div className="relative flex-1 max-w-sm">
-                            <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
-                            <input
-                                type="text"
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                                placeholder="Rechercher un véhicule..."
-                                className="w-full bg-white/5 border border-white/10 pl-10 pr-4 py-3 rounded-xl focus:border-accent-gold outline-none text-white/70 text-sm transition-all"
-                            />
+            {/* Luxury Control Panel */}
+            <div className="sticky top-[var(--header-height)] z-40 bg-black/95 backdrop-blur-3xl border-b border-white/5 py-8 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                <div className="main-container">
+                    <div className="flex flex-col lg:flex-row gap-8 items-center justify-between">
+
+                        {/* Search Bar: Floating Pill Design */}
+                        <div className="relative w-full lg:max-w-xl group">
+                            <div className="absolute -inset-1 bg-gradient-to-r from-accent-gold/20 to-transparent blur-md opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
+                            <div className="relative flex items-center bg-white/[0.03] border border-white/10 rounded-full px-8 py-5 focus-within:border-accent-gold/50 focus-within:bg-white/[0.05] transition-all duration-300">
+                                <Search size={22} className="text-white/10 group-focus-within:text-accent-gold transition-colors shrink-0" />
+                                <input
+                                    type="text"
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                    placeholder="MODELE, MARQUE, MOTORISATION..."
+                                    className="w-full bg-transparent border-none pl-6 text-white placeholder:text-white/10 text-[11px] font-black uppercase tracking-[0.3em] outline-none"
+                                />
+                                {search && (
+                                    <button onClick={() => setSearch('')} className="text-white/20 hover:text-white transition-colors ml-4">
+                                        <X size={18} />
+                                    </button>
+                                )}
+                            </div>
                         </div>
 
-                        {/* Filter toggle */}
-                        <button
-                            onClick={() => setShowFilters(!showFilters)}
-                            className={`flex items-center gap-2 px-4 py-3 border rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${showFilters || hasFilters
-                                ? 'border-accent-gold/40 text-accent-gold bg-accent-gold/5'
-                                : 'border-white/10 text-white/40 hover:border-white/20 hover:text-white/60'
-                                }`}
-                        >
-                            <SlidersHorizontal size={14} />
-                            Filtres {hasFilters && `(actifs)`}
-                        </button>
-
-                        {/* Clear filters */}
-                        {hasFilters && (
+                        {/* Actions Control */}
+                        <div className="flex items-center gap-6 w-full lg:w-auto">
                             <button
-                                onClick={clearFilters}
-                                className="flex items-center gap-1.5 px-3 py-3 text-white/30 hover:text-white/60 text-xs transition-colors"
+                                onClick={() => setShowFilters(!showFilters)}
+                                className={`flex-1 lg:flex-none flex items-center justify-center gap-4 px-10 py-5 rounded-full text-[10px] font-black uppercase tracking-[0.4em] transition-all duration-700 border ${showFilters || hasFilters
+                                        ? 'bg-accent-gold text-black border-accent-gold shadow-[0_0_40px_rgba(212,175,55,0.4)]'
+                                        : 'bg-white/5 text-white/40 border-white/10 hover:border-accent-gold/50 hover:text-white'
+                                    }`}
                             >
-                                <X size={12} /> Effacer
+                                <SlidersHorizontal size={18} />
+                                {showFilters ? 'FERMER LES OPTIONS' : 'PARAMÈTRES DE RECHERCHE'}
                             </button>
-                        )}
+
+                            {hasFilters && (
+                                <button
+                                    onClick={clearFilters}
+                                    className="p-5 bg-white/5 border border-white/10 rounded-full text-white/40 hover:text-red-400 transition-all hover:bg-red-500/5 group"
+                                    title="Réinitialiser"
+                                >
+                                    <RefreshCw size={20} className="group-hover:rotate-180 transition-transform duration-700" />
+                                </button>
+                            )}
+                        </div>
                     </div>
 
-                    {/* Expanded Filters */}
-                    {showFilters && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="flex flex-wrap gap-x-8 gap-y-4 mt-6 pt-6 border-t border-white/5"
-                        >
-                            <div className="flex flex-col gap-2 min-w-[140px]">
-                                <label className="text-[9px] tracking-[0.2em] font-black uppercase text-accent-gold/60 ml-1">Marque</label>
-                                <select
-                                    value={filterMarque}
-                                    onChange={(e) => setFilterMarque(e.target.value)}
-                                    className="bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl text-white/70 text-sm focus:border-accent-gold outline-none cursor-pointer transition-all hover:bg-white/10"
-                                >
-                                    <option value="">Toutes</option>
-                                    {marquesDisponibles.map((m) => (
-                                        <option key={m} value={m}>{m}</option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            <div className="flex flex-col gap-2 min-w-[140px]">
-                                <label className="text-[9px] tracking-[0.2em] font-black uppercase text-accent-gold/60 ml-1">Carburant</label>
-                                <select
-                                    value={filterCarburant}
-                                    onChange={(e) => setFilterCarburant(e.target.value)}
-                                    className="bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl text-white/70 text-sm focus:border-accent-gold outline-none cursor-pointer transition-all hover:bg-white/10"
-                                >
-                                    <option value="">Tous</option>
-                                    {CARBURANTS.map((c) => (
-                                        <option key={c} value={c}>{c}</option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            <div className="flex flex-col gap-2 min-w-[140px]">
-                                <label className="text-[9px] tracking-[0.2em] font-black uppercase text-accent-gold/60 ml-1">Boîte</label>
-                                <select
-                                    value={filterTransmission}
-                                    onChange={(e) => setFilterTransmission(e.target.value)}
-                                    className="bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl text-white/70 text-sm focus:border-accent-gold outline-none cursor-pointer transition-all hover:bg-white/10"
-                                >
-                                    <option value="">Toutes</option>
-                                    {TRANSMISSIONS.map((t) => (
-                                        <option key={t} value={t}>{t}</option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            <div className="flex flex-col gap-2 min-w-[140px]">
-                                <label className="text-[9px] tracking-[0.2em] font-black uppercase text-accent-gold/60 ml-1">Prix maximum</label>
-                                <select
-                                    value={filterMaxPrix}
-                                    onChange={(e) => setFilterMaxPrix(e.target.value)}
-                                    className="bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl text-white/70 text-sm focus:border-accent-gold outline-none cursor-pointer transition-all hover:bg-white/10"
-                                >
-                                    <option value="">Illimité</option>
-                                    {[50000, 100000, 150000, 200000, 300000, 500000, 1000000].map((p) => (
-                                        <option key={p} value={p}>{p.toLocaleString('fr-FR')} €</option>
-                                    ))}
-                                </select>
-                            </div>
-                        </motion.div>
-                    )}
+                    {/* Advanced Filters Panel */}
+                    <AnimatePresence>
+                        {showFilters && (
+                            <motion.div
+                                initial={{ opacity: 0, scaleY: 0.95, y: -20 }}
+                                animate={{ opacity: 1, scaleY: 1, y: 0 }}
+                                exit={{ opacity: 0, scaleY: 0.95, y: -20 }}
+                                className="mt-12 overflow-hidden"
+                            >
+                                <div className="p-10 bg-white/[0.02] border border-white/[0.05] rounded-[3rem]">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+                                        {[
+                                            { label: 'Manufacture', value: filterMarque, setter: setFilterMarque, options: marquesDisponibles, placeholder: 'Toutes les marques' },
+                                            { label: 'Propulsion', value: filterCarburant, setter: setFilterCarburant, options: CARBURANTS, placeholder: 'Toutes motorisations' },
+                                            { label: 'Ingénierie', value: filterTransmission, setter: setFilterTransmission, options: TRANSMISSIONS, placeholder: 'Toutes les boîtes' },
+                                            { label: 'Allocation Budget', value: filterMaxPrix, setter: setFilterMaxPrix, options: [50000, 100000, 150000, 200000, 300000, 500000, 1000000], placeholder: 'No limit', isPrice: true }
+                                        ].map((f, i) => (
+                                            <div key={i} className="flex flex-col gap-4">
+                                                <div className="flex items-center gap-4">
+                                                    <span className="w-8 h-[1px] bg-accent-gold/40" />
+                                                    <h4 className="text-[10px] font-black uppercase tracking-[0.5em] text-accent-gold/60">{f.label}</h4>
+                                                </div>
+                                                <div className="relative">
+                                                    <select
+                                                        value={f.value}
+                                                        onChange={(e) => f.setter(e.target.value)}
+                                                        className="w-full bg-white/[0.03] border border-white/10 px-6 py-5 rounded-2xl text-white/80 text-[11px] font-black uppercase tracking-widest focus:border-accent-gold focus:bg-white/[0.08] outline-none cursor-pointer transition-all appearance-none"
+                                                    >
+                                                        <option value="" className="bg-black text-white/50">{f.placeholder}</option>
+                                                        {f.options.map((opt) => (
+                                                            <option key={opt} value={opt} className="bg-black text-white">
+                                                                {f.isPrice ? `${opt.toLocaleString('fr-FR')} €` : opt}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                    <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-30">
+                                                        <Car size={14} />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </div>
 
