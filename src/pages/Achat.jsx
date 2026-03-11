@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Search, Zap, ShieldCheck } from 'lucide-react';
 import FAQ from '../components/FAQ';
 
@@ -30,62 +31,88 @@ const Achat = () => {
                 </div>
             </section>
 
-            <section className="section-padding">
-                <div className="main-container">
-                    <div className="grid md:grid-cols-3 gap-20 mb-40">
+            <section className="section-padding relative overflow-hidden">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-accent-gold/5 blur-[200px] pointer-events-none" />
+
+                <div className="main-container relative z-10">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16 mb-32">
                         {[
-                            { title: "Estimation en ligne", desc: "Décrivez votre véhicule en quelques clics via notre formulaire dédié.", icon: <Search size={24} /> },
-                            { title: "Expertise physique", desc: "Prenez rendez-vous dans notre laboratoire pour une validation finale.", icon: <Zap size={24} /> },
-                            { title: "Paiement sécurisé", desc: "Une fois l'expertise validée, nous procédons à un virement immédiat.", icon: <ShieldCheck size={24} /> }
+                            {
+                                title: "Estimation en ligne",
+                                desc: "Décrivez votre véhicule en quelques clics via notre protocole digital simplifié.",
+                                icon: <Search size={24} />,
+                                step: "01"
+                            },
+                            {
+                                title: "Expertise physique",
+                                desc: "Prenez rendez-vous dans notre laboratoire pour une validation technique complète.",
+                                icon: <Zap size={24} />,
+                                step: "02"
+                            },
+                            {
+                                title: "Paiement sécurisé",
+                                desc: "Une fois l'expertise validée, nous déclenchons un virement instantané.",
+                                icon: <ShieldCheck size={24} />,
+                                step: "03"
+                            }
                         ].map((feature, i) => (
                             <MotionDiv
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: i * 0.1 }}
-                                className="glass-panel p-16 hover:-translate-y-2 transition-transform duration-500 group border-t-2 border-accent-gold/20 flex flex-col items-center text-center rounded-[2rem]"
+                                transition={{ duration: 0.8, delay: i * 0.2 }}
+                                className="relative group"
                             >
-                                <div className="text-accent-gold mb-10 group-hover:scale-110 transition-transform duration-300 bg-accent-gold/10 w-fit p-5 rounded-2xl">{feature.icon}</div>
-                                <h3 className="text-2xl font-black mb-6 uppercase tracking-tight">{feature.title}</h3>
-                                <p className="text-white/40 leading-loose font-light text-lg">{feature.desc}</p>
+                                <div className="glass-panel p-10 md:p-12 lg:p-14 h-full border border-white/5 hover:border-accent-gold/20 transition-all duration-500 rounded-[2.5rem] flex flex-col gap-8 relative overflow-hidden">
+                                    {/* background numbering */}
+                                    <span className="absolute -top-4 -right-4 text-9xl font-black text-white/[0.02] pointer-events-none group-hover:text-accent-gold/[0.05] transition-colors duration-500">
+                                        {feature.step}
+                                    </span>
+
+                                    <div className="w-16 h-16 rounded-2xl bg-accent-gold/10 flex items-center justify-center text-accent-gold border border-accent-gold/20 group-hover:scale-110 group-hover:bg-accent-gold group-hover:text-black transition-all duration-500 shadow-[0_0_20px_rgba(212,175,55,0.1)]">
+                                        {feature.icon}
+                                    </div>
+
+                                    <div className="space-y-4">
+                                        <h3 className="text-xl lg:text-2xl font-black uppercase tracking-tight text-white/90">
+                                            {feature.title}
+                                        </h3>
+                                        <p className="text-white/30 leading-relaxed font-light text-base lg:text-lg">
+                                            {feature.desc}
+                                        </p>
+                                    </div>
+                                </div>
                             </MotionDiv>
                         ))}
                     </div>
 
-                    {/* Form Section */}
-                    <div className="max-w-5xl mx-auto glass-panel p-12 md:p-24 neon-border bg-black/40 rounded-[3rem]">
-                        <div className="text-center mb-20">
-                            <h2 className="text-4xl font-black mb-6 uppercase tracking-widest">Lancez le Protocole d'Estimation</h2>
-                            <p className="text-white/40 max-w-2xl mx-auto leading-loose text-lg">Remplissez ce formulaire préliminaire pour recevoir une première offre d'achat indicative de la part de nos experts.</p>
-                        </div>
+                    {/* Contact CTA Section */}
+                    <MotionDiv
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                        className="flex flex-col items-center text-center gap-10"
+                    >
+                        <div className="w-px h-24 bg-gradient-to-b from-transparent via-accent-gold/50 to-transparent mb-4" />
 
-                        <form className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                            <div className="space-y-4">
-                                <label className="text-[10px] tracking-[0.4em] uppercase font-bold text-accent-gold ml-2">Marque & Modèle</label>
-                                <input type="text" className="w-full bg-white/5 border border-white/10 p-5 rounded-lg focus:border-accent-gold outline-none text-white/80 transition-all focus:bg-white/10" placeholder="Ex: Porsche 911 GT3" />
-                            </div>
-                            <div className="space-y-4">
-                                <label className="text-[10px] tracking-[0.4em] uppercase font-bold text-accent-gold ml-2">Année & Kilométrage</label>
-                                <input type="text" className="w-full bg-white/5 border border-white/10 p-5 rounded-lg focus:border-accent-gold outline-none text-white/80 transition-all focus:bg-white/10" placeholder="Ex: 2021 | 15,000 km" />
-                            </div>
-                            <div className="space-y-4">
-                                <label className="text-[10px] tracking-[0.4em] uppercase font-bold text-accent-gold ml-2">Votre Email</label>
-                                <input type="email" className="w-full bg-white/5 border border-white/10 p-5 rounded-lg focus:border-accent-gold outline-none text-white/80 transition-all focus:bg-white/10" placeholder="votre@email.com" />
-                            </div>
-                            <div className="space-y-4">
-                                <label className="text-[10px] tracking-[0.4em] uppercase font-bold text-accent-gold ml-2">Téléphone</label>
-                                <input type="tel" className="w-full bg-white/5 border border-white/10 p-5 rounded-lg focus:border-accent-gold outline-none text-white/80 transition-all focus:bg-white/10" placeholder="+33 6 00 00 00 00" />
-                            </div>
-                            <div className="col-span-1 md:col-span-2 space-y-4">
-                                <label className="text-[10px] tracking-[0.4em] uppercase font-bold text-accent-gold ml-2">Informations Complémentaires</label>
-                                <textarea rows="5" className="w-full bg-white/5 border border-white/10 p-5 rounded-lg focus:border-accent-gold outline-none text-white/80 transition-all focus:bg-white/10" placeholder="États du véhicule, options principales..."></textarea>
-                            </div>
-                            <div className="col-span-1 md:col-span-2">
-                                <button type="submit" className="gold-button w-full py-6 text-xl tracking-[0.2em] font-black">SOUMETTRE À L'ANALYSE</button>
-                            </div>
-                        </form>
-                    </div>
+                        <Link to="/contact">
+                            <button className="gold-button px-14 md:px-20 py-6 md:py-7 text-lg md:text-xl tracking-[0.3em] font-black group relative overflow-hidden">
+                                <span className="relative z-10">LANCER L'ESTIMATION</span>
+                                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                            </button>
+                        </Link>
+
+                        <div className="space-y-3">
+                            <p className="text-accent-gold/60 uppercase tracking-[0.4em] font-black text-[10px] md:text-xs">
+                                PROTOCOLE DE RACHAT SÉCURISÉ
+                            </p>
+                            <p className="text-white/20 uppercase tracking-[0.2em] font-medium text-[9px] md:text-[10px]">
+                                Analyse physique en laboratoire recommandée sous 48h
+                            </p>
+                        </div>
+                    </MotionDiv>
                 </div>
             </section>
             <FAQ

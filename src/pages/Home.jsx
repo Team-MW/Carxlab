@@ -112,102 +112,111 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Laboratory Experience Section */}
-            <section className="section-padding relative bg-black">
-                <div className="main-container">
+            {/* SEO Presentation Section: Achat Revente Toulouse */}
+            <section className="section-padding bg-black relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-full lab-grid opacity-10 pointer-events-none" />
+                <div className="main-container relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 xl:gap-32 items-center">
-                        <MotionDiv
+                        <motion.div
                             initial={{ opacity: 0, x: -40 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
                             className="text-center lg:text-left"
                         >
-                            <div className="inline-flex items-center justify-center p-5 rounded-full bg-accent-gold/10 border border-accent-gold/20 mb-12">
-                                <FlaskConical className="text-accent-gold" size={32} />
+                            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-accent-gold/10 border border-accent-gold/20 mb-8">
+                                <MapPin size={16} className="text-accent-gold" />
+                                <span className="text-accent-gold text-[10px] font-black uppercase tracking-[0.3em]">Garage Toulouse Haute-Garonne</span>
                             </div>
 
-                            <h2 className="text-5xl md:text-7xl font-black mb-12 uppercase tracking-tight leading-[1.1]">
-                                LE CONCEPT <br /><span className="gold-gradient">LAB PROTOCOL</span>
+                            <h2 className="text-5xl md:text-7xl font-black mb-10 uppercase tracking-tighter leading-[1.1]">
+                                VOTRE SPÉCIALISTE <br /><span className="gold-gradient">AUTO À TOULOUSE</span>
                             </h2>
 
-                            <p className="text-lg md:text-2xl text-white/40 mb-20 font-light leading-loose max-w-xl mx-auto lg:mx-0">
-                                Un écosystème en 3 étapes conçu pour éradiquer le doute et documenter l'invisible par la donnée.
+                            <p className="text-lg md:text-xl text-white/40 mb-12 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+                                CarXLab est votre partenaire de confiance pour l'<strong>achat et la revente de véhicules d'occasion</strong> et de prestige à Toulouse. Situés au cœur de la Ville Rose, nous sélectionnons pour vous les meilleures pépites automobiles en Haute-Garonne.
                             </p>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 md:gap-14">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
                                 {[
-                                    { title: "Séquençage", desc: "Lecture & cohérence des calculateurs.", icon: <Zap size={20} /> },
-                                    { title: "Moléculaire", desc: "Mesure de structure et peinture.", icon: <ShieldCheck size={20} /> },
-                                    { title: "Thermique", desc: "Détection des zones de contraintes.", icon: <Search size={20} /> },
-                                    { title: "Certifié", desc: "Dossier digital complet infalsifiable.", icon: <FlaskConical size={20} /> }
-                                ].map((feature, i) => (
+                                    {
+                                        title: "Achat Cash",
+                                        desc: "Reprise immédiate de votre véhicule au meilleur prix du marché toulousain.",
+                                        icon: <Zap size={20} />
+                                    },
+                                    {
+                                        title: "Stock Premium",
+                                        desc: "Large choix de voitures d'occasion révisées et garanties par nos experts.",
+                                        icon: <ShieldCheck size={20} />
+                                    },
+                                    {
+                                        title: "Expertise Locale",
+                                        desc: "Un service de proximité dédié aux passionnés d'automobile du 31.",
+                                        icon: <MapPin size={20} />
+                                    },
+                                    {
+                                        title: "Vente Flash",
+                                        desc: "Vendez votre voiture rapidement grâce à notre réseau de partenaires.",
+                                        icon: <Search size={20} />
+                                    }
+                                ].map((item, i) => (
                                     <div
                                         key={i}
-                                        className="glass-panel rounded-[2rem] border border-white/5 p-10 flex flex-col gap-6 hover:border-accent-gold/30 transition-all group"
+                                        className="flex flex-col gap-4 p-8 glass-panel border border-white/5 hover:border-accent-gold/30 transition-all group"
                                     >
                                         <div className="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold group-hover:scale-110 transition-transform">
-                                            {feature.icon}
+                                            {item.icon}
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-black uppercase tracking-widest text-white/90 mb-3">{feature.title}</h4>
-                                            <p className="text-sm text-white/30 leading-relaxed font-light">{feature.desc}</p>
+                                            <h4 className="text-base font-black uppercase tracking-widest text-white mb-2">{item.title}</h4>
+                                            <p className="text-xs text-white/30 leading-relaxed font-light">{item.desc}</p>
                                         </div>
                                     </div>
                                 ))}
                             </div>
 
-                            <div className="mt-12 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-10">
-                                <Link to="/expertise">
-                                    <button className="gold-button px-16">PROTOCOLE</button>
+                            <div className="mt-16 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-8">
+                                <Link to="/stock">
+                                    <button className="gold-button px-14 py-5">ACHETER UN VÉHICULE</button>
                                 </Link>
                                 <Link to="/contact">
-                                    <button className="gold-button-outline px-16">RDV LAB</button>
+                                    <button className="gold-button-outline px-14 py-5 text-accent-gold">VENDEZ VOTRE AUTO</button>
                                 </Link>
                             </div>
-                        </MotionDiv>
+                        </motion.div>
 
-                        <MotionDiv
-                            initial={{ opacity: 0, x: 40 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
+                            transition={{ duration: 1 }}
+                            className="relative lg:block"
                         >
-                            <div className="relative aspect-square md:aspect-auto md:h-[650px] w-full glass-panel neon-border overflow-hidden bg-black/40 rounded-[3rem]">
+                            <div className="relative aspect-[4/5] glass-panel rounded-[3rem] overflow-hidden border border-white/5 shadow-2xl">
                                 <div className="absolute inset-0 lab-grid opacity-20" />
-                                <div className="absolute inset-x-0 h-[2px] bg-accent-gold/20 animate-[scan-line_6s_linear_infinite]" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
 
-                                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-12">
-                                    <MotionDiv
-                                        animate={{ rotate: 360 }}
-                                        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                                        className="w-48 h-48 md:w-64 md:h-64 mb-12 rounded-full border-2 border-dashed border-accent-gold/10 flex items-center justify-center"
-                                    >
-                                        <div className="w-40 h-40 md:w-56 md:h-56 rounded-full border border-accent-gold/20 flex-center">
-                                            <FlaskConical size={72} className="text-accent-gold drop-shadow-[0_0_30px_#d4af37]" />
-                                        </div>
-                                    </MotionDiv>
-                                    <div className="text-[10px] tracking-[0.8em] text-accent-gold/40 uppercase font-black mb-6">Extraction en cours</div>
-                                    <h3 className="text-3xl md:text-5xl font-black tracking-widest uppercase">SYSTÈME ACTIF</h3>
+                                {/* Background Image placeholder - Using the hero image but stylized */}
+                                <img
+                                    src={heroImg}
+                                    className="w-full h-full object-cover opacity-60 grayscale scale-110 group-hover:scale-100 transition-all duration-1000"
+                                    alt="CarXLab Toulouse Garage"
+                                />
+
+                                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-10 z-20">
+                                    <div className="w-24 h-24 mb-8 rounded-2xl bg-accent-gold/10 border border-accent-gold/20 flex items-center justify-center animate-pulse">
+                                        <MapPin size={48} className="text-accent-gold" />
+                                    </div>
+                                    <h3 className="text-4xl font-black uppercase tracking-widest mb-4">TOULOUSE</h3>
+                                    <div className="h-[2px] w-32 bg-accent-gold/50 mb-4" />
+                                    <p className="text-white/40 text-sm font-bold tracking-[0.4em] uppercase">Secteur Haute-Garonne (31)</p>
                                 </div>
 
-                                <div className="absolute bottom-10 left-10 right-10 grid grid-cols-3 gap-6">
-                                    {[
-                                        { k: "Data", v: "256 pts" },
-                                        { k: "Time", v: "Real" },
-                                        { k: "Trust", v: "100%" }
-                                    ].map((m) => (
-                                        <div key={m.k} className="glass-panel p-5 text-center">
-                                            <div className="text-[10px] uppercase tracking-widest text-white/20 font-black mb-2">{m.k}</div>
-                                            <div className="text-white font-black">{m.v}</div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-accent-gold opacity-30" />
-                                <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-accent-gold opacity-30" />
+                                {/* Coordinate markers */}
+                                <div className="absolute top-10 left-10 text-[10px] text-accent-gold font-black tracking-[0.3em]">SITE OFFICE ID: 31000</div>
+                                <div className="absolute bottom-10 right-10 text-[10px] text-accent-gold font-black tracking-[0.3em]">SECURE TRADE ZONE</div>
                             </div>
-                        </MotionDiv>
+                        </motion.div>
                     </div>
                 </div>
             </section>
