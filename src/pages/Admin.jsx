@@ -40,7 +40,7 @@ const Login = ({ onLogin }) => {
     };
 
     return (
-        <div className="min-h-screen bg-[var(--bg-color)] flex items-center justify-center relative overflow-hidden pt-[var(--header-height)]">
+        <div className="min-h-screen bg-[var(--bg-color)] flex items-center justify-center relative overflow-hidden">
             <div className="absolute inset-0 lab-grid opacity-50 pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent-gold/5 blur-[120px] rounded-full pointer-events-none" />
             <div className="scan-overlay" />
@@ -365,20 +365,20 @@ const AdminDashboard = ({ onLogout }) => {
     };
 
     return (
-        <div className="min-h-screen bg-[var(--bg-color)] relative pt-[var(--header-height)]">
+        <div className="min-h-screen bg-[var(--bg-color)] relative">
             <div className="absolute inset-0 lab-grid opacity-20 pointer-events-none" />
             <div className="scan-overlay" />
 
             {/* Header */}
-            <header className="sticky top-[var(--header-height)] z-50 border-b border-white/5 bg-black/70 backdrop-blur-xl">
+            <header className="sticky top-0 z-50 border-b border-white/5 bg-black/80 backdrop-blur-2xl">
                 <div className="main-container py-4 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg bg-accent-gold/10 border border-accent-gold/30 flex-center">
                             <Car size={15} className="text-accent-gold" />
                         </div>
                         <div>
-                            <span className="text-[10px] text-accent-gold tracking-[0.3em] uppercase font-bold block">CarXLab</span>
-                            <span className="text-white font-black text-sm tracking-wide uppercase">Admin Panel</span>
+                            <span className="text-[10px] text-accent-gold tracking-[0.4em] uppercase font-black block leading-none mb-1">CarXLab</span>
+                            <span className="text-white font-black text-lg tracking-tight uppercase leading-none">Console <span className="text-white/40">v1.2</span></span>
                         </div>
                     </div>
 
@@ -403,10 +403,11 @@ const AdminDashboard = ({ onLogout }) => {
                 {/* Top Bar */}
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-10">
                     <div>
-                        <h1 className="text-4xl font-black uppercase tracking-tight">
-                            Gestion du <span className="gold-gradient">Stock</span>
+                        <h1 className="text-5xl md:text-6xl font-black uppercase tracking-tighter">
+                            <span className="text-white">Gestion du</span> <br />
+                            <span className="gold-gradient">Stock Live</span>
                         </h1>
-                        <p className="text-white/30 text-sm font-light mt-1">Déposez et gérez vos annonces véhicules</p>
+                        <p className="text-white/20 text-sm font-medium mt-4 tracking-widest uppercase italic">Protocole de mise en ligne sécurisé</p>
                     </div>
                     <div className="flex items-center gap-3">
                         <button
@@ -466,7 +467,7 @@ const AdminDashboard = ({ onLogout }) => {
                             </button>
                         </div>
                     ) : (
-                        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10">
                             {annonces.map((annonce, i) => (
                                 <motion.div
                                     key={annonce.id}
@@ -491,8 +492,8 @@ const AdminDashboard = ({ onLogout }) => {
                                     </div>
 
                                     {/* Infos */}
-                                    <div className="p-5">
-                                        <h3 className="font-black uppercase tracking-tight">
+                                    <div className="p-8">
+                                        <h3 className="font-black text-2xl uppercase tracking-tight mb-4">
                                             {annonce.marque} <span className="text-white/60 font-semibold">{annonce.modele}</span>
                                         </h3>
                                         <div className="flex flex-wrap gap-2 mt-3">

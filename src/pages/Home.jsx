@@ -89,24 +89,26 @@ const Home = () => {
                                 </button>
                             </Link>
                         </div>
-                    </motion.div>
-                </div>
-
-                {/* Center-Aligned Metrics for better balance on desktop */}
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden xl:flex gap-20 glass-panel py-10 px-20 border-t border-accent-gold/20 backdrop-blur-3xl bg-black/40 shadow-2xl scale-110">
-                    {[
-                        { label: 'Certifications', value: 4.8, suffix: 'k+', decimals: 1 },
-                        { label: 'Protocole Lab', value: 150, suffix: '+', decimals: 0 },
-                        { label: 'Fiabilité', value: 99.8, suffix: '%', decimals: 1 }
-                    ].map((stat, i) => (
-                        <div key={i} className="flex flex-col items-center min-w-[150px]">
-                            <div className="text-white font-black text-5xl mb-2 tracking-tight flex">
-                                <Counter value={stat.value} decimals={stat.decimals} />
-                                <span>{stat.suffix}</span>
-                            </div>
-                            <div className="text-[10px] uppercase font-black tracking-[0.5em] text-accent-gold/50">{stat.label}</div>
+                        {/* Center-Aligned Metrics */}
+                        <div className="mt-40 hidden xl:flex items-center justify-center gap-32">
+                            {[
+                                { label: 'Certifications', value: 4.8, suffix: 'k+', decimals: 1 },
+                                { label: 'Protocole Lab', value: 150, suffix: '+', decimals: 0 },
+                                { label: 'Fiabilité', value: 99.8, suffix: '%', decimals: 1 }
+                            ].map((stat, i) => (
+                                <div key={i} className="flex items-center gap-32">
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-white font-black text-6xl mb-4 tracking-tighter flex items-baseline">
+                                            <Counter value={stat.value} decimals={stat.decimals} />
+                                            <span className="text-accent-gold text-2xl ml-1 font-bold">{stat.suffix}</span>
+                                        </div>
+                                        <div className="text-[10px] uppercase font-black tracking-[0.5em] text-white/20">{stat.label}</div>
+                                    </div>
+                                    {i < 2 && <div className="h-12 w-px bg-white/10" />}
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </motion.div>
                 </div>
             </section>
 
@@ -125,7 +127,7 @@ const Home = () => {
                                 <FlaskConical className="text-accent-gold" size={32} />
                             </div>
 
-                            <h2 className="text-5xl md:text-7xl font-black mb-10 uppercase tracking-tighter leading-none">
+                            <h2 className="text-5xl md:text-7xl font-black mb-12 uppercase tracking-tight leading-[1.1]">
                                 LE CONCEPT <br /><span className="gold-gradient">LAB PROTOCOL</span>
                             </h2>
 
@@ -155,7 +157,7 @@ const Home = () => {
                                 ))}
                             </div>
 
-                            <div className="mt-24 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-10">
+                            <div className="mt-12 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-10">
                                 <Link to="/expertise">
                                     <button className="gold-button px-16">PROTOCOLE</button>
                                 </Link>
@@ -223,7 +225,7 @@ const Home = () => {
                                 <span className="h-[2px] w-20 bg-accent-gold"></span>
                                 <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Localisation</span>
                             </div>
-                            <h2 className="text-5xl md:text-7xl font-black mb-16 uppercase tracking-tighter leading-none">
+                            <h2 className="text-5xl md:text-7xl font-black mb-16 uppercase tracking-tight leading-[1.1]">
                                 OÙ NOUS <br /><span className="gold-gradient">TROUVER</span>
                             </h2>
                             <div className="space-y-10">
@@ -246,7 +248,7 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="mt-20">
+                            <div className="mt-12">
                                 <a
                                     href="https://maps.google.com"
                                     target="_blank"
@@ -284,7 +286,7 @@ const Home = () => {
             </section>
 
             {/* CTA Section */}
-            <section className="section-padding bg-black relative flex items-center justify-center overflow-hidden">
+            <section className="pb-40 pt-0 bg-black relative flex items-center justify-center overflow-hidden">
                 <div className="main-container text-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -292,18 +294,18 @@ const Home = () => {
                         viewport={{ once: true }}
                         className="flex flex-col items-center"
                     >
-                        <h2 className="text-6xl md:text-[10rem] font-black mb-16 uppercase leading-[0.85] tracking-tighter">
+                        <h2 className="text-5xl md:text-7xl font-black mb-10 uppercase leading-[1.1] tracking-tight">
                             VOTRE <br /><span className="gold-gradient">FUTUR</span> EST ICI
                         </h2>
-                        <p className="text-xl md:text-4xl text-white/30 mb-20 max-w-4xl mx-auto font-light leading-snug">
+                        <p className="text-lg md:text-xl text-white/30 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
                             Vendez votre véhicule au juste prix ou trouvez la perle rare parmi notre stock ultra-limité.
                         </p>
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-10 w-full px-6">
+                        <div className="flex flex-col md:flex-row items-center justify-center gap-6 w-full px-6">
                             <Link to="/contact" className="w-full md:w-auto">
-                                <button className="gold-button w-full px-24 py-8 text-sm">PRENDRE RENDEZ-VOUS</button>
+                                <button className="gold-button w-full px-12 py-5 text-xs">PRENDRE RENDEZ-VOUS</button>
                             </Link>
                             <Link to="/stock" className="w-full md:w-auto">
-                                <button className="gold-button-outline w-full px-24 py-8 text-sm">CATALOGUE LIVE</button>
+                                <button className="gold-button-outline w-full px-12 py-5 text-xs">CATALOGUE LIVE</button>
                             </Link>
                         </div>
                     </motion.div>

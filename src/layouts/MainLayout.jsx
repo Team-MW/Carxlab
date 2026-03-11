@@ -1,9 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const MainLayout = ({ children }) => {
+    const location = useLocation();
+    const isAdmin = location.pathname.startsWith('/admin');
+
     return (
         <div className="min-h-screen bg-[#050505] text-white selection:bg-accent-gold/30 selection:text-accent-gold">
             <motion.div
@@ -13,11 +17,11 @@ const MainLayout = ({ children }) => {
                 className="flex flex-col min-h-screen relative"
             >
                 <div className="scan-overlay" />
-                <Navbar />
-                <main className="flex-grow relative z-10 w-full overflow-x-hidden">
+                {!isAdmin && <Navbar />}
+                <main className={`flex-grow relative z-10 w-full overflow-x-hidden ${isAdmin ? 'pt-0' : ''}`}>
                     {children}
                 </main>
-                <Footer />
+                {!isAdmin && <Footer />}
             </motion.div>
         </div>
     );

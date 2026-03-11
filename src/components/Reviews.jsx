@@ -63,16 +63,16 @@ const Reviews = () => {
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(212,175,55,0.03)_0%,transparent_100%)]" />
 
             <div className="main-container relative z-10">
-                <div className="text-center mb-24">
-                    <div className="flex justify-center items-center gap-4 mb-8">
+                <div className="text-center mb-16">
+                    <div className="flex justify-center items-center gap-4 mb-6">
                         <span className="h-[2px] w-12 bg-accent-gold"></span>
                         <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Témoignages</span>
                         <span className="h-[2px] w-12 bg-accent-gold"></span>
                     </div>
-                    <h2 className="text-5xl md:text-7xl font-black text-black uppercase tracking-tighter leading-none mb-8">
+                    <h2 className="text-5xl md:text-7xl font-black text-black uppercase tracking-tight leading-[1.2] mb-10">
                         L'AVIS DE NOS <br /><span className="text-accent-gold">PARTENAIRES</span>
                     </h2>
-                    <div className="flex justify-center items-center gap-6 mt-10">
+                    <div className="flex justify-center items-center gap-6 mt-6">
                         <div className="flex items-center gap-2">
                             <Star className="text-accent-gold fill-accent-gold" size={24} />
                             <span className="text-black font-black text-3xl">4.9/5</span>

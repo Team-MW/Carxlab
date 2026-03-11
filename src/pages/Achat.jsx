@@ -32,7 +32,7 @@ const Achat = () => {
 
             <section className="section-padding">
                 <div className="main-container">
-                    <div className="grid md:grid-cols-3 gap-12 mb-40">
+                    <div className="grid md:grid-cols-3 gap-20 mb-40">
                         {[
                             { title: "Estimation en ligne", desc: "Décrivez votre véhicule en quelques clics via notre formulaire dédié.", icon: <Search size={24} /> },
                             { title: "Expertise physique", desc: "Prenez rendez-vous dans notre laboratoire pour une validation finale.", icon: <Zap size={24} /> },

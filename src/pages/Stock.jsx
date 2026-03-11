@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Search, SlidersHorizontal, X, Car } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, SlidersHorizontal, X, Car, RefreshCw } from 'lucide-react';
 import AnnonceCard from '../components/AnnonceCard';
 
 const CARBURANTS = ['Essence', 'Diesel', 'Hybride', 'Hybride Rechargeable', 'Électrique'];
@@ -123,8 +123,8 @@ const Stock = () => {
                             <button
                                 onClick={() => setShowFilters(!showFilters)}
                                 className={`flex-1 lg:flex-none flex items-center justify-center gap-4 px-10 py-5 rounded-full text-[10px] font-black uppercase tracking-[0.4em] transition-all duration-700 border ${showFilters || hasFilters
-                                        ? 'bg-accent-gold text-black border-accent-gold shadow-[0_0_40px_rgba(212,175,55,0.4)]'
-                                        : 'bg-white/5 text-white/40 border-white/10 hover:border-accent-gold/50 hover:text-white'
+                                    ? 'bg-accent-gold text-black border-accent-gold shadow-[0_0_40px_rgba(212,175,55,0.4)]'
+                                    : 'bg-white/5 text-white/40 border-white/10 hover:border-accent-gold/50 hover:text-white'
                                     }`}
                             >
                                 <SlidersHorizontal size={18} />
@@ -193,36 +193,46 @@ const Stock = () => {
             </div>
 
             {/* Content */}
-            <section className="section-padding">
+            <section className="section-padding bg-black/30">
                 <div className="main-container">
+                    <div className="mb-12">
+                        <div className="flex items-center gap-4 mb-4">
+                            <span className="h-[1px] w-12 bg-accent-gold/50" />
+                            <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-accent-gold">Catalogue Live</h2>
+                        </div>
+                        <p className="text-white/20 text-xs font-bold tracking-widest uppercase">Sélection exclusive CarXLab</p>
+                    </div>
+
                     {loading ? (
-                        <div className="flex-center py-32">
+                        <div className="flex-center py-24">
                             <div className="w-12 h-12 border-2 border-accent-gold/20 border-t-accent-gold rounded-full animate-spin" />
                         </div>
                     ) : filtered.length === 0 ? (
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="flex-center-col py-32 gap-4"
+                            className="flex-center-col py-24 gap-8"
                         >
-                            <Car size={48} className="text-white/10" />
-                            <p className="text-white/30 text-lg font-light">
-                                {hasFilters ? 'Aucun véhicule ne correspond à votre recherche' : 'Aucun véhicule disponible pour le moment'}
-                            </p>
-                            {hasFilters && (
-                                <button onClick={clearFilters} className="gold-button-outline px-6 py-3 text-xs rounded-xl mt-2">
-                                    Effacer les filtres
-                                </button>
-                            )}
+                            <Car size={64} className="text-white/5" />
+                            <div className="text-center">
+                                <p className="text-white/40 text-xl font-light mb-4">
+                                    {hasFilters ? 'Aucun véhicule ne correspond à votre recherche' : 'Aucun véhicule disponible pour le moment'}
+                                </p>
+                                {hasFilters && (
+                                    <button onClick={clearFilters} className="gold-button-outline px-10 py-5 text-[10px] rounded-full mt-6">
+                                        RÉINITIALISER TOUS LES FILTRES
+                                    </button>
+                                )}
+                            </div>
                         </motion.div>
                     ) : (
                         <>
                             {hasFilters && (
-                                <p className="text-white/30 text-sm mb-8">
-                                    {filtered.length} résultat{filtered.length !== 1 ? 's' : ''}
+                                <p className="text-accent-gold/40 text-[10px] font-black uppercase tracking-[0.3em] mb-12">
+                                    {filtered.length} véhicule{filtered.length !== 1 ? 's' : ''} trouvé{filtered.length !== 1 ? 's' : ''} correspondant à vos critères
                                 </p>
                             )}
-                            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-12">
+                            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
                                 {filtered.map((annonce, i) => (
                                     <AnnonceCard key={annonce.id} annonce={annonce} index={i} />
                                 ))}

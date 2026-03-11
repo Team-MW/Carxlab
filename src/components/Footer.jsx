@@ -9,41 +9,40 @@ const Footer = () => {
     };
 
     return (
-        <footer className="pt-16 md:pt-24 pb-8 md:pb-12 border-t border-white/5 bg-[#050505] relative overflow-hidden mt-auto">
+        <footer className="pt-32 md:pt-48 pb-12 md:pb-20 border-t border-white/5 bg-[#111111] relative overflow-hidden mt-auto">
             {/* Background glow overlay */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[80%] bg-accent-gold/5 blur-[150px] pointer-events-none" />
 
             <div className="main-container relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 lg:gap-16 mb-16 md:mb-24">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-20 md:gap-16 lg:gap-24 mb-20 md:mb-32">
                     {/* Brand Section */}
-                    <div className="md:col-span-12 lg:col-span-5 flex flex-col items-center md:items-start text-center md:text-left gap-6 md:gap-8">
+                    <div className="md:col-span-12 lg:col-span-5 flex flex-col items-center md:items-start text-center md:text-left gap-8 md:gap-10">
                         <Link to="/" onClick={handleScrollToTop} className="inline-block w-fit opacity-80 hover:opacity-100 transition-opacity">
-                            <img src={logo} alt="Carxlab" className="h-12 object-contain grayscale hover:grayscale-0 transition-all duration-500" />
+                            <img src={logo} alt="Carxlab" className="h-14 object-contain grayscale hover:grayscale-0 transition-all duration-500" />
                         </Link>
-                        <p className="text-white/40 max-w-sm text-lg font-light leading-loose">
+                        <p className="text-white/30 max-w-sm text-lg font-light leading-loose">
                             Plus qu'un showroom, une expertise de précision. Bienvenue dans l'ère de l'automobile analytique.
                         </p>
-                        <div className="flex gap-4 mt-2 justify-center md:justify-start">
+                        <div className="flex gap-6 mt-4 justify-center md:justify-start">
                             {[Instagram, Facebook, Mail].map((Icon, i) => (
                                 <a
                                     key={i}
                                     href="#"
-                                    className="w-14 h-14 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-white/50 hover:bg-accent-gold/10 hover:text-accent-gold hover:border-accent-gold/50 transition-all duration-300 transform hover:-translate-y-1"
+                                    className="w-16 h-16 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-white/30 hover:bg-accent-gold/10 hover:text-accent-gold hover:border-accent-gold/50 transition-all duration-300 transform hover:-translate-y-1"
                                 >
-                                    <Icon size={22} />
+                                    <Icon size={24} />
                                 </a>
                             ))}
                         </div>
                     </div>
 
                     {/* Links - Services */}
-                    <div className="md:col-span-6 lg:col-span-3 lg:col-start-7 flex flex-col items-center md:items-start text-center md:text-left gap-6 md:gap-8">
-                        <h4 className="text-white font-black text-xs uppercase tracking-[0.4em] flex items-center justify-center md:justify-start gap-3 w-full">
-                            <span className="hidden md:block w-4 h-[1px] bg-accent-gold"></span>
+                    <div className="md:col-span-6 lg:col-span-3 lg:col-start-7 flex flex-col items-center md:items-start text-center md:text-left gap-10 md:gap-12">
+                        <h4 className="text-white font-black text-xs uppercase tracking-[0.5em] flex items-center justify-center md:justify-start gap-4 w-full">
+                            <span className="hidden md:block w-6 h-[1px] bg-accent-gold"></span>
                             Services
-                            <span className="hidden md:block w-4 h-[1px] bg-transparent"></span>
                         </h4>
-                        <ul className="space-y-4 md:space-y-6">
+                        <ul className="space-y-6 md:space-y-8">
                             {[
                                 { name: 'Expertise Lab', path: '/expertise' },
                                 { name: 'Achat Express', path: '/achat' },
@@ -51,7 +50,7 @@ const Footer = () => {
                                 { name: 'Solutions Financement', path: '/contact' }
                             ].map((item) => (
                                 <li key={item.name}>
-                                    <Link to={item.path} onClick={handleScrollToTop} className="text-white/40 hover:text-white transition-colors text-[15px] font-light tracking-wide flex items-center justify-center md:justify-start gap-2 group">
+                                    <Link to={item.path} onClick={handleScrollToTop} className="text-white/30 hover:text-white transition-colors text-[15px] font-medium tracking-widest flex items-center justify-center md:justify-start gap-3 group">
                                         <span className="w-1.5 h-1.5 rounded-full bg-accent-gold/0 group-hover:bg-accent-gold transition-all duration-300"></span>
                                         {item.name}
                                     </Link>
@@ -61,20 +60,19 @@ const Footer = () => {
                     </div>
 
                     {/* Links - Contact */}
-                    <div className="md:col-span-6 lg:col-span-3 flex flex-col items-center md:items-start text-center md:text-left gap-6 md:gap-8">
-                        <h4 className="text-white font-black text-xs uppercase tracking-[0.4em] flex items-center justify-center md:justify-start gap-3 w-full">
-                            <span className="hidden md:block w-4 h-[1px] bg-accent-gold"></span>
+                    <div className="md:col-span-6 lg:col-span-3 flex flex-col items-center md:items-start text-center md:text-left gap-10 md:gap-12">
+                        <h4 className="text-white font-black text-xs uppercase tracking-[0.5em] flex items-center justify-center md:justify-start gap-4 w-full">
+                            <span className="hidden md:block w-6 h-[1px] bg-accent-gold"></span>
                             Contact
-                            <span className="hidden md:block w-4 h-[1px] bg-transparent"></span>
                         </h4>
-                        <ul className="space-y-4 md:space-y-6 w-full max-w-sm">
-                            <li className="flex items-start gap-4 p-4 rounded-2xl border border-white/5 bg-white/[0.02]">
-                                <MapPin size={20} className="text-accent-gold shrink-0 mt-0.5" />
-                                <span className="text-white/50 text-[15px] leading-relaxed font-light">Paris, Avenue des<br />Champs-Élysées</span>
+                        <ul className="space-y-6 md:space-y-8 w-full max-w-sm">
+                            <li className="flex items-start gap-6 p-6 rounded-2xl border border-white/5 bg-white/[0.02] group hover:border-white/10 transition-all">
+                                <MapPin size={22} className="text-accent-gold shrink-0 mt-1" />
+                                <span className="text-white/40 text-[15px] leading-loose font-light">Paris, Avenue des<br />Champs-Élysées</span>
                             </li>
-                            <li className="flex items-center gap-4 p-4 rounded-2xl border border-white/5 bg-white/[0.02]">
-                                <Phone size={20} className="text-accent-gold shrink-0" />
-                                <span className="text-white/50 text-[15px] font-light tracking-wider">+33 1 42 67 89 00</span>
+                            <li className="flex items-center gap-6 p-6 rounded-2xl border border-white/5 bg-white/[0.02] group hover:border-white/10 transition-all">
+                                <Phone size={22} className="text-accent-gold shrink-0" />
+                                <span className="text-white/40 text-[15px] font-light tracking-widest">+33 1 42 67 89 00</span>
                             </li>
                         </ul>
                     </div>

@@ -54,7 +54,7 @@ const AnnonceCard = ({ annonce, index = 0 }) => {
 
             {/* Infos */}
             <div className="p-8">
-                <h3 className="font-black text-2xl uppercase tracking-tight mb-2">
+                <h3 className="font-black text-2xl uppercase tracking-tight mb-4">
                     {marque} <span className="text-white/60 font-semibold">{modele}</span>
                 </h3>
 
