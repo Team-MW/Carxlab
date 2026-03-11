@@ -81,7 +81,11 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className="pt-8 md:pt-10 border-t border-white/10 flex flex-col lg:flex-row justify-between items-center gap-6 md:gap-8">
                     <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] font-medium text-white/30 text-center lg:text-left leading-relaxed">
-                        © {new Date().getFullYear()} CARXLAB. ALL RIGHTS RESERVED.<br className="lg:hidden" /> <span className="text-accent-gold">LAB PROTOCOL VERIFIED.</span>
+                        © {new Date().getFullYear()} CARXLAB. ALL RIGHTS RESERVED.<br className="lg:hidden" />
+                        <span className="text-accent-gold mr-4">LAB PROTOCOL VERIFIED.</span>
+                        <a href="https://microdidact.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-300">
+                            RÉALISÉ PAR <span className="font-black">MICRODIDACT</span>
+                        </a>
                     </p>
                     <div className="flex flex-wrap justify-center gap-6 md:gap-10">
                         <Link to="/mentions-legales" onClick={handleScrollToTop} className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/30 hover:text-accent-gold transition-colors font-medium">Mentions Légales</Link>
