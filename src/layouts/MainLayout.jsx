@@ -18,7 +18,7 @@ const MainLayout = ({ children }) => {
             >
                 <div className="scan-overlay" />
                 {!isAdmin && <Navbar />}
-                <main className={`flex-grow relative z-10 w-full overflow-x-hidden ${isAdmin ? 'pt-0' : 'pt-[80px] md:pt-[100px]'}`}>
+                <main className={`flex-grow relative z-10 w-full overflow-x-hidden ${isAdmin ? 'pt-0' : 'pt-[140px] md:pt-[160px]'}`}>
                     {children}
                 </main>
                 {!isAdmin && <Footer />}
