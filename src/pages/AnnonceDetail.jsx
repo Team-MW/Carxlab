@@ -65,9 +65,9 @@ const AnnonceDetail = () => {
     ].filter(s => s.value);
 
     return (
-        <div className="min-h-screen bg-[var(--bg-color)] pb-24">
+        <div className="min-h-screen bg-[var(--bg-color)] pt-20 md:pt-40 pb-24">
             {/* Navigation haute */}
-            <div className="sticky top-[110px] md:top-[120px] z-40 bg-black/90 backdrop-blur-xl border-b border-white/5 py-4">
+            <div className="sticky top-[100px] md:top-[120px] z-40 bg-black backdrop-blur-xl border-b border-white/5 py-4">
                 <div className="main-container flex items-center justify-between">
                     <Link to="/stock" className="flex items-center gap-2 text-white/40 hover:text-white transition-colors group">
                         <ChevronLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
@@ -114,7 +114,7 @@ const AnnonceDetail = () => {
 
                     {/* Droite : Infos & Achat */}
                     <div className="lg:col-span-5 space-y-12">
-                        <div className="lg:sticky lg:top-[200px]">
+                        <div className="lg:sticky lg:top-[220px]">
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}

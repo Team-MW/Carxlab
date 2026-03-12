@@ -31,7 +31,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 h-[var(--header-height)] flex items-center ${isScrolled ? 'bg-black/90 backdrop-blur-2xl border-b border-white/5' : 'bg-transparent'}`} >
+            <nav className="fixed top-0 left-0 right-0 z-[100] transition-all duration-500 h-[var(--header-height)] flex items-center bg-black shadow-2xl border-b border-white/5" >
                 <div className="main-container w-full flex justify-between items-center">
                     <Link to="/" onClick={handleNavClick} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                         <img src={logo} alt="Carxlab" className="h-7 md:h-10 object-contain" />
