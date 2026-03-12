@@ -62,10 +62,10 @@ const AnnonceDetail = () => {
     ].filter(s => s.value);
 
     return (
-        <div className="min-h-screen bg-[var(--bg-color)] pt-20 md:pt-40 pb-24">
+        <div className="min-h-screen bg-[var(--bg-color)] pt-24 md:pt-60 pb-24">
 
 
-            <div className="main-container mt-20 md:mt-32">
+            <div className="main-container mt-24 md:mt-48">
                 <div className="grid lg:grid-cols-12 gap-12">
 
                     {/* Gauche : Image & Details */}
@@ -100,7 +100,7 @@ const AnnonceDetail = () => {
 
                     {/* Droite : Infos & Achat */}
                     <div className="lg:col-span-5 space-y-12">
-                        <div className="lg:sticky lg:top-[220px]">
+                        <div className="lg:sticky lg:top-[280px]">
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
