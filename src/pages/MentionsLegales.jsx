@@ -53,12 +53,12 @@ const MentionsLegales = () => {
 
                         <Section title="Éditeur du site" delay={0}>
                             <p>Le présent site internet est édité par la société <strong className="text-white/70">CARXLAB SAS</strong>.</p>
-                            <p>Siège social : Avenue des Champs-Élysées, 75008 Paris, France</p>
-                            <p>Email : <a href="mailto:contact@carxlab.fr" className="text-accent-gold hover:underline">contact@carxlab.fr</a></p>
-                            <p>Téléphone : +33 1 42 67 89 00</p>
+                            <p>Siège social : 4 impasses du pont, 31140 Launaguet, France</p>
+                            <p>Email : <a href="mailto:Carxlab31@gmail.com" className="text-accent-gold hover:underline">Carxlab31@gmail.com</a></p>
+                            <p>Téléphone : 06 59 33 03 12</p>
                             <p>Forme juridique : Société par Actions Simplifiée (SAS)</p>
                             <p>Capital social : 10 000 €</p>
-                            <p>RCS Paris : 000 000 000</p>
+                            <p>RCS Toulouse : [En cours d'immatriculation]</p>
                             <p>Numéro de TVA intracommunautaire : FR00 000 000 000</p>
                         </Section>
 
@@ -82,7 +82,7 @@ const MentionsLegales = () => {
                         <Section title="Données personnelles" delay={0.4}>
                             <p>Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés n°78-17 du 6 janvier 1978, vous disposez d'un droit d'accès, de rectification, de portabilité et d'effacement de vos données, ou encore de limitation du traitement.</p>
                             <p>Les informations collectées via les formulaires de contact sont uniquement utilisées pour répondre à vos demandes. Elles ne sont pas transmises à des tiers sans votre consentement.</p>
-                            <p>Pour exercer ces droits ou pour toute question, contactez-nous à : <a href="mailto:privacy@carxlab.fr" className="text-accent-gold hover:underline">privacy@carxlab.fr</a></p>
+                            <p>Pour exercer ces droits ou pour toute question, contactez-nous à : <a href="mailto:Carxlab31@gmail.com" className="text-accent-gold hover:underline">Carxlab31@gmail.com</a></p>
                         </Section>
 
                         <Section title="Cookies" delay={0.5}>

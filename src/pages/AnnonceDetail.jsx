@@ -65,7 +65,7 @@ const AnnonceDetail = () => {
     ].filter(s => s.value);
 
     return (
-        <div className="min-h-screen bg-[var(--bg-color)] pb-24">
+        <div className="min-h-screen bg-[var(--bg-color)] pt-[var(--header-height)] pb-24">
             {/* Navigation haute */}
             <div className="sticky top-[var(--header-height)] z-40 bg-black/50 backdrop-blur-xl border-b border-white/5 py-4">
                 <div className="main-container flex items-center justify-between">
@@ -114,14 +114,14 @@ const AnnonceDetail = () => {
 
                     {/* Droite : Infos & Achat */}
                     <div className="lg:col-span-5 space-y-12">
-                        <div className="lg:sticky lg:top-[calc(var(--header-height)+40px)]">
+                        <div className="lg:sticky lg:top-[calc(var(--header-height)+20px)]">
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 className="glass-panel p-8 md:p-10 rounded-3xl border border-accent-gold/20 relative"
                             >
                                 {/* Badge Rare */}
-                                <div className="absolute -top-3 left-10 px-4 py-1.5 bg-accent-gold text-black text-[10px] font-black uppercase tracking-widest rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+                                <div className="absolute top-0 left-10 transform -translate-y-1/2 px-4 py-1.5 bg-accent-gold text-black text-[10px] font-black uppercase tracking-widest rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] z-10">
                                     DISPONIBLE IMMÉDIATEMENT
                                 </div>
 

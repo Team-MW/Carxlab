@@ -77,7 +77,7 @@ const Expertise = () => {
                     </div>
 
                     {/* Dynamic Display Panel */}
-                    <div className="relative h-[700px] border border-white/5 overflow-hidden group rounded-[3rem] bg-black/40">
+                    <div className="relative min-h-[500px] md:h-[700px] border border-white/5 overflow-hidden group rounded-[3rem] bg-black/40">
                         <div className="absolute inset-0 lab-grid opacity-10" />
                         <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center relative z-10">
                             <div className="w-28 h-28 mb-12 rounded-full border border-accent-gold/20 flex items-center justify-center relative">

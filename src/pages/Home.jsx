@@ -90,21 +90,18 @@ const Home = () => {
                             </Link>
                         </div>
                         {/* Center-Aligned Metrics */}
-                        <div className="mt-40 hidden xl:flex items-center justify-center gap-32">
+                        <div className="mt-24 md:mt-40 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24 items-center justify-center">
                             {[
                                 { label: 'Certifications', value: 4.8, suffix: 'k+', decimals: 1 },
                                 { label: 'Protocole Lab', value: 150, suffix: '+', decimals: 0 },
                                 { label: 'Fiabilité', value: 99.8, suffix: '%', decimals: 1 }
                             ].map((stat, i) => (
-                                <div key={i} className="flex items-center gap-32">
-                                    <div className="flex flex-col items-center">
-                                        <div className="text-white font-black text-6xl mb-4 tracking-tighter flex items-baseline">
-                                            <Counter value={stat.value} decimals={stat.decimals} />
-                                            <span className="text-accent-gold text-2xl ml-1 font-bold">{stat.suffix}</span>
-                                        </div>
-                                        <div className="text-[10px] uppercase font-black tracking-[0.5em] text-white/20">{stat.label}</div>
+                                <div key={i} className="flex flex-col items-center group">
+                                    <div className="text-white font-black text-4xl md:text-6xl mb-3 tracking-tighter flex items-baseline group-hover:scale-110 transition-transform duration-500">
+                                        <Counter value={stat.value} decimals={stat.decimals} />
+                                        <span className="text-accent-gold text-xl md:text-2xl ml-1 font-bold">{stat.suffix}</span>
                                     </div>
-                                    {i < 2 && <div className="h-12 w-px bg-white/10" />}
+                                    <div className="text-[10px] uppercase font-black tracking-[0.4em] text-white/20">{stat.label}</div>
                                 </div>
                             ))}
                         </div>
@@ -126,15 +123,15 @@ const Home = () => {
                         >
                             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-accent-gold/10 border border-accent-gold/20 mb-8">
                                 <MapPin size={16} className="text-accent-gold" />
-                                <span className="text-accent-gold text-[10px] font-black uppercase tracking-[0.3em]">Garage Toulouse Haute-Garonne</span>
+                                <span className="text-accent-gold text-[10px] font-black uppercase tracking-[0.3em]">Garage Launaguet, Haute-Garonne</span>
                             </div>
 
                             <h2 className="text-5xl md:text-7xl font-black mb-10 uppercase tracking-tighter leading-[1.1]">
-                                VOTRE SPÉCIALISTE <br /><span className="gold-gradient">AUTO À TOULOUSE</span>
+                                VOTRE SPÉCIALISTE <br /><span className="gold-gradient">AUTO À LAUNAGUET</span>
                             </h2>
 
                             <p className="text-lg md:text-xl text-white/40 mb-12 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
-                                CarXLab est votre partenaire de confiance pour l'<strong>achat et la revente de véhicules d'occasion</strong> et de prestige à Toulouse. Situés au cœur de la Ville Rose, nous sélectionnons pour vous les meilleures pépites automobiles en Haute-Garonne.
+                                CarXLab est votre partenaire de confiance pour l'<strong>achat et la revente de véhicules d'occasion</strong> et de prestige à Launaguet. Situés à 15 minutes de Toulouse, nous sélectionnons pour vous les meilleures pépites automobiles en Haute-Garonne.
                             </p>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
@@ -207,9 +204,9 @@ const Home = () => {
                                     <div className="w-24 h-24 mb-8 rounded-2xl bg-accent-gold/10 border border-accent-gold/20 flex items-center justify-center animate-pulse">
                                         <MapPin size={48} className="text-accent-gold" />
                                     </div>
-                                    <h3 className="text-4xl font-black uppercase tracking-widest mb-4">TOULOUSE</h3>
+                                    <h3 className="text-4xl font-black uppercase tracking-widest mb-4">LAUNAGUET</h3>
                                     <div className="h-[2px] w-32 bg-accent-gold/50 mb-4" />
-                                    <p className="text-white/40 text-sm font-bold tracking-[0.4em] uppercase">Secteur Haute-Garonne (31)</p>
+                                    <p className="text-white/40 text-sm font-bold tracking-[0.4em] uppercase">Secteur Toulouse (31)</p>
                                 </div>
 
                                 {/* Coordinate markers */}
@@ -244,7 +241,7 @@ const Home = () => {
                                     </div>
                                     <div>
                                         <h4 className="text-white font-black uppercase tracking-widest mb-2">Le Laboratoire</h4>
-                                        <p className="text-white/40 text-lg font-light leading-relaxed">75008 Paris, France<br />Avenue des Champs-Élysées</p>
+                                        <p className="text-white/40 text-lg font-light leading-relaxed">4 impasses du pont<br />31140 Launaguet, France</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-8 group">
@@ -253,13 +250,13 @@ const Home = () => {
                                     </div>
                                     <div>
                                         <h4 className="text-white font-black uppercase tracking-widest mb-2">Ligne Directe</h4>
-                                        <p className="text-white/40 text-lg font-light leading-relaxed">+33 1 42 67 89 00<br />Expertise & Stock</p>
+                                        <p className="text-white/40 text-lg font-light leading-relaxed">06 59 33 03 12<br />Expertise & Stock</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="mt-12">
                                 <a
-                                    href="https://maps.google.com"
+                                    href="https://www.google.com/maps/search/?api=1&query=4+impasse+du+pont+31140+Launaguet"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="gold-button px-14 group"
@@ -271,23 +268,16 @@ const Home = () => {
                         </div>
                         <div className="w-full md:w-1/2">
                             <div className="relative aspect-square glass-panel rounded-[3rem] overflow-hidden border border-white/5 group">
-                                <div className="absolute inset-0 lab-grid opacity-20" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    {/* Styled placeholder for map */}
-                                    <div className="w-full h-full bg-gradient-to-br from-white/5 to-transparent relative">
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <div className="relative">
-                                                <div className="w-32 h-32 rounded-full bg-accent-gold/10 animate-pulse border border-accent-gold/20 flex items-center justify-center">
-                                                    <div className="w-4 h-4 rounded-full bg-accent-gold shadow-[0_0_20px_#d4af37]" />
-                                                </div>
-                                                <div className="absolute -top-16 -left-16 w-64 h-64 border-2 border-dashed border-accent-gold/5 rounded-full animate-[spin_60s_linear_infinite]" />
-                                            </div>
-                                        </div>
-                                        {/* Grid coordinates */}
-                                        <div className="absolute top-8 left-8 text-[10px] font-black text-accent-gold/40 tracking-[0.3em]">LAT: 48.8667</div>
-                                        <div className="absolute bottom-8 right-8 text-[10px] font-black text-accent-gold/40 tracking-[0.3em]">LONG: 2.3333</div>
-                                    </div>
-                                </div>
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.67!2d1.46!3d43.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aebb1!2s4+Imp.+du+Pont%2C+31140+Launaguet!5e0!3m2!1sfr!2sfr!4v1"
+                                    width="100%"
+                                    height="100%"
+                                    style={{ border: 0, filter: 'grayscale(1) invert(0.9) contrast(1.2)' }}
+                                    allowFullScreen=""
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                    className="opacity-60 hover:opacity-100 transition-opacity duration-700"
+                                />
                             </div>
                         </div>
                     </div>
@@ -295,7 +285,7 @@ const Home = () => {
             </section>
 
             {/* CTA Section */}
-            <section className="pb-40 pt-0 bg-black relative flex items-center justify-center overflow-hidden">
+            <section className="pb-96 pt-32 bg-black relative flex items-center justify-center overflow-hidden">
                 <div className="main-container text-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}

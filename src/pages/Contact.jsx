@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, Zap } from 'lucide-react';
 import FAQ from '../components/FAQ';
 
 const Contact = () => {
@@ -32,69 +32,109 @@ const Contact = () => {
                 </div>
             </section>
 
-            <section className="section-padding">
-                <div className="main-container">
-                    <div className="grid lg:grid-cols-12 gap-16 items-start">
-                        {/* Left Side: Contact Info & Schedule */}
-                        <div className="lg:col-span-12 xl:col-span-5 space-y-12">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-8">
-                                {[
-                                    { label: 'Prendre RDV', value: '+33 1 42 67 89 00', icon: <Phone size={20} /> },
-                                    { label: 'Support & Expertise', value: 'contact@carxlab.fr', icon: <Mail size={20} /> },
-                                    { label: 'Notre Bureau', value: '75008 Paris, France', icon: <MapPin size={20} /> }
-                                ].map((item, i) => (
-                                    <div key={i} className="glass-panel p-8 flex items-center gap-8 group hover:neon-border transition-all duration-500 rounded-2xl">
-                                        <div className="w-16 h-16 rounded-2xl bg-accent-gold/10 flex items-center justify-center text-accent-gold flex-shrink-0 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(212,175,55,0.1)]">
-                                            {item.icon}
+            <section className="section-padding relative overflow-hidden">
+                {/* Background glow for premium feel */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-gold/5 blur-[200px] pointer-events-none" />
+
+                <div className="main-container relative z-10 flex flex-col items-center">
+                    <div className="w-full max-w-5xl space-y-24">
+                        {/* Contact Cards Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                            {[
+                                {
+                                    label: 'Prendre RDV',
+                                    value: '06 59 33 03 12',
+                                    icon: <Phone size={24} />,
+                                    link: 'tel:0659330312'
+                                },
+                                {
+                                    label: 'Support & Expertise',
+                                    value: 'Carxlab31@gmail.com',
+                                    icon: <Mail size={24} />,
+                                    link: 'mailto:Carxlab31@gmail.com'
+                                },
+                                {
+                                    label: 'Notre Bureau',
+                                    value: '4 impasses du pont, 31140 Launaguet',
+                                    icon: <MapPin size={24} />,
+                                    link: 'https://www.google.com/maps/search/?api=1&query=4+impasse+du+pont+31140+Launaguet'
+                                },
+                                {
+                                    label: 'Réseaux Sociaux',
+                                    value: '@Carxlab',
+                                    icon: <Zap size={24} />,
+                                    link: '#'
+                                }
+                            ].map((item, i) => (
+                                <motion.a
+                                    key={i}
+                                    href={item.link}
+                                    target={item.link.startsWith('http') ? "_blank" : undefined}
+                                    rel={item.link.startsWith('http') ? "noopener noreferrer" : undefined}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                                    className="glass-panel p-10 flex items-center gap-10 group hover:neon-border transition-all duration-500 rounded-[2.5rem] bg-white/[0.02] border border-white/5"
+                                >
+                                    <div className="w-20 h-20 rounded-3xl bg-accent-gold/10 flex items-center justify-center text-accent-gold flex-shrink-0 group-hover:scale-110 group-hover:bg-accent-gold group-hover:text-black transition-all duration-500 shadow-[0_0_40px_rgba(212,175,55,0.1)]">
+                                        {item.icon}
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <div className="text-[10px] uppercase tracking-[0.5em] font-black text-white/20 mb-2 group-hover:text-accent-gold/50 transition-colors">
+                                            {item.label}
                                         </div>
-                                        <div>
-                                            <div className="text-[9px] uppercase tracking-[0.4em] font-black text-white/20 mb-1">{item.label}</div>
-                                            <div className="text-lg font-black text-white group-hover:text-accent-gold transition-colors">{item.value}</div>
+                                        <div className="text-xl md:text-2xl font-black text-white group-hover:text-accent-gold transition-colors tracking-tight">
+                                            {item.value}
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-
-                            <div className="glass-panel p-12 md:p-16 border-l-4 border-l-accent-gold bg-black/40 rounded-3xl mt-10">
-                                <h4 className="text-2xl font-black mb-12 uppercase tracking-[0.3em]">Horaires d'Accès</h4>
-                                <div className="space-y-6">
-                                    {[
-                                        { day: 'Lundi - Vendredi', time: '09h - 19h' },
-                                        { day: 'Samedi', time: '10h - 18h' },
-                                        { day: 'Dimanche', time: 'Fermé', highlight: true }
-                                    ].map((item, i) => (
-                                        <div key={i} className="flex justify-between items-center text-lg border-b border-white/5 pb-5">
-                                            <span className="text-white font-bold">{item.day}</span>
-                                            <span className={item.highlight ? "text-accent-gold/50" : "text-white/30"}>{item.time}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                                </motion.a>
+                            ))}
                         </div>
 
-                        {/* Right Side: Contact Form */}
-                        <div className="lg:col-span-12 xl:col-span-7">
-                            <div className="glass-panel p-12 md:p-20 neon-border bg-black/40 rounded-[3rem]">
-                                <div className="mb-16">
-                                    <h2 className="text-4xl font-black mb-6 uppercase tracking-[0.2em]">Lancer le Protocole</h2>
-                                    <p className="text-white/30 text-xl font-light leading-loose">Remplissez le formulaire ci-dessous pour initier une demande de service ou d'information.</p>
-                                </div>
+                        {/* Hours Section - Centered */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            className="w-full max-w-3xl mx-auto"
+                        >
+                            <div className="glass-panel p-12 md:p-16 border-t-4 border-t-accent-gold bg-black/40 rounded-[3rem] shadow-2xl relative overflow-hidden group hover:border-accent-gold/30 transition-all duration-500">
+                                <div className="absolute inset-0 lab-grid opacity-10 pointer-events-none" />
 
-                                <form className="space-y-10">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                        <input type="text" className="w-full bg-white/5 border border-white/10 p-6 rounded-xl focus:border-accent-gold outline-none text-white transition-all text-sm uppercase tracking-widest" placeholder="votre nom" />
-                                        <select className="w-full bg-[#111] border border-white/10 p-6 rounded-xl focus:border-accent-gold outline-none text-white/60 transition-all appearance-none text-sm uppercase tracking-widest bg-white/5">
-                                            <option>Expertise complète</option>
-                                            <option>Achat / Sourcing</option>
-                                            <option>Vente / Reprise</option>
-                                        </select>
+                                <div className="relative z-10">
+                                    <div className="flex items-center gap-6 mb-12">
+                                        <div className="h-px flex-1 bg-white/10" />
+                                        <h4 className="text-2xl font-black uppercase tracking-[0.4em] text-white whitespace-nowrap">
+                                            Horaires d'Accès
+                                        </h4>
+                                        <div className="h-px flex-1 bg-white/10" />
                                     </div>
-                                    <input type="email" className="w-full bg-white/5 border border-white/10 p-6 rounded-xl focus:border-accent-gold outline-none text-white transition-all text-sm uppercase tracking-widest" placeholder="votre email" />
-                                    <textarea rows="4" className="w-full bg-white/5 border border-white/10 p-6 rounded-xl focus:border-accent-gold outline-none text-white transition-all text-sm uppercase tracking-widest" placeholder="votre message..."></textarea>
-                                    <button type="submit" className="gold-button w-full py-8 text-lg tracking-[0.4em] font-black mt-8">INITIER LE PROTOCOLE</button>
-                                </form>
+
+                                    <div className="space-y-8">
+                                        {[
+                                            { day: 'Lundi - Vendredi', time: '09h - 19h' },
+                                            { day: 'Samedi', time: '10h - 18h' },
+                                            { day: 'Dimanche', time: 'Fermé', highlight: true }
+                                        ].map((item, i) => (
+                                            <div key={i} className="flex justify-between items-center text-lg md:text-xl border-b border-white/5 pb-6 group/row">
+                                                <span className="text-white/60 font-bold group-hover/row:text-white transition-colors">{item.day}</span>
+                                                <span className={item.highlight ? "text-accent-gold font-black" : "text-white/30 font-light"}>
+                                                    {item.time}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="mt-12 text-center">
+                                        <p className="text-[10px] uppercase tracking-[0.5em] font-black text-white/20">
+                                            Protocole Lab CarXLab // Verified Status
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>
@@ -107,7 +147,7 @@ const Contact = () => {
                     },
                     {
                         question: "Comment prendre rendez-vous au laboratoire CarXLab ?",
-                        answer: "Remplissez le formulaire de contact en sélectionnant le service souhaité (expertise, achat ou vente). Vous pouvez également nous appeler directement au +33 1 42 67 89 00 du lundi au vendredi de 9h à 19h et le samedi de 10h à 18h. Un conseiller vous confirmera votre créneau dans les meilleurs délais."
+                        answer: "Remplissez le formulaire de contact en sélectionnant le service souhaité (expertise, achat ou vente). Vous pouvez également nous appeler directement au 06 59 33 03 12 du lundi au vendredi de 9h à 19h et le samedi de 10h à 18h. Un conseiller vous confirmera votre créneau dans les meilleurs délais."
                     },
                     {
                         question: "Le laboratoire CarXLab est-il ouvert au grand public ?",

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Exclude admin panel
+Disallow: /admin
+
+# Sitemap location
+Sitemap: https://carxlab.fr/sitemap.xml

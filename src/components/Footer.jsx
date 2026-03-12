@@ -27,7 +27,7 @@ const Footer = () => {
                             {[Instagram, Facebook, Mail].map((Icon, i) => (
                                 <a
                                     key={i}
-                                    href="#"
+                                    href="mailto:Carxlab31@gmail.com"
                                     className="w-16 h-16 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-white/30 hover:bg-accent-gold/10 hover:text-accent-gold hover:border-accent-gold/50 transition-all duration-300 transform hover:-translate-y-1"
                                 >
                                     <Icon size={24} />
@@ -68,11 +68,11 @@ const Footer = () => {
                         <ul className="space-y-6 md:space-y-8 w-full max-w-sm">
                             <li className="flex items-start gap-6 p-6 rounded-2xl border border-white/5 bg-white/[0.02] group hover:border-white/10 transition-all">
                                 <MapPin size={22} className="text-accent-gold shrink-0 mt-1" />
-                                <span className="text-white/40 text-[15px] leading-loose font-light">Paris, Avenue des<br />Champs-Élysées</span>
+                                <span className="text-white/40 text-[15px] leading-loose font-light">4 impasses du pont,<br />31140 Launaguet</span>
                             </li>
                             <li className="flex items-center gap-6 p-6 rounded-2xl border border-white/5 bg-white/[0.02] group hover:border-white/10 transition-all">
                                 <Phone size={22} className="text-accent-gold shrink-0" />
-                                <span className="text-white/40 text-[15px] font-light tracking-widest">+33 1 42 67 89 00</span>
+                                <span className="text-white/40 text-[15px] font-light tracking-widest">06 59 33 03 12</span>
                             </li>
                         </ul>
                     </div>

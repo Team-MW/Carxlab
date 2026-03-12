@@ -51,7 +51,7 @@ const Login = ({ onLogin }) => {
                 transition={{ duration: 0.8 }}
                 className={`w-full max-w-md mx-4 ${shake ? 'animate-shake' : ''}`}
             >
-                <div className="glass-panel border border-white/5 rounded-2xl p-10">
+                <div className="glass-panel border border-white/5 rounded-2xl p-6 md:p-10">
                     <div className="flex-center-col mb-10">
                         <div className="w-16 h-16 rounded-2xl bg-accent-gold/10 border border-accent-gold/30 flex-center mb-6">
                             <Lock size={26} className="text-accent-gold" />
@@ -180,7 +180,7 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-8">
+        <form onSubmit={handleSubmit} className="grid lg:grid-cols-2 gap-10 lg:gap-16">
             {/* Photo Upload */}
             <div>
                 <label className={labelCls}>Photo principale *</label>
@@ -370,30 +370,30 @@ const AdminDashboard = ({ onLogout }) => {
             <div className="scan-overlay" />
 
             {/* Header */}
-            <header className="sticky top-0 z-50 border-b border-white/5 bg-black/80 backdrop-blur-2xl">
-                <div className="main-container py-4 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-accent-gold/10 border border-accent-gold/30 flex-center">
-                            <Car size={15} className="text-accent-gold" />
+            <header className="sticky top-0 z-[60] border-b border-white/5 bg-black/80 backdrop-blur-3xl">
+                <div className="main-container py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div className="flex items-center gap-3 w-full sm:w-auto">
+                        <div className="w-10 h-10 rounded-xl bg-accent-gold/10 border border-accent-gold/20 flex-center">
+                            <Car size={18} className="text-accent-gold" />
                         </div>
                         <div>
                             <span className="text-[10px] text-accent-gold tracking-[0.4em] uppercase font-black block leading-none mb-1">CarXLab</span>
-                            <span className="text-white font-black text-lg tracking-tight uppercase leading-none">Console <span className="text-white/40">v1.2</span></span>
+                            <span className="text-white font-black text-xl tracking-tight uppercase leading-none">Console <span className="text-white/40">v1.2</span></span>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                        <div className="hidden md:flex items-center gap-2 px-3 py-2 bg-accent-gold/5 border border-accent-gold/15 rounded-lg">
+                    <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
+                        <div className="flex items-center gap-2 px-3 py-2 bg-accent-gold/5 border border-accent-gold/15 rounded-lg">
                             <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                            <span className="text-xs text-white/50">
-                                {annonces.length} annonce{annonces.length !== 1 ? 's' : ''} en ligne
+                            <span className="text-[10px] uppercase font-bold tracking-widest text-white/50">
+                                {annonces.length} ONLINE
                             </span>
                         </div>
                         <button
                             onClick={onLogout}
-                            className="flex items-center gap-2 px-4 py-2 text-white/40 hover:text-white/70 border border-white/10 hover:border-white/20 rounded-xl transition-all text-xs uppercase tracking-widest"
+                            className="flex items-center gap-2 px-5 py-2.5 text-white/40 hover:text-white/80 border border-white/10 hover:border-white/20 rounded-xl transition-all text-[10px] uppercase font-black tracking-widest bg-white/[0.02]"
                         >
-                            <LogOut size={13} /> Déconnexion
+                            <LogOut size={13} /> DÉCONNEXION
                         </button>
                     </div>
                 </div>
@@ -401,27 +401,30 @@ const AdminDashboard = ({ onLogout }) => {
 
             <div className="main-container py-12">
                 {/* Top Bar */}
-                <div className="flex flex-wrap items-center justify-between gap-4 mb-10">
+                <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-16">
                     <div>
-                        <h1 className="text-5xl md:text-6xl font-black uppercase tracking-tighter">
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
                             <span className="text-white">Gestion du</span> <br />
                             <span className="gold-gradient">Stock Live</span>
                         </h1>
-                        <p className="text-white/20 text-sm font-medium mt-4 tracking-widest uppercase italic">Protocole de mise en ligne sécurisé</p>
+                        <p className="text-white/20 text-[10px] md:text-xs font-bold mt-6 tracking-[0.4em] uppercase italic flex items-center gap-4">
+                            <span className="h-px w-8 bg-accent-gold/20" />
+                            Protocole de mise en ligne sécurisé
+                        </p>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-4 w-full md:w-auto">
                         <button
                             onClick={fetchAnnonces}
-                            className="p-3 border border-white/10 rounded-xl text-white/30 hover:text-white/60 hover:border-white/20 transition-all"
+                            className="p-4 border border-white/10 rounded-2xl text-white/30 hover:text-white/60 hover:border-accent-gold/30 transition-all bg-white/[0.02]"
                         >
-                            <RefreshCw size={15} />
+                            <RefreshCw size={18} />
                         </button>
                         <button
                             onClick={() => setShowForm(!showForm)}
-                            className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${showForm ? 'border border-white/15 text-white/50' : 'gold-button'
+                            className={`flex-1 md:flex-none flex items-center justify-center gap-3 px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition-all shadow-2xl ${showForm ? 'bg-white/5 text-white/50 border border-white/10' : 'gold-button'
                                 }`}
                         >
-                            {showForm ? <X size={15} /> : <Plus size={15} />}
+                            {showForm ? <X size={18} /> : <Plus size={18} />}
                             {showForm ? 'Fermer' : 'Nouvelle Annonce'}
                         </button>
                     </div>
@@ -467,7 +470,7 @@ const AdminDashboard = ({ onLogout }) => {
                             </button>
                         </div>
                     ) : (
-                        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10">
+                        <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12">
                             {annonces.map((annonce, i) => (
                                 <motion.div
                                     key={annonce.id}
