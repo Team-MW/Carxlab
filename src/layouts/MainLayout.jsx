@@ -9,7 +9,7 @@ const MainLayout = ({ children }) => {
     const isAdmin = location.pathname.startsWith('/admin');
 
     return (
-        <div className="min-h-screen bg-[#050505] text-white selection:bg-accent-gold/30 selection:text-accent-gold">
+        <div className="min-h-screen bg-[var(--bg-color)] pb-24 text-white selection:bg-accent-gold/30 selection:text-accent-gold">
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -18,7 +18,7 @@ const MainLayout = ({ children }) => {
             >
                 <div className="scan-overlay" />
                 {!isAdmin && <Navbar />}
-                <main className={`flex-grow relative z-10 w-full overflow-x-hidden ${isAdmin ? 'pt-0' : ''}`}>
+                <main className={`flex-grow relative z-10 w-full overflow-x-hidden ${isAdmin ? 'pt-0' : 'pt-[var(--header-height)]'}`}>
                     {children}
                 </main>
                 {!isAdmin && <Footer />}

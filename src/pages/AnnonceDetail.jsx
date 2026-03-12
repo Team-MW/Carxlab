@@ -65,7 +65,7 @@ const AnnonceDetail = () => {
     ].filter(s => s.value);
 
     return (
-        <div className="min-h-screen bg-[var(--bg-color)] pt-[var(--header-height)] pb-24">
+        <div className="min-h-screen bg-[var(--bg-color)] pb-24">
             {/* Navigation haute */}
             <div className="sticky top-[var(--header-height)] z-40 bg-black/50 backdrop-blur-xl border-b border-white/5 py-4">
                 <div className="main-container flex items-center justify-between">

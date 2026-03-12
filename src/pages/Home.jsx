@@ -44,7 +44,7 @@ const Home = () => {
     return (
         <div className="relative">
             {/* Hero Section */}
-            <section className="page-hero overflow-hidden">
+            <section className="relative min-h-[calc(100vh-var(--header-height))] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <motion.div style={{ y }} className="w-full h-full">
                         <LazyLoadImage
