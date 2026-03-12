@@ -241,6 +241,26 @@ const Stock = () => {
                     )}
                 </div>
             </section>
+
+            {/* Local SEO Text Section */}
+            <section className="section-padding bg-black border-t border-white/5">
+                <div className="main-container">
+                    <div className="max-w-4xl mx-auto text-center">
+                        <h2 className="text-2xl md:text-3xl font-black uppercase tracking-widest mb-8">VÉHICULES D'OCCASION À TOULOUSE - LAUNAGUET</h2>
+                        <div className="space-y-6 text-white/30 text-sm md:text-base font-light leading-relaxed">
+                            <p>
+                                Bienvenue chez <strong>CarXLab</strong>, votre garage spécialisé dans la vente de <strong>voitures d'occasion premium</strong>. Notre laboratoire automobile est stratégiquement situé à <strong>Launaguet</strong>, à quelques minutes de <strong>Toulouse</strong>, Blagnac, et l'Union. Nous sélectionnons rigoureusement chaque véhicule pour vous offrir une qualité irréprochable en Haute-Garonne.
+                            </p>
+                            <p>
+                                Que vous recherchiez une <strong>berline de luxe</strong>, un SUV familial ou une <strong>sportive d'exception</strong>, notre catalogue live est mis à jour quotidiennement. Chaque annonce détaille précisément l'historique du véhicule, son kilométrage certifié et ses options exclusives. Nos services s'étendent à tout le secteur de <strong>Toulouse métropole</strong>, incluant Aucamville, Saint-Alban et Castelginest.
+                            </p>
+                            <p>
+                                En plus de la vente, profitez de notre expertise gratuite pour le rachat de votre voiture cash. Nous rachetons tous types de modèles récents au meilleur prix du marché local. Faites confiance à l'expertise CarXLab pour votre prochain achat automobile dans le <strong>31</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };

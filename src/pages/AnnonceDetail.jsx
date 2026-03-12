@@ -75,7 +75,7 @@ const AnnonceDetail = () => {
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 group relative"
+                            className="aspect-square md:aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 group relative"
                         >
                             <img
                                 src={annonce.url}

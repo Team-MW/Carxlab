@@ -113,6 +113,29 @@ const Achat = () => {
                             </p>
                         </div>
                     </MotionDiv>
+
+                    {/* SEO Buyback Content */}
+                    <div className="mt-40 max-w-4xl mx-auto border-t border-white/5 pt-20">
+                        <h2 className="text-2xl md:text-3xl font-black uppercase tracking-widest mb-10 text-center">Estimation et rachat automobile à Toulouse (31)</h2>
+                        <div className="grid md:grid-cols-2 gap-12 text-sm md:text-base text-white/30 leading-relaxed font-light">
+                            <div className="space-y-6">
+                                <p>
+                                    Vous souhaitez <strong>vendre votre voiture à Toulouse</strong> rapidement et en toute sécurité ? CarXLab propose un service de <strong>rachat cash</strong> simplifié pour tous les propriétaires de véhicules récents et de prestige à <strong>Launaguet</strong> et dans toute la Haute-Garonne.
+                                </p>
+                                <p>
+                                    Notre processus d'expertise est conçu pour refléter la valeur réelle du marché. En évitant les plateformes génériques, vous bénéficiez d'une <strong>estimation personnalisée</strong> réalisée par des passionnés qui comprennent la valeur des options et de l'entretien de votre véhicule.
+                                </p>
+                            </div>
+                            <div className="space-y-6">
+                                <p>
+                                    Que vous soyez à Blagnac, Colomiers ou Tournefeuille, nous nous déplaçons ou vous accueillons dans notre showroom pour une <strong>reprise immédiate</strong>. Nous gérons l'intégralité des formalités administratives pour une vente sans stress.
+                                </p>
+                                <p>
+                                    <strong>CarXLab Launaguet</strong> : la référence locale pour la revente de BMW, Audi, Mercedes, Porsche et autres marques de prestige dans le 31. Obtenez votre offre de rachat en moins de 24h.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
             <FAQ

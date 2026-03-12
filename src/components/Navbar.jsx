@@ -64,27 +64,65 @@ const Navbar = () => {
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <MotionDiv
-                        initial={{ opacity: 0, x: '100%' }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: '100%' }}
-                        transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-                        className="fixed inset-0 z-[110] bg-black flex flex-col items-center justify-center gap-10"
+                        initial={{ opacity: 0, y: '-100%' }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: '-100%' }}
+                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        className="fixed inset-0 z-[120] bg-black/95 backdrop-blur-3xl flex flex-col justify-center px-10"
                     >
-                        <button className="absolute top-8 right-8 text-white p-4" onClick={() => setMobileMenuOpen(false)}>
+                        <button
+                            className="absolute top-8 right-8 text-white/40 hover:text-accent-gold transition-all p-4"
+                            onClick={() => setMobileMenuOpen(false)}
+                        >
                             <X size={32} />
                         </button>
-                        <div className="flex flex-col items-center gap-8">
-                            {navLinks.map((link) => (
-                                <Link
+
+                        <div className="flex flex-col gap-8">
+                            <div className="flex flex-col gap-2 mb-10">
+                                <span className="h-[2px] w-12 bg-accent-gold"></span>
+                                <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Navigation</span>
+                            </div>
+
+                            {navLinks.map((link, i) => (
+                                <motion.div
                                     key={link.name}
-                                    to={link.path}
-                                    onClick={handleNavClick}
-                                    className={`text-2xl font-black tracking-widest uppercase transition-all ${location.pathname === link.path ? 'text-accent-gold' : 'text-white'}`}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.2 + i * 0.1 }}
                                 >
-                                    {link.name}
-                                </Link>
+                                    <Link
+                                        to={link.path}
+                                        onClick={handleNavClick}
+                                        className={`text-4xl font-black tracking-tighter uppercase transition-all ${location.pathname === link.path ? 'text-accent-gold' : 'text-white/60'}`}
+                                    >
+                                        {link.name}
+                                        {location.pathname === link.path && (
+                                            <span className="text-accent-gold ml-4">.</span>
+                                        )}
+                                    </Link>
+                                </motion.div>
                             ))}
-                            <Link to="/stock" className="gold-button mt-4" onClick={handleNavClick}>Stock disponible</Link>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.6 }}
+                                className="mt-12 pt-12 border-t border-white/5"
+                            >
+                                <Link to="/stock" className="gold-button w-full py-6" onClick={handleNavClick}>
+                                    VOIR LE STOCK RÉEL
+                                </Link>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.8 }}
+                                className="mt-12 space-y-2"
+                            >
+                                <p className="text-[10px] text-white/20 font-black uppercase tracking-[0.3em]">Contact Direct</p>
+                                <p className="text-white/60 font-bold">06 59 33 03 12</p>
+                            </motion.div>
                         </div>
                     </MotionDiv>
                 )}

@@ -89,8 +89,32 @@ const Expertise = () => {
                         </div>
                         <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)]" />
                     </div>
+
+                    {/* SEO Expertise Content */}
+                    <div className="mt-40 max-w-4xl mx-auto border-t border-white/5 pt-20">
+                        <h2 className="text-2xl md:text-3xl font-black uppercase tracking-widest mb-10 text-center">Expertise Automobile Certifiée en Haute-Garonne</h2>
+                        <div className="grid md:grid-cols-2 gap-12 text-sm md:text-base text-white/30 leading-relaxed font-light text-justify">
+                            <div className="space-y-6">
+                                <p>
+                                    Vous cherchez une <strong>expertise automobile à Toulouse</strong> pour sécuriser votre futur achat ? CarXLab, situé à <strong>Launaguet</strong>, offre un service de diagnostic haut de gamme. Nous intervenons sur tout le secteur (31), apportant une précision technique pour les véhicules de prestige et d'occasion.
+                                </p>
+                                <p>
+                                    Notre protocole exclusif permet de vérifier l'intégrité de votre voiture. Que ce soit pour une <strong>expertise avant achat</strong> ou une valorisation de votre patrimoine automobile, nos techniciens qualifiés utilisent des outils de pointe pour inspecter chaque détail structurel et électronique.
+                                </p>
+                            </div>
+                            <div className="space-y-6">
+                                <p>
+                                    Basés à proximité immédiate de <strong>l'Union</strong> et <strong>Castelginest</strong>, nous sommes le laboratoire de référence pour les passionnés exigeants du Nord Toulousain. Nous couvrons aussi bien l'analyse mécanique que la vérification de l'historique complet pour garantir votre sérénité.
+                                </p>
+                                <p>
+                                    Faites appel au savoir-faire <strong>CarXLab Toulouse</strong> pour une transparence totale. Notre engagement est simple : transformer l'incertitude d'une occasion en la certitude d'une acquisition maîtrisée.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
+
             <FAQ
                 subtitle="Questions sur notre protocole d'expertise automobile unique."
                 items={[
