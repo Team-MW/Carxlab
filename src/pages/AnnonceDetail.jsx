@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-    ChevronLeft, Gauge, Zap, Settings2, Calendar,
-    Palette, Info, Phone, MessageSquare, Share2,
+    Gauge, Zap, Settings2, Calendar,
+    Palette, Info, Phone, MessageSquare,
     ShieldCheck, Star, ArrowRight
 } from 'lucide-react';
 
@@ -50,9 +50,6 @@ const AnnonceDetail = () => {
         <div className="min-h-screen bg-black flex-center-col gap-6 text-center px-4">
             <h1 className="text-4xl font-black text-white/20 uppercase tracking-tighter">Oups !</h1>
             <p className="text-white/40 max-w-md">{error || "Cette annonce n'existe plus ou a été déplacée."}</p>
-            <Link to="/stock" className="gold-button px-8 py-4 rounded-xl text-xs font-black tracking-widest uppercase">
-                Retour au stock
-            </Link>
         </div>
     );
 
@@ -66,18 +63,7 @@ const AnnonceDetail = () => {
 
     return (
         <div className="min-h-screen bg-[var(--bg-color)] pt-20 md:pt-40 pb-24">
-            {/* Navigation haute */}
-            <div className="sticky top-[100px] md:top-[120px] z-40 bg-black backdrop-blur-xl border-b border-white/5 py-4">
-                <div className="main-container flex items-center justify-between">
-                    <Link to="/stock" className="flex items-center gap-2 text-white/40 hover:text-white transition-colors group">
-                        <ChevronLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em]">Retour au stock</span>
-                    </Link>
-                    <div className="flex items-center gap-4">
-                        <button className="p-2 text-white/30 hover:text-white transition-colors"><Share2 size={16} /></button>
-                    </div>
-                </div>
-            </div>
+
 
             <div className="main-container mt-20 md:mt-32">
                 <div className="grid lg:grid-cols-12 gap-12">
