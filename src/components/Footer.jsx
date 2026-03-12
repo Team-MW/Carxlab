@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import logo from '../assets/333carxlab.png';
 
 const Footer = () => {
@@ -24,15 +24,12 @@ const Footer = () => {
                             Plus qu'un showroom, une expertise de précision. Bienvenue dans l'ère de l'automobile analytique.
                         </p>
                         <div className="flex gap-6 mt-4 justify-center md:justify-start">
-                            {[Instagram, Facebook, Mail].map((Icon, i) => (
-                                <a
-                                    key={i}
-                                    href="mailto:Carxlab31@gmail.com"
-                                    className="w-16 h-16 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-white/30 hover:bg-accent-gold/10 hover:text-accent-gold hover:border-accent-gold/50 transition-all duration-300 transform hover:-translate-y-1"
-                                >
-                                    <Icon size={24} />
-                                </a>
-                            ))}
+                            <a
+                                href="mailto:Carxlab31@gmail.com"
+                                className="w-16 h-16 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-white/30 hover:bg-accent-gold/10 hover:text-accent-gold hover:border-accent-gold/50 transition-all duration-300 transform hover:-translate-y-1"
+                            >
+                                <Mail size={24} />
+                            </a>
                         </div>
                     </div>
 
