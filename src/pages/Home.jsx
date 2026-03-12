@@ -44,7 +44,7 @@ const Home = () => {
     return (
         <div className="relative">
             {/* Hero Section */}
-            <section className="relative min-h-[calc(100vh-var(--header-height))] flex items-center overflow-hidden">
+            <section className="relative min-h-[calc(100vh-var(--header-height))] flex items-center justify-center overflow-hidden pt-28 pb-20 md:pt-0">
                 <div className="absolute inset-0 z-0">
                     <motion.div style={{ y }} className="w-full h-full">
                         <LazyLoadImage
@@ -58,50 +58,50 @@ const Home = () => {
                     <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black"></div>
                 </div>
 
-                <div className="main-container relative z-20 flex-center-col">
+                <div className="main-container relative z-20 flex flex-col items-center justify-center text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.2, ease: "easeOut" }}
                         className="max-w-6xl"
                     >
-                        <div className="flex-center gap-6 mb-16">
-                            <span className="h-[1px] w-16 md:w-32 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
-                            <span className="text-accent-gold tracking-[0.6em] font-black text-[10px] md:text-sm uppercase">Prototype V4 // Lab</span>
-                            <span className="h-[1px] w-12 md:w-20 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
+                        <div className="flex-center gap-4 md:gap-6 mb-8 md:mb-16">
+                            <span className="h-[1px] w-12 md:w-32 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
+                            <span className="text-accent-gold tracking-[0.4em] md:tracking-[0.6em] font-black text-[9px] md:text-sm uppercase">Prototype V4 // Lab</span>
+                            <span className="h-[1px] w-8 md:w-20 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                         </div>
 
-                        <h1 className="hero-title mb-12">
-                            L'ART DE LA <br />
+                        <h1 className="hero-title mb-8 md:mb-12">
+                            L'ART DE LA <br className="hidden md:block" />
                             <span className="gold-gradient">PERFECTION</span>
                         </h1>
 
-                        <div className="flex-center flex-wrap gap-8 md:gap-16">
+                        <div className="flex-center flex-col sm:flex-row gap-4 md:gap-16">
                             <Link to="/stock" className="flex-1 sm:flex-none">
                                 <button className="gold-button group gap-4 w-full">
                                     EXPLORER LE STOCK
                                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                 </button>
                             </Link>
-                            <Link to="/expertise" className="flex-1 sm:flex-none">
+                            <Link to="/expertise" className="w-full sm:w-auto">
                                 <button className="gold-button-outline px-12 w-full">
                                     NOS MÉTHODES
                                 </button>
                             </Link>
                         </div>
                         {/* Center-Aligned Metrics */}
-                        <div className="mt-24 md:mt-40 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24 items-center justify-center">
+                        <div className="mt-12 md:mt-24 grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-24 items-start justify-center">
                             {[
                                 { label: 'Certifications', value: 4.8, suffix: 'k+', decimals: 1 },
                                 { label: 'Protocole Lab', value: 150, suffix: '+', decimals: 0 },
                                 { label: 'Fiabilité', value: 99.8, suffix: '%', decimals: 1 }
                             ].map((stat, i) => (
-                                <div key={i} className="flex flex-col items-center group">
-                                    <div className="text-white font-black text-4xl md:text-6xl mb-3 tracking-tighter flex items-baseline group-hover:scale-110 transition-transform duration-500">
+                                <div key={i} className={`flex flex-col items-center group ${i === 2 ? 'col-span-2 md:col-span-1' : ''}`}>
+                                    <div className="text-white font-black text-2xl md:text-6xl mb-1 md:mb-3 tracking-tighter flex items-baseline group-hover:scale-110 transition-transform duration-500">
                                         <Counter value={stat.value} decimals={stat.decimals} />
-                                        <span className="text-accent-gold text-xl md:text-2xl ml-1 font-bold">{stat.suffix}</span>
+                                        <span className="text-accent-gold text-xs md:text-2xl ml-0.5 font-bold">{stat.suffix}</span>
                                     </div>
-                                    <div className="text-[10px] uppercase font-black tracking-[0.4em] text-white/20">{stat.label}</div>
+                                    <div className="text-[8px] md:text-[10px] uppercase font-black tracking-[0.2em] md:tracking-[0.4em] text-white/20">{stat.label}</div>
                                 </div>
                             ))}
                         </div>
@@ -113,7 +113,7 @@ const Home = () => {
             <section className="section-padding bg-black relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full lab-grid opacity-10 pointer-events-none" />
                 <div className="main-container relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 xl:gap-32 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 xl:gap-32 items-center">
                         <motion.div
                             initial={{ opacity: 0, x: -40 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -126,7 +126,7 @@ const Home = () => {
                                 <span className="text-accent-gold text-[10px] font-black uppercase tracking-[0.3em]">Garage Launaguet, Haute-Garonne</span>
                             </div>
 
-                            <h2 className="text-5xl md:text-7xl font-black mb-10 uppercase tracking-tighter leading-[1.1]">
+                            <h2 className="text-4xl md:text-7xl font-black mb-8 md:mb-10 uppercase tracking-tighter leading-[1.1]">
                                 VOTRE SPÉCIALISTE <br /><span className="gold-gradient">AUTO À LAUNAGUET</span>
                             </h2>
 
@@ -134,7 +134,7 @@ const Home = () => {
                                 CarXLab est votre partenaire de confiance pour l'<strong>achat et la revente de véhicules d'occasion</strong> et de prestige à Launaguet. Situés à 15 minutes de Toulouse, nous sélectionnons pour vous les meilleures pépites automobiles en Haute-Garonne.
                             </p>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-10">
                                 {[
                                     {
                                         title: "Achat Cash",
@@ -159,7 +159,7 @@ const Home = () => {
                                 ].map((item, i) => (
                                     <div
                                         key={i}
-                                        className="flex flex-col gap-4 p-8 glass-panel border border-white/5 hover:border-accent-gold/30 transition-all group"
+                                        className="flex flex-col gap-3 p-6 md:p-8 glass-panel border border-white/5 hover:border-accent-gold/30 transition-all group"
                                     >
                                         <div className="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold group-hover:scale-110 transition-transform">
                                             {item.icon}
@@ -172,7 +172,7 @@ const Home = () => {
                                 ))}
                             </div>
 
-                            <div className="mt-16 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-8">
+                            <div className="mt-10 md:mt-16 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-6 md:gap-8">
                                 <Link to="/stock">
                                     <button className="gold-button px-14 py-5">ACHETER UN VÉHICULE</button>
                                 </Link>
@@ -285,7 +285,7 @@ const Home = () => {
             </section>
 
             {/* CTA Section */}
-            <section className="pb-96 pt-32 bg-black relative flex items-center justify-center overflow-hidden">
+            <section className="pb-40 md:pb-96 pt-20 md:pt-32 bg-black relative flex items-center justify-center overflow-hidden">
                 <div className="main-container text-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -293,7 +293,7 @@ const Home = () => {
                         viewport={{ once: true }}
                         className="flex flex-col items-center"
                     >
-                        <h2 className="text-5xl md:text-7xl font-black mb-10 uppercase leading-[1.1] tracking-tight">
+                        <h2 className="text-4xl md:text-7xl font-black mb-8 md:mb-10 uppercase leading-[1.1] tracking-tight">
                             VOTRE <br /><span className="gold-gradient">FUTUR</span> EST ICI
                         </h2>
                         <p className="text-lg md:text-xl text-white/30 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
