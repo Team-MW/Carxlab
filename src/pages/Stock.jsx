@@ -94,7 +94,7 @@ const Stock = () => {
             </section>
 
             {/* Luxury Control Panel */}
-            <div className="sticky top-[var(--header-height)] z-40 bg-black/95 backdrop-blur-3xl border-b border-white/5 py-8 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <div className="sticky top-[80px] md:top-[100px] z-40 bg-black/95 backdrop-blur-3xl border-b border-white/5 py-8 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                 <div className="main-container">
                     <div className="flex flex-col lg:flex-row gap-8 items-center justify-between">
 
