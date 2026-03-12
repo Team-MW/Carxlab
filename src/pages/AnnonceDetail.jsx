@@ -62,10 +62,11 @@ const AnnonceDetail = () => {
     ].filter(s => s.value);
 
     return (
-        <div className="min-h-screen bg-[var(--bg-color)] pt-24 md:pt-60 pb-24">
+        <div className="min-h-screen bg-[var(--bg-color)] pb-24">
+            {/* Espaceur physique forcé par style CSS direct */}
+            <div style={{ height: '120px' }} className="w-full"></div>
 
-
-            <div className="main-container mt-24 md:mt-48">
+            <div className="main-container mt-10 md:mt-20">
                 <div className="grid lg:grid-cols-12 gap-12">
 
                     {/* Gauche : Image & Details */}
