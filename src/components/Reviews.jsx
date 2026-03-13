@@ -7,7 +7,7 @@ const ReviewCard = ({ name, date, text, rating = 5 }) => (
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="bg-white p-10 rounded-[2.5rem] shadow-xl flex flex-col gap-6 relative group h-full"
+        className="bg-white p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-xl flex flex-col gap-6 relative group h-full"
     >
         <div className="absolute -top-4 -left-4 w-12 h-12 bg-accent-gold rounded-2xl flex items-center justify-center text-black shadow-lg shadow-accent-gold/20">
             <Quote size={20} fill="currentColor" />
@@ -69,7 +69,7 @@ const Reviews = () => {
                         <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Témoignages</span>
                         <span className="h-[2px] w-12 bg-accent-gold"></span>
                     </div>
-                    <h2 className="text-5xl md:text-7xl font-black text-black uppercase tracking-tight leading-[1.2] mb-10">
+                    <h2 className="text-4xl md:text-7xl font-black text-black uppercase tracking-tight leading-[1.1] mb-10">
                         L'AVIS DE NOS <br /><span className="text-accent-gold">PARTENAIRES</span>
                     </h2>
                     <div className="flex justify-center items-center gap-6 mt-6">

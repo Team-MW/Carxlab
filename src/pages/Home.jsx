@@ -44,18 +44,23 @@ const Home = () => {
     return (
         <div className="relative">
             {/* Hero Section */}
-            <section className="relative min-h-[calc(100vh-var(--header-height))] flex items-center justify-center overflow-hidden pt-28 pb-20 md:pt-0">
+            <section className="relative min-h-[calc(100vh-var(--header-height))] flex items-center justify-center overflow-hidden pt-24 pb-20 md:pt-0">
                 <div className="absolute inset-0 z-0">
                     <motion.div style={{ y }} className="w-full h-full">
                         <LazyLoadImage
                             src={heroImg}
                             effect="blur"
                             alt="CarXLab Hero Background"
-                            className="w-full h-full object-cover opacity-60 scale-105"
+                            className="w-full h-full object-cover opacity-50 scale-105"
                             wrapperClassName="w-full h-full"
                         />
                     </motion.div>
                     <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black"></div>
+
+                    {/* Lab Grid & HUD elements */}
+                    <div className="absolute inset-0 lab-grid opacity-20 pointer-events-none" />
+                    <div className="absolute top-40 left-10 w-32 h-32 border-l border-t border-accent-gold/20 pointer-events-none hidden md:block" />
+                    <div className="absolute bottom-40 right-10 w-32 h-32 border-r border-b border-accent-gold/20 pointer-events-none hidden md:block" />
                 </div>
 
                 <div className="main-container relative z-20 flex flex-col items-center justify-center text-center">
@@ -65,45 +70,52 @@ const Home = () => {
                         transition={{ duration: 1.2, ease: "easeOut" }}
                         className="max-w-6xl"
                     >
-                        <div className="flex-center gap-4 md:gap-6 mb-8 md:mb-16">
-                            <span className="h-[1px] w-12 md:w-32 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
-                            <span className="text-accent-gold tracking-[0.4em] md:tracking-[0.6em] font-black text-[9px] md:text-sm uppercase">Prototype V4 // Lab</span>
-                            <span className="h-[1px] w-8 md:w-20 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
+                        <div className="flex-center gap-3 md:gap-6 mb-10 md:mb-16">
+                            <span className="h-[1px] w-8 md:w-32 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
+                            <span className="text-accent-gold tracking-[0.2em] md:tracking-[0.6em] font-black text-[8px] md:text-sm uppercase italic">Prototype V4 // Lab</span>
+                            <span className="h-[1px] w-8 md:w-32 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                         </div>
 
-                        <h1 className="hero-title mb-8 md:mb-12">
-                            L'ART DE LA <br className="hidden md:block" />
+                        <h1 className="hero-title mb-12 md:mb-12 px-2">
+                            L'ART DE LA <br className="md:hidden" />
                             <span className="gold-gradient">PERFECTION</span>
                         </h1>
 
-                        <div className="flex-center flex-col sm:flex-row gap-4 md:gap-16">
-                            <Link to="/stock" className="flex-1 sm:flex-none">
-                                <button className="gold-button group gap-4 w-full">
+                        <div className="flex-center flex-col sm:flex-row gap-4 md:gap-6 mb-16">
+                            <Link to="/stock" className="w-full sm:w-auto">
+                                <button className="gold-button group gap-4 w-full px-12">
                                     EXPLORER LE STOCK
                                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                 </button>
                             </Link>
-                            <Link to="/expertise" className="w-full sm:w-auto">
+                            <Link to="/expertise" className="hidden sm:block w-full sm:w-auto">
                                 <button className="gold-button-outline px-12 w-full">
                                     NOS MÉTHODES
                                 </button>
                             </Link>
                         </div>
                         {/* Center-Aligned Metrics */}
-                        <div className="mt-12 md:mt-24 grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-24 items-start justify-center">
-                            {[
-                                { label: 'Certifications', value: 4.8, suffix: 'k+', decimals: 1 },
-                                { label: 'Protocole Lab', value: 150, suffix: '+', decimals: 0 },
-                                { label: 'Fiabilité', value: 99.8, suffix: '%', decimals: 1 }
-                            ].map((stat, i) => (
-                                <div key={i} className={`flex flex-col items-center group ${i === 2 ? 'col-span-2 md:col-span-1' : ''}`}>
-                                    <div className="text-white font-black text-2xl md:text-6xl mb-1 md:mb-3 tracking-tighter flex items-baseline group-hover:scale-110 transition-transform duration-500">
-                                        <Counter value={stat.value} decimals={stat.decimals} />
-                                        <span className="text-accent-gold text-xs md:text-2xl ml-0.5 font-bold">{stat.suffix}</span>
+                        <div className="mt-16 md:mt-24 flex items-center justify-center w-full max-w-4xl mx-auto px-4 relative">
+                            {/* Decorative architectural markers */}
+                            <div className="absolute -top-4 -left-2 text-[8px] text-accent-gold/40 font-mono hidden md:block">REF: LAB_OS_V4.0</div>
+                            <div className="absolute -bottom-4 -right-2 text-[8px] text-accent-gold/40 font-mono hidden md:block">STATUS: LIVE_FEED</div>
+
+                            <div className="grid grid-cols-3 gap-0 w-full glass-panel rounded-[1.5rem] md:rounded-[2.5rem] border-white/10 relative overflow-hidden group divide-x divide-white/5">
+                                <div className="absolute inset-0 bg-gradient-to-r from-accent-gold/0 via-accent-gold/5 to-accent-gold/0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+                                {[
+                                    { label: 'Certifications', value: 4.8, suffix: 'k+', decimals: 1 },
+                                    { label: 'Protocole Lab', value: 150, suffix: '+', decimals: 0 },
+                                    { label: 'Fiabilité', value: 99.8, suffix: '%', decimals: 1 }
+                                ].map((stat, i) => (
+                                    <div key={i} className="flex flex-col items-center py-6 md:py-12 transition-transform duration-500 hover:bg-white/5">
+                                        <div className="text-white font-black text-2xl md:text-6xl mb-1 md:mb-2 tracking-tighter flex items-baseline">
+                                            <Counter value={stat.value} decimals={stat.decimals} />
+                                            <span className="text-accent-gold text-[10px] md:text-2xl ml-0.5 font-bold">{stat.suffix}</span>
+                                        </div>
+                                        <div className="text-[6px] md:text-[10px] uppercase font-black tracking-[0.1em] md:tracking-[0.4em] text-white/20 whitespace-nowrap">{stat.label}</div>
                                     </div>
-                                    <div className="text-[8px] md:text-[10px] uppercase font-black tracking-[0.2em] md:tracking-[0.4em] text-white/20">{stat.label}</div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </motion.div>
                 </div>
@@ -126,48 +138,53 @@ const Home = () => {
                                 <span className="text-accent-gold text-[10px] font-black uppercase tracking-[0.3em]">Garage Launaguet, Haute-Garonne</span>
                             </div>
 
-                            <h2 className="text-4xl md:text-7xl font-black mb-8 md:mb-10 uppercase tracking-tighter leading-[1.1]">
+                            <h2 className="text-5xl md:text-7xl font-black mb-8 md:mb-10 uppercase tracking-tighter leading-[1] px-4">
                                 VOTRE SPÉCIALISTE <br /><span className="gold-gradient">AUTO À LAUNAGUET</span>
                             </h2>
 
-                            <p className="text-lg md:text-xl text-white/40 mb-12 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+                            <p className="text-lg md:text-xl text-white/60 mb-12 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
                                 CarXLab est votre partenaire de confiance pour l'<strong>achat et la revente de véhicules d'occasion</strong> et de prestige à Launaguet. Situés à 15 minutes de Toulouse, nous sélectionnons pour vous les meilleures pépites automobiles en Haute-Garonne.
                             </p>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-10">
+                            <div className="grid grid-cols-2 gap-3 md:gap-6">
                                 {[
                                     {
                                         title: "Achat Cash",
-                                        desc: "Reprise immédiate de votre véhicule au meilleur prix du marché toulousain.",
-                                        icon: <Zap size={20} />
+                                        desc: "Reprise immédiate au meilleur prix du marché.",
+                                        icon: <Zap size={18} />
                                     },
                                     {
-                                        title: "Stock Premium",
-                                        desc: "Large choix de voitures d'occasion révisées et garanties par nos experts.",
-                                        icon: <ShieldCheck size={20} />
+                                        title: "Stock Lab",
+                                        desc: "Véhicules révisés sous protocole strict.",
+                                        icon: <ShieldCheck size={18} />
                                     },
                                     {
-                                        title: "Expertise Locale",
-                                        desc: "Un service de proximité dédié aux passionnés d'automobile du 31.",
-                                        icon: <MapPin size={20} />
+                                        title: "Expertise 31",
+                                        desc: "Service de proximité dédié aux passionnés.",
+                                        icon: <MapPin size={18} />
                                     },
                                     {
                                         title: "Vente Flash",
-                                        desc: "Vendez votre voiture rapidement grâce à notre réseau de partenaires.",
-                                        icon: <Search size={20} />
+                                        desc: "Vendez rapidement via notre réseau.",
+                                        icon: <Search size={18} />
                                     }
                                 ].map((item, i) => (
                                     <div
                                         key={i}
-                                        className="flex flex-col gap-3 p-6 md:p-8 glass-panel border border-white/5 hover:border-accent-gold/30 transition-all group"
+                                        className="flex flex-col gap-4 p-6 md:p-10 glass-panel border border-white/5 hover:border-accent-gold/40 transition-all group relative overflow-hidden"
                                     >
-                                        <div className="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold group-hover:scale-110 transition-transform">
+                                        <div className="absolute top-0 right-0 w-12 h-12 border-r border-t border-accent-gold/0 group-hover:border-accent-gold/40 transition-all duration-500" />
+                                        <div className="absolute bottom-0 left-0 w-12 h-12 border-l border-b border-accent-gold/0 group-hover:border-accent-gold/40 transition-all duration-500" />
+
+                                        <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-accent-gold/5 flex items-center justify-center text-accent-gold group-hover:bg-accent-gold group-hover:text-black transition-all duration-500">
                                             {item.icon}
                                         </div>
                                         <div>
-                                            <h4 className="text-base font-black uppercase tracking-widest text-white mb-2">{item.title}</h4>
-                                            <p className="text-xs text-white/30 leading-relaxed font-light">{item.desc}</p>
+                                            <h4 className="text-xs md:text-sm font-black uppercase tracking-[0.2em] text-white mb-3 group-hover:text-accent-gold transition-colors">{item.title}</h4>
+                                            <p className="text-[9px] md:text-[11px] text-white/40 leading-relaxed font-medium uppercase tracking-wider">{item.desc}</p>
                                         </div>
+
+                                        <div className="absolute top-4 left-4 text-[7px] font-mono text-white/5 group-hover:text-accent-gold/20">0{i + 1} // DATA_NODE</div>
                                     </div>
                                 ))}
                             </div>
@@ -231,7 +248,7 @@ const Home = () => {
                                 <span className="h-[2px] w-20 bg-accent-gold"></span>
                                 <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Localisation</span>
                             </div>
-                            <h2 className="text-5xl md:text-7xl font-black mb-16 uppercase tracking-tight leading-[1.1]">
+                            <h2 className="text-4xl md:text-7xl font-black mb-16 uppercase tracking-tight leading-[1.1]">
                                 OÙ NOUS <br /><span className="gold-gradient">TROUVER</span>
                             </h2>
                             <div className="space-y-10">
@@ -267,7 +284,7 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="w-full md:w-1/2">
-                            <div className="relative aspect-square glass-panel rounded-[3rem] overflow-hidden border border-white/5 group">
+                            <div className="relative aspect-video md:aspect-square glass-panel rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/5 group">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.67!2d1.46!3d43.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aebb1!2s4+Imp.+du+Pont%2C+31140+Launaguet!5e0!3m2!1sfr!2sfr!4v1"
                                     width="100%"
@@ -293,7 +310,7 @@ const Home = () => {
                         viewport={{ once: true }}
                         className="flex flex-col items-center"
                     >
-                        <h2 className="text-4xl md:text-7xl font-black mb-8 md:mb-10 uppercase leading-[1.1] tracking-tight">
+                        <h2 className="text-4xl md:text-7xl font-black mb-8 md:mb-10 uppercase leading-[1] tracking-tight">
                             VOTRE <br /><span className="gold-gradient">FUTUR</span> EST ICI
                         </h2>
                         <p className="text-lg md:text-xl text-white/30 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
