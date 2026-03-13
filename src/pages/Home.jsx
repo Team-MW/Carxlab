@@ -301,6 +301,41 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* SEO Content Section */}
+            <section className="section-padding bg-black relative overflow-hidden">
+                <div className="main-container relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="max-w-4xl mx-auto text-center glass-panel p-8 md:p-16 rounded-[2rem] md:rounded-[3rem] border border-white/5 shadow-2xl"
+                    >
+                        <h2 className="text-3xl md:text-5xl font-black mb-8 md:mb-10 uppercase tracking-tighter leading-tight gold-gradient">
+                            VÉHICULES D'OCCASION À TOULOUSE - LAUNAGUET
+                        </h2>
+                        <div className="space-y-6 text-white/40 text-base md:text-xl font-light leading-relaxed">
+                            <p>
+                                Bienvenue chez <strong className="text-white">CarXLab</strong>, votre garage spécialisé dans la vente de voitures d'occasion premium. Notre laboratoire automobile est stratégiquement situé à Launaguet, à quelques minutes de <strong className="text-white">Toulouse</strong>, Blagnac, et l'Union. Nous sélectionnons rigoureusement chaque véhicule pour vous offrir une qualité irréprochable en Haute-Garonne.
+                            </p>
+                            <p>
+                                Que vous recherchiez une berline de luxe, un SUV familial ou une sportive d'exception, notre catalogue live est mis à jour quotidiennement. Chaque annonce détaille précisément l'historique du véhicule, son kilométrage certifié et ses options exclusives. Nos services s'étendent à tout le secteur de Toulouse métropole, incluant Aucamville, Saint-Alban et Castelginest.
+                            </p>
+                            <p>
+                                En plus de la vente, profitez de notre expertise gratuite pour le rachat de votre voiture cash. Nous rachetons tous types de modèles récents au meilleur prix du marché local. Faites confiance à l'expertise CarXLab pour votre prochain achat automobile dans le 31.
+                            </p>
+                        </div>
+
+                        {/* Lab architectural detail */}
+                        <div className="mt-12 pt-12 border-t border-white/5 flex justify-center items-center gap-4">
+                            <span className="h-[1px] w-8 bg-accent-gold/30"></span>
+                            <span className="text-[10px] text-accent-gold font-black tracking-[0.4em] uppercase">Expertise Automobile Lab</span>
+                            <span className="h-[1px] w-8 bg-accent-gold/30"></span>
+                        </div>
+                    </motion.div>
+                </div>
+                <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-accent-gold/5 blur-[120px] rounded-full pointer-events-none" />
+            </section>
+
             {/* CTA Section */}
             <section className="pb-40 md:pb-96 pt-20 md:pt-32 bg-black relative flex items-center justify-center overflow-hidden">
                 <div className="main-container text-center relative z-10">
