@@ -76,11 +76,18 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 12vw, 8rem);
-  line-height: 0.9;
+  font-size: clamp(3rem, 12vw, 8rem);
+  line-height: 1.05;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+  }
 }
 
 /* Layout Components */
@@ -182,6 +189,7 @@ body {
   justify-content: center;
   overflow: hidden;
   position: relative;
+  border-radius: 100px;
 }
 
 .gold-button::after {
@@ -226,6 +234,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-radius: 100px;
 }
 
 .gold-button-outline:hover {

@@ -43,28 +43,28 @@ const Home = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.2, ease: "easeOut" }}
-                        className="max-w-6xl"
+                        className="max-w-6xl w-full px-4"
                     >
-                        <div className="flex-center gap-3 md:gap-6 mb-10 md:mb-16">
+                        <div className="flex-center gap-3 md:gap-6 mb-8 md:mb-12 w-full">
                             <span className="h-[1px] w-8 md:w-32 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                             <span className="text-accent-gold tracking-[0.2em] md:tracking-[0.6em] font-black text-[8px] md:text-sm uppercase italic">Prototype V4 // Lab</span>
                             <span className="h-[1px] w-8 md:w-32 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                         </div>
 
-                        <h1 className="hero-title mb-12 md:mb-12 px-2">
-                            L'ART DE LA <br className="md:hidden" />
+                        <h1 className="hero-title mb-10 md:mb-12 flex flex-col items-center gap-2 md:gap-0">
+                            <span>L'ART DE LA</span>
                             <span className="gold-gradient">PERFECTION</span>
                         </h1>
 
-                        <div className="flex-center flex-col sm:flex-row gap-4 md:gap-6 mb-16">
+                        <div className="flex-center flex-col sm:flex-row gap-4 md:gap-6 mb-16 w-full max-w-sm sm:max-w-none mx-auto">
                             <Link to="/stock" className="w-full sm:w-auto">
-                                <button className="gold-button group gap-4 w-full px-12">
+                                <button className="gold-button group gap-4 w-full">
                                     EXPLORER LE STOCK
                                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                 </button>
                             </Link>
-                            <Link to="/expertise" className="hidden sm:block w-full sm:w-auto">
-                                <button className="gold-button-outline px-12 w-full">
+                            <Link to="/expertise" className="w-full sm:w-auto mt-2 sm:mt-0">
+                                <button className="gold-button-outline w-full">
                                     NOS MÉTHODES
                                 </button>
                             </Link>
