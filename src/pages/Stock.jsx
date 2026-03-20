@@ -243,11 +243,11 @@ const Stock = () => {
             </section>
 
             {/* Local SEO Text Section */}
-            <section className="section-padding bg-black border-t border-white/5">
-                <div className="main-container">
-                    <div className="max-w-4xl mx-auto text-center">
+            <section className="section-padding bg-black border-t border-white/5 flex justify-center">
+                <div className="main-container flex flex-col items-center w-full">
+                    <div className="w-full max-w-4xl text-center">
                         <h2 className="text-2xl md:text-3xl font-black uppercase tracking-widest mb-8">VÉHICULES D'OCCASION À TOULOUSE - LAUNAGUET</h2>
-                        <div className="space-y-6 text-white/30 text-sm md:text-base font-light leading-relaxed">
+                        <div className="flex flex-col gap-6 text-white/30 text-sm md:text-base font-light leading-relaxed text-center">
                             <p>
                                 Bienvenue chez <strong>CarXLab</strong>, votre garage spécialisé dans la vente de <strong>voitures d'occasion premium</strong>. Notre laboratoire automobile est stratégiquement situé à <strong>Launaguet</strong>, à quelques minutes de <strong>Toulouse</strong>, Blagnac, et l'Union. Nous sélectionnons rigoureusement chaque véhicule pour vous offrir une qualité irréprochable en Haute-Garonne.
                             </p>

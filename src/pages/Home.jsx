@@ -1,5 +1,5 @@
-import React, { memo, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useSpring, useInView } from 'framer-motion';
+import React, { memo } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Zap, ShieldCheck, Search, FlaskConical, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -9,32 +9,7 @@ import Reviews from '../components/Reviews';
 // Import Assets
 import heroImg from '../assets/Carxlab.png';
 
-const Counter = ({ value, decimals = 0 }) => {
-    const ref = useRef(null);
-    const motionValue = useMotionValue(0);
-    const springValue = useSpring(motionValue, {
-        damping: 30,
-        stiffness: 100,
-    });
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-    useEffect(() => {
-        if (isInView) {
-            motionValue.set(value);
-        }
-    }, [isInView, motionValue, value]);
-
-    useEffect(() => {
-        const unsubscribe = springValue.on("change", (latest) => {
-            if (ref.current) {
-                ref.current.textContent = latest.toFixed(decimals);
-            }
-        });
-        return unsubscribe;
-    }, [springValue, decimals]);
-
-    return <span ref={ref}>0</span>;
-};
 
 const Home = () => {
     const { scrollY } = useScroll();
@@ -94,29 +69,7 @@ const Home = () => {
                                 </button>
                             </Link>
                         </div>
-                        {/* Center-Aligned Metrics */}
-                        <div className="mt-16 md:mt-24 flex items-center justify-center w-full max-w-4xl mx-auto px-4 relative">
-                            {/* Decorative architectural markers */}
-                            <div className="absolute -top-4 -left-2 text-[8px] text-accent-gold/40 font-mono hidden md:block">REF: LAB_OS_V4.0</div>
-                            <div className="absolute -bottom-4 -right-2 text-[8px] text-accent-gold/40 font-mono hidden md:block">STATUS: LIVE_FEED</div>
 
-                            <div className="grid grid-cols-3 gap-0 w-full glass-panel rounded-[1.5rem] md:rounded-[2.5rem] border-white/10 relative overflow-hidden group divide-x divide-white/5">
-                                <div className="absolute inset-0 bg-gradient-to-r from-accent-gold/0 via-accent-gold/5 to-accent-gold/0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-                                {[
-                                    { label: 'Certifications', value: 4.8, suffix: 'k+', decimals: 1 },
-                                    { label: 'Protocole Lab', value: 150, suffix: '+', decimals: 0 },
-                                    { label: 'Fiabilité', value: 99.8, suffix: '%', decimals: 1 }
-                                ].map((stat, i) => (
-                                    <div key={i} className="flex flex-col items-center py-6 md:py-12 transition-transform duration-500 hover:bg-white/5">
-                                        <div className="text-white font-black text-2xl md:text-6xl mb-1 md:mb-2 tracking-tighter flex items-baseline">
-                                            <Counter value={stat.value} decimals={stat.decimals} />
-                                            <span className="text-accent-gold text-[10px] md:text-2xl ml-0.5 font-bold">{stat.suffix}</span>
-                                        </div>
-                                        <div className="text-[6px] md:text-[10px] uppercase font-black tracking-[0.1em] md:tracking-[0.4em] text-white/20 whitespace-nowrap">{stat.label}</div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
                     </motion.div>
                 </div>
             </section>
@@ -171,7 +124,7 @@ const Home = () => {
                                 ].map((item, i) => (
                                     <div
                                         key={i}
-                                        className="flex flex-col gap-4 p-6 md:p-10 glass-panel border border-white/5 hover:border-accent-gold/40 transition-all group relative overflow-hidden"
+                                        className="flex flex-col items-center lg:items-start text-center lg:text-left gap-4 p-6 md:p-10 glass-panel border border-white/5 hover:border-accent-gold/40 transition-all group relative overflow-hidden"
                                     >
                                         <div className="absolute top-0 right-0 w-12 h-12 border-r border-t border-accent-gold/0 group-hover:border-accent-gold/40 transition-all duration-500" />
                                         <div className="absolute bottom-0 left-0 w-12 h-12 border-l border-b border-accent-gold/0 group-hover:border-accent-gold/40 transition-all duration-500" />
@@ -243,40 +196,41 @@ const Home = () => {
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-gold/5 blur-[150px] rounded-full pointer-events-none" />
                 <div className="main-container relative z-10">
                     <div className="flex flex-col md:flex-row items-center gap-24 xl:gap-32">
-                        <div className="w-full md:w-1/2">
-                            <div className="flex items-center gap-6 mb-12">
-                                <span className="h-[2px] w-20 bg-accent-gold"></span>
+                        <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
+                            <div className="flex items-center justify-center md:justify-start gap-6 mb-12 w-full">
+                                <span className="h-[2px] w-8 md:w-20 bg-accent-gold md:hidden"></span>
                                 <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Localisation</span>
+                                <span className="h-[2px] w-20 bg-accent-gold"></span>
                             </div>
                             <h2 className="text-4xl md:text-7xl font-black mb-16 uppercase tracking-tight leading-[1.1]">
                                 OÙ NOUS <br /><span className="gold-gradient">TROUVER</span>
                             </h2>
-                            <div className="space-y-10">
-                                <div className="flex gap-8 group">
-                                    <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent-gold group-hover:bg-accent-gold group-hover:text-black transition-all duration-500 shrink-0">
+                            <div className="space-y-10 w-full flex flex-col items-center md:items-start">
+                                <div className="flex flex-col md:flex-row items-center md:items-start gap-6 group">
+                                    <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent-gold group-hover:bg-accent-gold group-hover:text-black transition-all duration-500 shrink-0 mx-auto md:mx-0">
                                         <MapPin size={28} />
                                     </div>
-                                    <div>
+                                    <div className="text-center md:text-left">
                                         <h4 className="text-white font-black uppercase tracking-widest mb-2">Le Laboratoire</h4>
                                         <p className="text-white/40 text-lg font-light leading-relaxed">4 impasses du pont<br />31140 Launaguet, France</p>
                                     </div>
                                 </div>
-                                <div className="flex gap-8 group">
-                                    <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent-gold group-hover:bg-accent-gold group-hover:text-black transition-all duration-500 shrink-0">
+                                <div className="flex flex-col md:flex-row items-center md:items-start gap-6 group">
+                                    <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent-gold group-hover:bg-accent-gold group-hover:text-black transition-all duration-500 shrink-0 mx-auto md:mx-0">
                                         <Phone size={28} />
                                     </div>
-                                    <div>
+                                    <div className="text-center md:text-left">
                                         <h4 className="text-white font-black uppercase tracking-widest mb-2">Ligne Directe</h4>
                                         <p className="text-white/40 text-lg font-light leading-relaxed">06 59 33 03 12<br />Expertise & Stock</p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="mt-12">
+                            <div className="mt-12 flex justify-center md:justify-start w-full">
                                 <a
                                     href="https://www.google.com/maps/search/?api=1&query=4+impasse+du+pont+31140+Launaguet"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="gold-button px-14 group"
+                                    className="gold-button px-14 group inline-flex"
                                 >
                                     OUVRIR DANS MAPS
                                     <ArrowRight size={18} className="ml-3 group-hover:translate-x-1 transition-transform" />
@@ -302,18 +256,18 @@ const Home = () => {
             </section>
 
             {/* SEO Content Section */}
-            <section className="section-padding bg-black relative overflow-hidden">
-                <div className="main-container relative z-10">
+            <section className="section-padding bg-black relative overflow-hidden flex justify-center">
+                <div className="main-container relative z-10 flex flex-col items-center w-full">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="max-w-4xl mx-auto text-center glass-panel p-8 md:p-16 rounded-[2rem] md:rounded-[3rem] border border-white/5 shadow-2xl"
+                        className="w-full max-w-4xl text-center glass-panel p-8 md:p-16 rounded-[2rem] md:rounded-[3rem] border border-white/5 shadow-2xl"
                     >
                         <h2 className="text-3xl md:text-5xl font-black mb-8 md:mb-10 uppercase tracking-tighter leading-tight gold-gradient">
                             VÉHICULES D'OCCASION À TOULOUSE - LAUNAGUET
                         </h2>
-                        <div className="space-y-6 text-white/40 text-base md:text-xl font-light leading-relaxed">
+                        <div className="flex flex-col gap-6 text-white/40 text-base md:text-xl font-light leading-relaxed text-center">
                             <p>
                                 Bienvenue chez <strong className="text-white">CarXLab</strong>, votre garage spécialisé dans la vente de voitures d'occasion premium. Notre laboratoire automobile est stratégiquement situé à Launaguet, à quelques minutes de <strong className="text-white">Toulouse</strong>, Blagnac, et l'Union. Nous sélectionnons rigoureusement chaque véhicule pour vous offrir une qualité irréprochable en Haute-Garonne.
                             </p>

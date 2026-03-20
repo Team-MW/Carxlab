@@ -86,8 +86,8 @@ const AnnonceDetail = () => {
                         </motion.div>
 
                         {/* Description */}
-                        <div className="glass-panel p-8 md:p-12 rounded-3xl border border-white/5">
-                            <div className="flex items-center gap-3 mb-8">
+                        <div className="glass-panel p-8 md:p-12 rounded-3xl border border-white/5 text-center md:text-left">
+                            <div className="flex items-center justify-center md:justify-start gap-3 mb-8">
                                 <ShieldCheck size={20} className="text-accent-gold" />
                                 <h2 className="text-sm font-black uppercase tracking-[0.3em] text-white/80">Description du véhicule</h2>
                             </div>
@@ -112,19 +112,19 @@ const AnnonceDetail = () => {
                                     DISPONIBLE IMMÉDIATEMENT
                                 </div>
 
-                                <h1 className="text-5xl font-black uppercase tracking-tighter mb-4 leading-none">
+                                <h1 className="text-5xl font-black uppercase tracking-tighter mb-4 leading-none text-center md:text-left">
                                     {annonce.marque} <br />
                                     <span className="gold-gradient">{annonce.modele}</span>
                                 </h1>
 
-                                <div className="text-3xl font-light text-white/80 mb-10 tracking-tight">
+                                <div className="text-3xl font-light text-white/80 mb-10 tracking-tight text-center md:text-left">
                                     {formatPrix(annonce.prix)}
                                 </div>
 
                                 {/* Specs Grid */}
                                 <div className="grid grid-cols-2 gap-4 mb-10">
                                     {specs.map((spec, i) => (
-                                        <div key={i} className="bg-white/5 border border-white/5 p-4 rounded-2xl">
+                                        <div key={i} className="bg-white/5 border border-white/5 p-4 rounded-2xl flex flex-col items-center md:items-start text-center md:text-left">
                                             <div className="text-accent-gold mb-2">{spec.icon}</div>
                                             <div className="text-[10px] text-white/30 uppercase tracking-widest font-bold mb-1">{spec.label}</div>
                                             <div className="text-sm text-white font-medium">{spec.value}</div>
@@ -159,8 +159,8 @@ const AnnonceDetail = () => {
                             </motion.div>
 
                             {/* Conseil Expert */}
-                            <div className="mt-8 p-6 bg-accent-gold/5 border border-accent-gold/10 rounded-2xl flex gap-4">
-                                <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-accent-gold/30">
+                            <div className="mt-8 p-6 bg-accent-gold/5 border border-accent-gold/10 rounded-2xl flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-4">
+                                <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-accent-gold/30 mx-auto md:mx-0">
                                     <div className="w-full h-full bg-accent-gold/20 flex-center text-accent-gold font-black italic">CX</div>
                                 </div>
                                 <div>

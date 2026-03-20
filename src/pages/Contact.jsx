@@ -75,7 +75,7 @@ const Contact = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                                    className="glass-panel p-10 flex items-center gap-10 group hover:neon-border transition-all duration-500 rounded-[2.5rem] bg-white/[0.02] border border-white/5"
+                                    className="glass-panel p-8 md:p-10 flex flex-col md:flex-row items-center text-center md:text-left gap-6 md:gap-10 group hover:neon-border transition-all duration-500 rounded-[2.5rem] bg-white/[0.02] border border-white/5"
                                 >
                                     <div className="w-20 h-20 rounded-3xl bg-accent-gold/10 flex items-center justify-center text-accent-gold flex-shrink-0 group-hover:scale-110 group-hover:bg-accent-gold group-hover:text-black transition-all duration-500 shadow-[0_0_40px_rgba(212,175,55,0.1)]">
                                         {item.icon}

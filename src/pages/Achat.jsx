@@ -64,7 +64,7 @@ const Achat = () => {
                                 transition={{ duration: 0.8, delay: i * 0.2 }}
                                 className="relative group"
                             >
-                                <div className="glass-panel p-10 md:p-12 lg:p-14 h-full border border-white/5 hover:border-accent-gold/20 transition-all duration-500 rounded-[2.5rem] flex flex-col gap-8 relative overflow-hidden">
+                                <div className="glass-panel p-10 md:p-12 lg:p-14 h-full border border-white/5 hover:border-accent-gold/20 transition-all duration-500 rounded-[2.5rem] flex flex-col items-center md:items-start text-center md:text-left gap-8 relative overflow-hidden">
                                     {/* background numbering */}
                                     <span className="absolute -top-4 -right-4 text-9xl font-black text-white/[0.02] pointer-events-none group-hover:text-accent-gold/[0.05] transition-colors duration-500">
                                         {feature.step}
@@ -114,26 +114,27 @@ const Achat = () => {
                         </div>
                     </MotionDiv>
 
-                    {/* SEO Buyback Content */}
-                    <div className="mt-40 max-w-4xl mx-auto border-t border-white/5 pt-20">
-                        <h2 className="text-2xl md:text-3xl font-black uppercase tracking-widest mb-10 text-center">Estimation et rachat automobile à Toulouse (31)</h2>
-                        <div className="grid md:grid-cols-2 gap-12 text-sm md:text-base text-white/30 leading-relaxed font-light">
-                            <div className="space-y-6">
-                                <p>
-                                    Vous souhaitez <strong>vendre votre voiture à Toulouse</strong> rapidement et en toute sécurité ? CarXLab propose un service de <strong>rachat cash</strong> simplifié pour tous les propriétaires de véhicules récents et de prestige à <strong>Launaguet</strong> et dans toute la Haute-Garonne.
-                                </p>
-                                <p>
-                                    Notre processus d'expertise est conçu pour refléter la valeur réelle du marché. En évitant les plateformes génériques, vous bénéficiez d'une <strong>estimation personnalisée</strong> réalisée par des passionnés qui comprennent la valeur des options et de l'entretien de votre véhicule.
-                                </p>
-                            </div>
-                            <div className="space-y-6">
-                                <p>
-                                    Que vous soyez à Blagnac, Colomiers ou Tournefeuille, nous nous déplaçons ou vous accueillons dans notre showroom pour une <strong>reprise immédiate</strong>. Nous gérons l'intégralité des formalités administratives pour une vente sans stress.
-                                </p>
-                                <p>
-                                    <strong>CarXLab Launaguet</strong> : la référence locale pour la revente de BMW, Audi, Mercedes, Porsche et autres marques de prestige dans le 31. Obtenez votre offre de rachat en moins de 24h.
-                                </p>
-                            </div>
+                </div>
+            </section>
+
+            {/* SEO Buyback Content */}
+            <section className="section-padding bg-black border-t border-white/5 flex justify-center">
+                <div className="main-container flex flex-col items-center w-full">
+                    <div className="w-full max-w-4xl text-center">
+                        <h2 className="text-2xl md:text-3xl font-black uppercase tracking-widest mb-10">Estimation et rachat automobile à Toulouse (31)</h2>
+                        <div className="flex flex-col gap-6 text-sm md:text-base text-white/30 leading-relaxed font-light text-center">
+                            <p>
+                                Vous souhaitez <strong>vendre votre voiture à Toulouse</strong> rapidement et en toute sécurité ? CarXLab propose un service de <strong>rachat cash</strong> simplifié pour tous les propriétaires de véhicules récents et de prestige à <strong>Launaguet</strong> et dans toute la Haute-Garonne.
+                            </p>
+                            <p>
+                                Notre processus d'expertise est conçu pour refléter la valeur réelle du marché. En évitant les plateformes génériques, vous bénéficiez d'une <strong>estimation personnalisée</strong> réalisée par des passionnés qui comprennent la valeur des options et de l'entretien de votre véhicule.
+                            </p>
+                            <p>
+                                Que vous soyez à Blagnac, Colomiers ou Tournefeuille, nous nous déplaçons ou vous accueillons dans notre showroom pour une <strong>reprise immédiate</strong>. Nous gérons l'intégralité des formalités administratives pour une vente sans stress.
+                            </p>
+                            <p>
+                                <strong>CarXLab Launaguet</strong> : la référence locale pour la revente de BMW, Audi, Mercedes, Porsche et autres marques de prestige dans le 31. Obtenez votre offre de rachat en moins de 24h.
+                            </p>
                         </div>
                     </div>
                 </div>
