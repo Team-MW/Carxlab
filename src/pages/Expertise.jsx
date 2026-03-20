@@ -57,7 +57,7 @@ const Expertise = () => {
 
             <section className="section-padding content-grid-section">
                 <div className="main-container">
-                    <div className="flex flex-col items-center mb-20">
+                    <div className="flex flex-col items-center mb-16 md:mb-20">
                         <div className="grid md:grid-cols-2 gap-12 w-full max-w-6xl">
                             {steps.map((step, i) => (
                                 <MotionDiv

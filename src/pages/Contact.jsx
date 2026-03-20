@@ -37,7 +37,7 @@ const Contact = () => {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-gold/5 blur-[200px] pointer-events-none" />
 
                 <div className="main-container relative z-10 flex flex-col items-center">
-                    <div className="w-full max-w-5xl space-y-24">
+                    <div className="w-full max-w-5xl flex flex-col gap-12 md:gap-16 lg:gap-20">
                         {/* Contact Cards Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                             {[

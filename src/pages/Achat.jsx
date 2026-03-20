@@ -35,7 +35,7 @@ const Achat = () => {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-accent-gold/5 blur-[200px] pointer-events-none" />
 
                 <div className="main-container relative z-10">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16 mb-32">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 mb-16 md:mb-20">
                         {[
                             {
                                 title: "Estimation en ligne",

@@ -291,7 +291,7 @@ const Home = () => {
             </section>
 
             {/* CTA Section */}
-            <section className="pb-40 md:pb-96 pt-20 md:pt-32 bg-black relative flex items-center justify-center overflow-hidden">
+            <section className="section-padding bg-black relative flex items-center justify-center overflow-hidden">
                 <div className="main-container text-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
