@@ -55,7 +55,7 @@ const MentionsLegales = () => {
                             <p>Le présent site internet est édité par la société <strong className="text-white/70">CARXLAB SAS</strong>.</p>
                             <p>Siège social : 4 impasses du pont, 31140 Launaguet, France</p>
                             <p>Email : <a href="mailto:Carxlab31@gmail.com" className="text-accent-gold hover:underline">Carxlab31@gmail.com</a></p>
-                            <p>Téléphone : 06 59 33 03 12</p>
+                            <p>Téléphone : <a href="tel:0659330312" className="text-accent-gold hover:underline">06 59 33 03 12</a></p>
                             <p>Forme juridique : Société par Actions Simplifiée (SAS)</p>
                             <p>Capital social : 10 000 €</p>
                             <p>RCS Toulouse : [En cours d'immatriculation]</p>

@@ -121,7 +121,9 @@ const Navbar = () => {
                                 className="mt-12 space-y-2"
                             >
                                 <p className="text-[10px] text-white/20 font-black uppercase tracking-[0.3em]">Contact Direct</p>
-                                <p className="text-white/60 font-bold">06 59 33 03 12</p>
+                                <p className="text-white/60 font-bold">
+                                    <a href="tel:0659330312" className="hover:text-accent-gold transition-colors">06 59 33 03 12</a>
+                                </p>
                             </motion.div>
                         </div>
                     </MotionDiv>

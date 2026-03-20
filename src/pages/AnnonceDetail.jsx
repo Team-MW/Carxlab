@@ -134,15 +134,15 @@ const AnnonceDetail = () => {
 
                                 {/* Call to action */}
                                 <div className="space-y-4">
-                                    <Link
-                                        to="/contact"
+                                    <a
+                                        href="tel:0659330312"
                                         className="gold-button w-full py-5 rounded-2xl flex items-center justify-center gap-3 font-black text-xs uppercase tracking-[0.2em] shadow-[0_4px_30px_rgba(212,175,55,0.1)] hover:shadow-[0_4px_40px_rgba(212,175,55,0.2)] transition-all"
                                     >
-                                        <Phone size={16} /> RÉSERVER CETTE VOITURE
-                                    </Link>
-                                    <button className="w-full flex items-center justify-center gap-3 py-5 bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-all rounded-2xl border border-white/10 text-[10px] font-bold uppercase tracking-widest">
+                                        <Phone size={16} /> APPELER POUR RÉSERVER
+                                    </a>
+                                    <Link to="/contact" className="w-full flex items-center justify-center gap-3 py-5 bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-all rounded-2xl border border-white/10 text-[10px] font-bold uppercase tracking-widest">
                                         <MessageSquare size={16} /> Demander plus d'infos
-                                    </button>
+                                    </Link>
                                 </div>
 
                                 <div className="mt-8 flex items-center justify-center gap-8 border-t border-white/5 pt-8">

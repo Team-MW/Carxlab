@@ -147,7 +147,7 @@ const Contact = () => {
                     },
                     {
                         question: "Comment prendre rendez-vous au laboratoire CarXLab ?",
-                        answer: "Remplissez le formulaire de contact en sélectionnant le service souhaité (expertise, achat ou vente). Vous pouvez également nous appeler directement au 06 59 33 03 12 du lundi au vendredi de 9h à 19h et le samedi de 10h à 18h. Un conseiller vous confirmera votre créneau dans les meilleurs délais."
+                        answer: <>Remplissez le formulaire de contact en sélectionnant le service souhaité (expertise, achat ou vente). Vous pouvez également nous appeler directement au <a href="tel:0659330312" className="text-accent-gold hover:underline">06 59 33 03 12</a> du lundi au vendredi de 9h à 19h et le samedi de 10h à 18h. Un conseiller vous confirmera votre créneau dans les meilleurs délais.</>
                     },
                     {
                         question: "Le laboratoire CarXLab est-il ouvert au grand public ?",

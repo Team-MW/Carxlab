@@ -221,7 +221,9 @@ const Home = () => {
                                     </div>
                                     <div className="text-center md:text-left">
                                         <h4 className="text-white font-black uppercase tracking-widest mb-2">Ligne Directe</h4>
-                                        <p className="text-white/40 text-lg font-light leading-relaxed">06 59 33 03 12<br />Expertise & Stock</p>
+                                        <p className="text-white/40 text-lg font-light leading-relaxed">
+                                            <a href="tel:0659330312" className="hover:text-accent-gold transition-colors">06 59 33 03 12</a><br />Expertise & Stock
+                                        </p>
                                     </div>
                                 </div>
                             </div>

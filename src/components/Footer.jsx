@@ -69,7 +69,9 @@ const Footer = () => {
                             </li>
                             <li className="flex items-center gap-6 p-6 rounded-2xl border border-white/5 bg-white/[0.02] group hover:border-white/10 transition-all">
                                 <Phone size={22} className="text-accent-gold shrink-0" />
-                                <span className="text-white/40 text-[15px] font-light tracking-widest">06 59 33 03 12</span>
+                                <span className="text-white/40 text-[15px] font-light tracking-widest">
+                                    <a href="tel:0659330312" className="hover:text-accent-gold transition-colors">06 59 33 03 12</a>
+                                </span>
                             </li>
                         </ul>
                     </div>
