@@ -51,12 +51,12 @@ const Home = () => {
                             <span className="h-[1px] w-8 md:w-32 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]"></span>
                         </div>
 
-                        <h1 className="hero-title mb-10 md:mb-12 flex flex-col items-center gap-2 md:gap-0">
+                        <h1 className="hero-title mb-16 md:mb-20 flex flex-col items-center gap-4 md:gap-0">
                             <span>L'ART DE LA</span>
                             <span className="gold-gradient">PERFECTION</span>
                         </h1>
 
-                        <div className="flex-center flex-col sm:flex-row gap-4 md:gap-6 mb-16 w-full max-w-sm sm:max-w-none mx-auto">
+                        <div className="flex-center flex-col sm:flex-row gap-6 md:gap-10 mb-20 md:mb-24 w-full max-w-sm sm:max-w-none mx-auto">
                             <Link to="/stock" className="w-full sm:w-auto">
                                 <button className="gold-button group gap-4 w-full">
                                     EXPLORER LE STOCK
@@ -78,7 +78,7 @@ const Home = () => {
             <section className="section-padding bg-black relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full lab-grid opacity-10 pointer-events-none" />
                 <div className="main-container relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 xl:gap-32 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 md:gap-32 xl:gap-48 items-center">
                         <motion.div
                             initial={{ opacity: 0, x: -40 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -91,15 +91,15 @@ const Home = () => {
                                 <span className="text-accent-gold text-[10px] font-black uppercase tracking-[0.3em]">Garage Launaguet, Haute-Garonne</span>
                             </div>
 
-                            <h2 className="text-5xl md:text-7xl font-black mb-8 md:mb-10 uppercase tracking-tighter leading-[1] px-4">
+                            <h2 className="text-5xl md:text-8xl font-black mb-12 md:mb-16 uppercase tracking-tighter leading-[1] px-4">
                                 VOTRE SPÉCIALISTE <br /><span className="gold-gradient">AUTO À LAUNAGUET</span>
                             </h2>
 
-                            <p className="text-lg md:text-xl text-white/60 mb-12 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+                            <p className="text-lg md:text-2xl text-white/60 mb-16 md:mb-24 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
                                 CarXLab est votre partenaire de confiance pour l'<strong>achat et la revente de véhicules d'occasion</strong> et de prestige à Launaguet. Situés à 15 minutes de Toulouse, nous sélectionnons pour vous les meilleures pépites automobiles en Haute-Garonne.
                             </p>
 
-                            <div className="grid grid-cols-2 gap-3 md:gap-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-10">
                                 {[
                                     {
                                         title: "Achat Cash",
@@ -124,7 +124,7 @@ const Home = () => {
                                 ].map((item, i) => (
                                     <div
                                         key={i}
-                                        className="flex flex-col items-center lg:items-start text-center lg:text-left gap-4 p-6 md:p-10 glass-panel border border-white/5 hover:border-accent-gold/40 transition-all group relative overflow-hidden"
+                                        className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 p-10 md:p-14 glass-panel border border-white/5 hover:border-accent-gold/40 transition-all group relative overflow-hidden"
                                     >
                                         <div className="absolute top-0 right-0 w-12 h-12 border-r border-t border-accent-gold/0 group-hover:border-accent-gold/40 transition-all duration-500" />
                                         <div className="absolute bottom-0 left-0 w-12 h-12 border-l border-b border-accent-gold/0 group-hover:border-accent-gold/40 transition-all duration-500" />
@@ -142,7 +142,7 @@ const Home = () => {
                                 ))}
                             </div>
 
-                            <div className="mt-10 md:mt-16 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-6 md:gap-8">
+                            <div className="mt-16 md:mt-24 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-8 md:gap-12">
                                 <Link to="/stock">
                                     <button className="gold-button px-14 py-5">ACHETER UN VÉHICULE</button>
                                 </Link>
@@ -195,17 +195,17 @@ const Home = () => {
             <section className="section-padding bg-black/50 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-gold/5 blur-[150px] rounded-full pointer-events-none" />
                 <div className="main-container relative z-10">
-                    <div className="flex flex-col md:flex-row items-center gap-24 xl:gap-32">
+                    <div className="flex flex-col md:flex-row items-center gap-32 xl:gap-48">
                         <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
                             <div className="flex items-center justify-center md:justify-start gap-6 mb-12 w-full">
                                 <span className="h-[2px] w-8 md:w-20 bg-accent-gold md:hidden"></span>
                                 <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Localisation</span>
                                 <span className="h-[2px] w-20 bg-accent-gold"></span>
                             </div>
-                            <h2 className="text-4xl md:text-7xl font-black mb-16 uppercase tracking-tight leading-[1.1]">
+                            <h2 className="text-4xl md:text-8xl font-black mb-20 uppercase tracking-tight leading-[1.1]">
                                 OÙ NOUS <br /><span className="gold-gradient">TROUVER</span>
                             </h2>
-                            <div className="space-y-10 w-full flex flex-col items-center md:items-start">
+                            <div className="space-y-16 w-full flex flex-col items-center md:items-start">
                                 <div className="flex flex-col md:flex-row items-center md:items-start gap-6 group">
                                     <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent-gold group-hover:bg-accent-gold group-hover:text-black transition-all duration-500 shrink-0 mx-auto md:mx-0">
                                         <MapPin size={28} />
@@ -266,10 +266,10 @@ const Home = () => {
                         viewport={{ once: true }}
                         className="w-full max-w-4xl text-center glass-panel p-8 md:p-16 rounded-[2rem] md:rounded-[3rem] border border-white/5 shadow-2xl"
                     >
-                        <h2 className="text-3xl md:text-5xl font-black mb-8 md:mb-10 uppercase tracking-tighter leading-tight gold-gradient">
+                        <h2 className="text-3xl md:text-5xl font-black mb-12 md:mb-16 uppercase tracking-tighter leading-tight gold-gradient">
                             VÉHICULES D'OCCASION À TOULOUSE - LAUNAGUET
                         </h2>
-                        <div className="flex flex-col gap-6 text-white/40 text-base md:text-xl font-light leading-relaxed text-center">
+                        <div className="flex flex-col gap-10 text-white/40 text-base md:text-xl font-light leading-relaxed text-center">
                             <p>
                                 Bienvenue chez <strong className="text-white">CarXLab</strong>, votre garage spécialisé dans la vente de voitures d'occasion premium. Notre laboratoire automobile est stratégiquement situé à Launaguet, à quelques minutes de <strong className="text-white">Toulouse</strong>, Blagnac, et l'Union. Nous sélectionnons rigoureusement chaque véhicule pour vous offrir une qualité irréprochable en Haute-Garonne.
                             </p>
@@ -301,10 +301,10 @@ const Home = () => {
                         viewport={{ once: true }}
                         className="flex flex-col items-center"
                     >
-                        <h2 className="text-4xl md:text-7xl font-black mb-8 md:mb-10 uppercase leading-[1] tracking-tight">
+                        <h2 className="text-4xl md:text-8xl font-black mb-12 md:mb-16 uppercase leading-[1] tracking-tight">
                             VOTRE <br /><span className="gold-gradient">FUTUR</span> EST ICI
                         </h2>
-                        <p className="text-lg md:text-xl text-white/30 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+                        <p className="text-lg md:text-2xl text-white/30 mb-16 md:mb-20 max-w-2xl mx-auto font-light leading-relaxed">
                             Vendez votre véhicule au juste prix ou trouvez la perle rare parmi notre stock ultra-limité.
                         </p>
                         <div className="flex flex-col md:flex-row items-center justify-center gap-6 w-full px-6">

@@ -115,47 +115,74 @@ const Login = ({ onLogin }) => {
 // ─── Formulaire Nouvelle Annonce ─────────────────────────────────────────────
 const AnnonceForm = ({ onSuccess, onCancel }) => {
     const [form, setForm] = useState(defaultForm);
-    const [imageFile, setImageFile] = useState(null);
-    const [imagePreview, setImagePreview] = useState(null);
+    const [exteriorPhotos, setExteriorPhotos] = useState([]);
+    const [interiorPhotos, setInteriorPhotos] = useState([]);
     const [uploading, setUploading] = useState(false);
     const [processing, setProcessing] = useState(false);
     const [success, setSuccess] = useState(false);
-    const fileInputRef = useRef();
+    const extInputRef = useRef();
+    const intInputRef = useRef();
 
     const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
-    const handleImageChange = async (file) => {
-        if (!file) return;
+    const handleAddExterior = async (files) => {
+        if (!files || files.length === 0) return;
         setProcessing(true);
-        try {
-            // Traitement Magique : Suppression fond + Garage
-            const processedFile = await processCarImage(file, CarxlabBg);
-            setImageFile(processedFile);
-            setImagePreview(URL.createObjectURL(processedFile));
-        } catch (err) {
-            console.error(err);
-            alert("Erreur de traitement d'image. Utilisation de l'image originale.");
-            setImageFile(file);
-            setImagePreview(URL.createObjectURL(file));
+        const newPhotos = [];
+        for (const file of Array.from(files)) {
+            try {
+                // Traitement Magique pour l'extérieur
+                const processedFile = await processCarImage(file, CarxlabBg);
+                newPhotos.push({ file: processedFile, preview: URL.createObjectURL(processedFile) });
+            } catch (err) {
+                console.error(err);
+                newPhotos.push({ file, preview: URL.createObjectURL(file) });
+            }
         }
+        setExteriorPhotos((prev) => [...prev, ...newPhotos]);
         setProcessing(false);
     };
 
-    const handleImageSelect = (e) => {
-        handleImageChange(e.target.files[0]);
+    const handleAddInterior = (files) => {
+        if (!files || files.length === 0) return;
+        const newPhotos = Array.from(files).map(file => ({
+            file,
+            preview: URL.createObjectURL(file)
+        }));
+        setInteriorPhotos((prev) => [...prev, ...newPhotos]);
     };
 
-    const handleDrop = (e) => {
-        e.preventDefault();
-        handleImageChange(e.dataTransfer.files[0]);
+    const removePhoto = (type, index) => {
+        if (type === 'ext') {
+            setExteriorPhotos(prev => prev.filter((_, i) => i !== index));
+        } else {
+            setInteriorPhotos(prev => prev.filter((_, i) => i !== index));
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!imageFile) return alert('Veuillez sélectionner une photo principale.');
+        if (exteriorPhotos.length === 0 && interiorPhotos.length === 0) {
+            return alert('Veuillez ajouter au moins une photo.');
+        }
         setUploading(true);
         try {
-            await uploadToCloudinary(imageFile, form);
+            const carId = `car_${Date.now()}`;
+            const uploadPromises = [];
+
+            // Upload Extérieurs
+            exteriorPhotos.forEach(({ file }, index) => {
+                const metadata = { ...form, carId, type: 'exterior', isMain: index === 0 };
+                uploadPromises.push(uploadToCloudinary(file, metadata));
+            });
+
+            // Upload Intérieurs
+            interiorPhotos.forEach(({ file }) => {
+                const metadata = { ...form, carId, type: 'interior', isMain: false };
+                uploadPromises.push(uploadToCloudinary(file, metadata));
+            });
+
+            await Promise.all(uploadPromises);
             setSuccess(true);
             setTimeout(() => { onSuccess(); }, 2000);
         } catch (err) {
@@ -180,148 +207,183 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="grid lg:grid-cols-2 gap-10 lg:gap-16">
-            {/* Photo Upload */}
-            <div>
-                <label className={labelCls}>Photo principale *</label>
-                <div
-                    onDrop={handleDrop}
-                    onDragOver={(e) => e.preventDefault()}
-                    onClick={() => fileInputRef.current?.click()}
-                    className={`relative w-full aspect-[4/3] border-2 border-dashed rounded-2xl cursor-pointer transition-all overflow-hidden ${imagePreview ? 'border-accent-gold/40' : 'border-white/10 hover:border-accent-gold/30'
-                        }`}
-                >
-                    {processing ? (
-                        <div className="absolute inset-0 flex-center-col gap-3 bg-black/40 backdrop-blur-sm z-50">
-                            <div className="w-10 h-10 border-2 border-accent-gold/20 border-t-accent-gold rounded-full animate-spin" />
-                            <p className="text-white font-bold text-xs uppercase tracking-widest">Détourage IA en cours...</p>
+        <form onSubmit={handleSubmit} className="space-y-20">
+            {/* 1. VISUELS SECTION */}
+            <div className="grid lg:grid-cols-2 gap-10 md:gap-16">
+                {/* Photos EXTÉRIER */}
+                <div className="glass-panel p-8 md:p-10 rounded-3xl border border-white/5 relative overflow-hidden group">
+                    <div className="absolute top-0 left-0 w-20 h-[2px] bg-accent-gold" />
+                    <div className="flex items-center gap-4 mb-8">
+                        <div className="w-10 h-10 rounded-xl bg-accent-gold/10 border border-accent-gold/20 flex-center">
+                            <Car size={18} className="text-accent-gold" />
                         </div>
-                    ) : null}
+                        <div>
+                            <h3 className="text-sm font-black uppercase tracking-[0.2em] text-white">Extérieur</h3>
+                            <p className="text-[9px] text-accent-gold/60 uppercase font-black tracking-widest mt-1">Détourage Auto ✨</p>
+                        </div>
+                    </div>
 
-                    {imagePreview ? (
-                        <>
-                            <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex-center">
-                                <p className="text-sm font-bold">Changer la photo</p>
-                            </div>
-                        </>
-                    ) : (
-                        <div className="absolute inset-0 flex-center-col gap-3">
-                            <div className="w-12 h-12 rounded-xl bg-accent-gold/10 border border-accent-gold/20 flex-center">
-                                <Upload size={20} className="text-accent-gold" />
-                            </div>
-                            <p className="text-white/40 text-sm font-bold">Glissez ou cliquez</p>
-                            <p className="text-white/20 text-xs">Correction auto de l'arrière-plan active ✨</p>
-                        </div>
-                    )}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        {exteriorPhotos.map((p, i) => (
+                            <motion.div
+                                key={i}
+                                layout
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 group/item"
+                            >
+                                <img src={p.preview} alt="ext" className="w-full h-full object-cover" />
+                                <button
+                                    type="button"
+                                    onClick={() => removePhoto('ext', i)}
+                                    className="absolute top-2 right-2 p-2 bg-black/80 text-white rounded-xl opacity-0 group-hover/item:opacity-100 transition-all hover:bg-red-500"
+                                >
+                                    <X size={14} />
+                                </button>
+                                {i === 0 && (
+                                    <div className="absolute bottom-0 inset-x-0 bg-accent-gold py-1 text-[8px] font-black text-black text-center uppercase tracking-widest">
+                                        Principale
+                                    </div>
+                                )}
+                            </motion.div>
+                        ))}
+                        <button
+                            type="button"
+                            onClick={() => extInputRef.current?.click()}
+                            disabled={processing}
+                            className={`aspect-[4/3] rounded-2xl border-2 border-dashed border-white/5 hover:border-accent-gold/30 flex-center-col gap-3 transition-all bg-white/[0.01] hover:bg-white/[0.03] ${processing ? 'opacity-50 cursor-wait' : ''}`}
+                        >
+                            {processing ? (
+                                <div className="w-6 h-6 border-2 border-accent-gold/20 border-t-accent-gold rounded-full animate-spin" />
+                            ) : (
+                                <Plus size={24} className="text-accent-gold/30 group-hover:text-accent-gold/60" />
+                            )}
+                            <span className="text-[9px] uppercase font-black text-white/20 tracking-[0.2em]">Ajouter</span>
+                        </button>
+                    </div>
                 </div>
-                <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageSelect} />
+
+                {/* Photos INTÉRIEUR */}
+                <div className="glass-panel p-8 md:p-10 rounded-3xl border border-white/5 relative overflow-hidden group">
+                    <div className="absolute top-0 left-0 w-20 h-[2px] bg-white/20" />
+                    <div className="flex items-center gap-4 mb-8">
+                        <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex-center">
+                            <div className="w-4 h-4 border-2 border-white/20 rounded-sm" />
+                        </div>
+                        <div>
+                            <h3 className="text-sm font-black uppercase tracking-[0.2em] text-white">Intérieur</h3>
+                            <p className="text-[9px] text-white/30 uppercase font-black tracking-widest mt-1">Format Original</p>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        {interiorPhotos.map((p, i) => (
+                            <motion.div
+                                key={i}
+                                layout
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 group/item"
+                            >
+                                <img src={p.preview} alt="int" className="w-full h-full object-cover" />
+                                <button
+                                    type="button"
+                                    onClick={() => removePhoto('int', i)}
+                                    className="absolute top-2 right-2 p-2 bg-black/80 text-white rounded-xl opacity-0 group-hover/item:opacity-100 transition-all hover:bg-red-500"
+                                >
+                                    <X size={14} />
+                                </button>
+                            </motion.div>
+                        ))}
+                        <button
+                            type="button"
+                            onClick={() => intInputRef.current?.click()}
+                            className="aspect-[4/3] rounded-2xl border-2 border-dashed border-white/5 hover:border-accent-gold/30 flex-center-col gap-3 transition-all bg-white/[0.01] hover:bg-white/[0.03]"
+                        >
+                            <Plus size={24} className="text-accent-gold/30 group-hover:text-accent-gold/60" />
+                            <span className="text-[9px] uppercase font-black text-white/20 tracking-[0.2em]">Ajouter</span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            {/* Champs */}
-            <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-3">
-                    <div>
-                        <label className={labelCls}>Marque</label>
-                        <input
-                            type="text"
-                            value={form.marque}
-                            onChange={set('marque')}
-                            list="marques-list"
-                            placeholder="Ex: Porsche"
-                            className={inputCls}
-                        />
-                        <datalist id="marques-list">
-                            {MARQUES.map((m) => <option key={m} value={m} />)}
-                        </datalist>
-                    </div>
-                    <div>
-                        <label className={labelCls}>Modèle</label>
-                        <input type="text" value={form.modele} onChange={set('modele')} placeholder="Ex: 911 GT3" className={inputCls} />
-                    </div>
+            {/* 2. INFOS SECTION */}
+            <div className="glass-panel p-10 md:p-16 rounded-[2.5rem] border border-white/5 relative bg-white/[0.01]">
+                <div className="flex items-center gap-6 mb-16">
+                    <span className="h-[2px] w-12 bg-accent-gold" />
+                    <h2 className="text-lg font-black uppercase tracking-[0.4em]">Spécifications</h2>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
-                    <div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10">
+                    <div className="space-y-3">
+                        <label className={labelCls}>Constructeur</label>
+                        <input type="text" value={form.marque} onChange={set('marque')} list="marques-list" placeholder="Ex: Porsche" className={inputCls} />
+                        <datalist id="marques-list">{MARQUES.map((m) => <option key={m} value={m} />)}</datalist>
+                    </div>
+                    <div className="space-y-3">
+                        <label className={labelCls}>Modèle Précis</label>
+                        <input type="text" value={form.modele} onChange={set('modele')} placeholder="Ex: 911 GT3 RS" className={inputCls} />
+                    </div>
+                    <div className="space-y-3">
+                        <label className={labelCls}>Prix de Vente (€)</label>
+                        <input type="number" value={form.prix} onChange={set('prix')} required placeholder="Ex: 245000" className={`${inputCls} !border-accent-gold/20 !bg-accent-gold/5 text-accent-gold font-black`} />
+                    </div>
+                    <div className="space-y-3">
                         <label className={labelCls}>Année</label>
-                        <input type="number" value={form.annee} onChange={set('annee')} placeholder="Ex: 2022" className={inputCls} />
+                        <input type="number" value={form.annee} onChange={set('annee')} placeholder="2024" className={inputCls} />
                     </div>
-                    <div>
+                    <div className="space-y-3">
                         <label className={labelCls}>Kilométrage</label>
-                        <input type="number" value={form.km} onChange={set('km')} placeholder="Ex: 15000" className={inputCls} />
+                        <input type="number" value={form.km} onChange={set('km')} placeholder="500" className={inputCls} />
+                    </div>
+                    <div className="space-y-3">
+                        <label className={labelCls}>Teinte Extérieure</label>
+                        <input type="text" value={form.couleur} onChange={set('couleur')} placeholder="Gris Craie" className={inputCls} />
+                    </div>
+                    <div className="space-y-3">
+                        <label className={labelCls}>Motorisation</label>
+                        <input type="text" value={form.carburant} onChange={set('carburant')} list="carburants-list" placeholder="Essence" className={inputCls} />
+                        <datalist id="carburants-list">{CARBURANTS.map((c) => <option key={c} value={c} />)}</datalist>
+                    </div>
+                    <div className="space-y-3">
+                        <label className={labelCls}>Transmission</label>
+                        <input type="text" value={form.transmission} onChange={set('transmission')} list="transmissions-list" placeholder="PDK" className={inputCls} />
+                        <datalist id="transmissions-list">{TRANSMISSIONS.map((t) => <option key={t} value={t} />)}</datalist>
                     </div>
                 </div>
-                <div>
-                    <label className={labelCls}>Prix (€) *</label>
-                    <input type="number" value={form.prix} onChange={set('prix')} required placeholder="Ex: 120000" className={inputCls} />
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                    <div>
-                        <label className={labelCls}>Carburant</label>
-                        <input
-                            type="text"
-                            value={form.carburant}
-                            onChange={set('carburant')}
-                            list="carburants-list"
-                            placeholder="Ex: Essence"
-                            className={inputCls}
-                        />
-                        <datalist id="carburants-list">
-                            {CARBURANTS.map((c) => <option key={c} value={c} />)}
-                        </datalist>
-                    </div>
-                    <div>
-                        <label className={labelCls}>Boîte</label>
-                        <input
-                            type="text"
-                            value={form.transmission}
-                            onChange={set('transmission')}
-                            list="transmissions-list"
-                            placeholder="Ex: Automatique"
-                            className={inputCls}
-                        />
-                        <datalist id="transmissions-list">
-                            {TRANSMISSIONS.map((t) => <option key={t} value={t} />)}
-                        </datalist>
-                    </div>
-                </div>
-                <div>
-                    <label className={labelCls}>Couleur</label>
-                    <input type="text" value={form.couleur} onChange={set('couleur')} placeholder="Noir, Blanc, Rouge..." className={inputCls} />
+
+                {/* Description integrated */}
+                <div className="mt-16 pt-16 border-t border-white/5 space-y-4">
+                    <label className={labelCls}>Présentation & Options</label>
+                    <textarea
+                        rows={6}
+                        value={form.description}
+                        onChange={set('description')}
+                        placeholder="Détaillez ici les équipements, l'historique et l'état général du véhicule..."
+                        className={`${inputCls} resize-none p-6 leading-relaxed`}
+                    />
                 </div>
             </div>
 
-            {/* Description full width */}
-            <div className="md:col-span-2">
-                <label className={labelCls}>Description</label>
-                <textarea
-                    rows={3}
-                    value={form.description}
-                    onChange={set('description')}
-                    placeholder="Options, historique, état général..."
-                    className={`${inputCls} resize-none`}
-                />
-            </div>
+            {/* Hidden Inputs */}
+            <input ref={extInputRef} type="file" multiple accept="image/*" className="hidden" onChange={(e) => handleAddExterior(e.target.files)} />
+            <input ref={intInputRef} type="file" multiple accept="image/*" className="hidden" onChange={(e) => handleAddInterior(e.target.files)} />
 
-            {/* Actions */}
-            <div className="md:col-span-2 flex gap-4">
+            {/* Actions Sticky Footer or Large Buttons */}
+            <div className="flex flex-col sm:grid sm:grid-cols-2 gap-6 pt-10">
                 <button
                     type="button"
                     onClick={onCancel}
-                    className="flex-1 py-4 border border-white/10 text-white/40 hover:text-white/70 hover:border-white/20 rounded-xl text-xs font-bold uppercase tracking-widest transition-all"
+                    className="py-6 border border-white/5 bg-white/[0.02] text-white/30 hover:text-white/60 hover:bg-white/[0.05] rounded-2xl text-[10px] font-black uppercase tracking-[0.4em] transition-all"
                 >
-                    Annuler
+                    Annuler la saisie
                 </button>
                 <button
                     type="submit"
                     disabled={uploading}
-                    className="flex-1 gold-button py-4 text-xs tracking-[0.2em] font-black rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="gold-button py-6 text-[10px] tracking-[0.4em] font-black rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_20px_40px_rgba(212,175,55,0.15)]"
                 >
-                    {uploading ? (
-                        <span className="flex items-center justify-center gap-2">
-                            <div className="w-3.5 h-3.5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-                            Publication…
-                        </span>
-                    ) : "PUBLIER L'ANNONCE"}
+                    {uploading ? "TRANSFÈRE VERS LE CLOUD..." : "VALIDER & PUBLIER L'ANNONCE"}
                 </button>
             </div>
         </form>
@@ -354,10 +416,11 @@ const AdminDashboard = ({ onLogout }) => {
         fetchAnnonces();
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (annonce) => {
         try {
-            await fetch(`/api/annonces?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
-            setAnnonces((prev) => prev.filter((a) => a.id !== id));
+            const ids = (annonce.publicIds || [annonce.id]).join(',');
+            await fetch(`/api/annonces?ids=${encodeURIComponent(ids)}`, { method: 'DELETE' });
+            setAnnonces((prev) => prev.filter((a) => a.id !== annonce.id));
             setDeleteId(null);
         } catch (err) {
             alert('Erreur suppression : ' + err.message);
@@ -399,16 +462,16 @@ const AdminDashboard = ({ onLogout }) => {
                 </div>
             </header>
 
-            <div className="main-container py-12">
+            <div className="main-container py-20">
                 {/* Top Bar */}
-                <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-16">
+                <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 mb-20">
                     <div>
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
+                        <h1 className="text-4xl md:text-6xl lg:text-8xl font-black uppercase tracking-tight leading-[1.1]">
                             <span className="text-white">Gestion du</span> <br />
                             <span className="gold-gradient">Stock Live</span>
                         </h1>
-                        <p className="text-white/20 text-[10px] md:text-xs font-bold mt-6 tracking-[0.4em] uppercase italic flex items-center gap-4">
-                            <span className="h-px w-8 bg-accent-gold/20" />
+                        <p className="text-white/20 text-[10px] md:text-xs font-bold mt-10 tracking-[0.4em] uppercase italic flex items-center gap-4">
+                            <span className="h-px w-12 bg-accent-gold/20" />
                             Protocole de mise en ligne sécurisé
                         </p>
                     </div>
@@ -437,12 +500,12 @@ const AdminDashboard = ({ onLogout }) => {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            className="mb-12 overflow-hidden"
+                            className="mb-20 overflow-hidden"
                         >
-                            <div className="glass-panel border border-accent-gold/15 rounded-2xl p-8 md:p-12">
-                                <div className="flex items-center gap-3 mb-8">
-                                    <span className="h-[2px] w-6 bg-accent-gold" />
-                                    <h2 className="text-sm font-black uppercase tracking-[0.3em]">Nouvelle Annonce</h2>
+                            <div className="glass-panel border border-accent-gold/15 rounded-3xl p-10 md:p-16">
+                                <div className="flex items-center gap-4 mb-12">
+                                    <span className="h-[2px] w-10 bg-accent-gold" />
+                                    <h2 className="text-base font-black uppercase tracking-[0.3em]">Nouvelle Annonce</h2>
                                 </div>
                                 <AnnonceForm onSuccess={handleSuccess} onCancel={() => setShowForm(false)} />
                             </div>
@@ -452,7 +515,7 @@ const AdminDashboard = ({ onLogout }) => {
 
                 {/* Annonces Grid */}
                 <div>
-                    <div className="flex items-center gap-4 mb-7">
+                    <div className="flex items-center gap-6 mb-12">
                         <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Annonces Publiées</span>
                         <div className="flex-1 h-[1px] bg-white/5" />
                     </div>
@@ -470,7 +533,7 @@ const AdminDashboard = ({ onLogout }) => {
                             </button>
                         </div>
                     ) : (
-                        <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12">
+                        <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-12 lg:gap-16">
                             {annonces.map((annonce, i) => (
                                 <motion.div
                                     key={annonce.id}
@@ -490,13 +553,21 @@ const AdminDashboard = ({ onLogout }) => {
                                         <span className="absolute bottom-3 left-3 text-accent-gold font-black text-lg">
                                             {Number(annonce.prix).toLocaleString('fr-FR')} €
                                         </span>
+                                        <div className="absolute top-3 right-3 flex flex-col gap-1">
+                                            <span className="bg-black/60 backdrop-blur-md px-2 py-1 rounded-md text-[8px] font-black text-white/80 border border-white/10">
+                                                {annonce.photos?.filter(p => p.type === 'exterior').length || 0} EXT.
+                                            </span>
+                                            <span className="bg-black/60 backdrop-blur-md px-2 py-1 rounded-md text-[8px] font-black text-white/80 border border-white/10">
+                                                {annonce.photos?.filter(p => p.type === 'interior').length || 0} INT.
+                                            </span>
+                                        </div>
 
 
                                     </div>
 
                                     {/* Infos */}
-                                    <div className="p-8">
-                                        <h3 className="font-black text-2xl uppercase tracking-tight mb-4">
+                                    <div className="p-10">
+                                        <h3 className="font-black text-2xl uppercase tracking-tight mb-6">
                                             {annonce.marque} <span className="text-white/60 font-semibold">{annonce.modele}</span>
                                         </h3>
                                         <div className="flex flex-wrap gap-2 mt-3">
@@ -508,7 +579,7 @@ const AdminDashboard = ({ onLogout }) => {
                                                 ))}
                                         </div>
                                         {annonce.description && (
-                                            <p className="text-white/25 text-xs leading-relaxed mt-3 line-clamp-2 font-light">
+                                            <p className="text-white/25 text-xs leading-relaxed mt-5 line-clamp-3 font-light">
                                                 {annonce.description}
                                             </p>
                                         )}
@@ -518,7 +589,7 @@ const AdminDashboard = ({ onLogout }) => {
                                             {deleteId === annonce.id ? (
                                                 <div className="flex gap-2">
                                                     <button
-                                                        onClick={() => handleDelete(annonce.id)}
+                                                        onClick={() => handleDelete(annonce)}
                                                         className="flex-1 py-2.5 bg-red-500 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-lg transition-all"
                                                     >
                                                         Confirmer

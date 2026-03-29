@@ -29,12 +29,18 @@ export default async function handler(req, res) {
 
             const data = await response.json();
 
-            const annonces = (data.resources || [])
-                .map((r) => {
-                    const ctx = r.context?.custom || {};
-                    return {
-                        id: r.public_id,
-                        url: r.secure_url,
+            // Grouping by carId
+            const groupedAnnonces = {};
+
+            (data.resources || []).forEach((r) => {
+                const ctx = r.context?.custom || {};
+                const carId = ctx.carId || r.public_id; // Fallback to public_id for legacy ads
+
+                if (!groupedAnnonces[carId]) {
+                    groupedAnnonces[carId] = {
+                        id: carId,
+                        publicIds: [],
+                        photos: [],
                         marque: ctx.marque || '',
                         modele: ctx.modele || '',
                         annee: ctx.annee || '',
@@ -46,7 +52,25 @@ export default async function handler(req, res) {
                         description: ctx.description || '',
                         created_at: r.created_at,
                     };
-                })
+                }
+
+                groupedAnnonces[carId].publicIds.push(r.public_id);
+                groupedAnnonces[carId].photos.push({
+                    url: r.secure_url,
+                    type: ctx.type || 'exterior',
+                    isMain: ctx.isMain === 'true' || ctx.isMain === true || !ctx.type
+                });
+
+                // Update metadata if this is the "main" photo or if the current metadata is empty
+                if (ctx.isMain === 'true' || !groupedAnnonces[carId].marque) {
+                    groupedAnnonces[carId].marque = ctx.marque || groupedAnnonces[carId].marque;
+                    groupedAnnonces[carId].modele = ctx.modele || groupedAnnonces[carId].modele;
+                    groupedAnnonces[carId].prix = ctx.prix || groupedAnnonces[carId].prix;
+                    groupedAnnonces[carId].url = r.secure_url; // Main image URL for preview
+                }
+            });
+
+            const annonces = Object.values(groupedAnnonces)
                 .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
             return res.json({ annonces });
@@ -55,14 +79,17 @@ export default async function handler(req, res) {
         }
     }
 
-    // ─── DELETE: supprimer une annonce par son public_id ──────────────────────
+    // ─── DELETE: supprimer une annonce (un ou plusieurs public_ids) ─────────────
     if (req.method === 'DELETE') {
-        const publicId = req.query.id;
-        if (!publicId) return res.status(400).json({ error: 'Paramètre id requis' });
+        const publicIdsPath = req.query.ids || req.query.id;
+        if (!publicIdsPath) return res.status(400).json({ error: 'Paramètre ids requis' });
+
+        const publicIds = publicIdsPath.split(',');
+        const idsQuery = publicIds.map(id => `public_ids[]=${encodeURIComponent(id)}`).join('&');
 
         try {
             const response = await fetch(
-                `${baseUrl}/resources/image/upload?public_ids[]=${encodeURIComponent(publicId)}`,
+                `${baseUrl}/resources/image/upload?${idsQuery}`,
                 { method: 'DELETE', headers: { Authorization: authHeader } }
             );
 

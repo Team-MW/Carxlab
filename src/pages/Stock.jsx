@@ -73,10 +73,10 @@ const Stock = () => {
                             <span className="text-accent-gold tracking-[0.4em] font-black text-xs uppercase">Inventaire Exclusif</span>
                             <span className="h-[2px] w-12 bg-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]" />
                         </div>
-                        <h1 className="hero-title mb-12">
+                        <h1 className="hero-title mb-16 md:mb-20">
                             STOCK <span className="gold-gradient">RÉEL</span>
                         </h1>
-                        <p className="text-white/40 text-xl font-light leading-relaxed">
+                        <p className="text-white/40 text-xl font-light leading-relaxed mb-12">
                             Notre sélection de véhicules d'exception, disponibles immédiatement.
                         </p>
                         {!loading && (
@@ -94,7 +94,7 @@ const Stock = () => {
             </section>
 
             {/* Luxury Control Panel */}
-            <div className="sticky top-[80px] md:top-[100px] z-40 bg-black/95 backdrop-blur-3xl border-b border-white/5 py-8 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <div className="sticky top-[80px] md:top-[100px] z-40 bg-black/95 backdrop-blur-3xl border-b border-white/5 py-10 md:py-14 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                 <div className="main-container">
                     <div className="flex flex-col lg:flex-row gap-8 items-center justify-between">
 
@@ -195,12 +195,12 @@ const Stock = () => {
             {/* Content */}
             <section className="section-padding bg-black/30">
                 <div className="main-container">
-                    <div className="mb-12">
-                        <div className="flex items-center gap-4 mb-4">
-                            <span className="h-[1px] w-12 bg-accent-gold/50" />
-                            <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-accent-gold">Catalogue Live</h2>
+                    <div className="mb-16 md:mb-20">
+                        <div className="flex items-center gap-6 mb-8">
+                            <span className="h-[1px] w-20 bg-accent-gold/50" />
+                            <h2 className="text-[12px] font-black uppercase tracking-[0.5em] text-accent-gold">Catalogue Live</h2>
                         </div>
-                        <p className="text-white/20 text-xs font-bold tracking-widest uppercase">Sélection exclusive CarXLab</p>
+                        <p className="text-white/20 text-sm font-bold tracking-widest uppercase">Sélection exclusive CarXLab</p>
                     </div>
 
                     {loading ? (
@@ -232,7 +232,7 @@ const Stock = () => {
                                     {filtered.length} véhicule{filtered.length !== 1 ? 's' : ''} trouvé{filtered.length !== 1 ? 's' : ''} correspondant à vos critères
                                 </p>
                             )}
-                            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+                            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-12 lg:gap-16">
                                 {filtered.map((annonce, i) => (
                                     <AnnonceCard key={annonce.id} annonce={annonce} index={i} />
                                 ))}

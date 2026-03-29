@@ -18,6 +18,7 @@ const AnnonceDetail = () => {
     const [annonce, setAnnonce] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [activePhoto, setActivePhoto] = useState(null);
 
     useEffect(() => {
         const fetchAnnonce = async () => {
@@ -28,6 +29,7 @@ const AnnonceDetail = () => {
                 const found = data.annonces.find(a => a.id === decodeURIComponent(id));
                 if (found) {
                     setAnnonce(found);
+                    setActivePhoto(found.url); // Use main image initially
                 } else {
                     setError("Annonce introuvable");
                 }
@@ -70,105 +72,153 @@ const AnnonceDetail = () => {
                 <div className="grid lg:grid-cols-12 gap-12">
 
                     {/* Gauche : Image & Details */}
-                    <div className="lg:col-span-7 space-y-12">
-                        {/* Image Principale */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="aspect-square md:aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 group relative"
-                        >
-                            <img
-                                src={annonce.url}
-                                alt={annonce.marque}
-                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                        </motion.div>
+                    <div className="lg:col-span-7 space-y-20">
+                        {/* Image Principale Display */}
+                        <div className="relative">
+                            <motion.div
+                                key={activePhoto}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className="aspect-square md:aspect-[16/10] rounded-[2rem] overflow-hidden bg-white/5 border border-white/10 group relative shadow-2xl"
+                            >
+                                <img
+                                    src={activePhoto}
+                                    alt={annonce.marque}
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                            </motion.div>
+                            
+                            {/* Decorative elements */}
+                            <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-accent-gold/20 rounded-tl-3xl pointer-events-none" />
+                            <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-accent-gold/20 rounded-br-3xl pointer-events-none" />
+                        </div>
+
+                        {/* Gallery Categories */}
+                        <div className="space-y-16">
+                            {/* Exterior Section */}
+                            {annonce.photos?.some(p => p.type === 'exterior') && (
+                                <div className="space-y-6">
+                                    <div className="flex items-center gap-4">
+                                        <span className="h-[2px] w-10 bg-accent-gold shadow-[0_0_10px_rgba(212,175,55,0.3)]" />
+                                        <h3 className="text-xs font-black uppercase tracking-[0.4em] text-white">Vues Extérieures</h3>
+                                    </div>
+                                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
+                                        {annonce.photos.filter(p => p.type === 'exterior').map((photo, i) => (
+                                            <button
+                                                key={i}
+                                                onClick={() => setActivePhoto(photo.url)}
+                                                className={`aspect-square rounded-2xl overflow-hidden border-2 transition-all duration-500 hover:scale-105 ${activePhoto === photo.url ? 'border-accent-gold shadow-[0_0_20px_rgba(212,175,55,0.2)]' : 'border-white/5 hover:border-white/20 opacity-40 hover:opacity-100'}`}
+                                            >
+                                                <img src={photo.url} alt={`EXT ${i}`} className="w-full h-full object-cover" />
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Interior Section */}
+                            {annonce.photos?.some(p => p.type === 'interior') && (
+                                <div className="space-y-6">
+                                    <div className="flex items-center gap-4">
+                                        <span className="h-[2px] w-10 bg-white/10" />
+                                        <h3 className="text-xs font-black uppercase tracking-[0.4em] text-white/40">Vues Intérieures</h3>
+                                    </div>
+                                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
+                                        {annonce.photos.filter(p => p.type === 'interior').map((photo, i) => (
+                                            <button
+                                                key={i}
+                                                onClick={() => setActivePhoto(photo.url)}
+                                                className={`aspect-square rounded-2xl overflow-hidden border-2 transition-all duration-500 hover:scale-105 ${activePhoto === photo.url ? 'border-accent-gold shadow-[0_0_20px_rgba(212,175,55,0.2)]' : 'border-white/5 hover:border-white/20 opacity-30 hover:opacity-100'}`}
+                                            >
+                                                <img src={photo.url} alt={`INT ${i}`} className="w-full h-full object-cover" />
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
 
                         {/* Description */}
-                        <div className="glass-panel p-8 md:p-12 rounded-3xl border border-white/5 text-center md:text-left">
-                            <div className="flex items-center justify-center md:justify-start gap-3 mb-8">
+                        <div className="glass-panel p-10 md:p-14 rounded-[2.5rem] border border-white/5 relative bg-white/[0.01]">
+                            <div className="flex items-center gap-4 mb-10">
                                 <ShieldCheck size={20} className="text-accent-gold" />
-                                <h2 className="text-sm font-black uppercase tracking-[0.3em] text-white/80">Description du véhicule</h2>
+                                <h2 className="text-sm font-black uppercase tracking-[0.3em] text-white">Expertise CarXLab</h2>
                             </div>
                             <div className="prose prose-invert max-w-none">
-                                <p className="text-white/40 text-lg leading-relaxed font-light whitespace-pre-line">
-                                    {annonce.description || "Aucune description détaillée n'a été fournie pour ce véhicule. Contactez l'un de nos conseillers pour plus d'informations."}
+                                <p className="text-white/40 text-lg leading-relaxed font-light whitespace-pre-line italic">
+                                    "{annonce.description || "Aucune description détaillée n'a été fournie pour ce véhicule. Contactez l'un de nos conseillers pour plus d'informations."}"
                                 </p>
                             </div>
                         </div>
                     </div>
 
                     {/* Droite : Infos & Achat */}
-                    <div className="lg:col-span-5 space-y-12">
-                        <div className="lg:sticky lg:top-[280px]">
+                    <div className="lg:col-span-5 relative">
+                        <div className="lg:sticky lg:top-[160px] space-y-16">
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="glass-panel p-8 md:p-10 rounded-3xl border border-accent-gold/20 relative"
+                                className="glass-panel p-10 md:p-14 rounded-[3rem] border border-white/5 relative bg-white/[0.01]"
                             >
-                                {/* Badge Rare */}
-                                <div className="absolute top-0 left-10 transform -translate-y-1/2 px-4 py-1.5 bg-accent-gold text-black text-[10px] font-black uppercase tracking-widest rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] z-10">
-                                    DISPONIBLE IMMÉDIATEMENT
+                                {/* Status Badge */}
+                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-2 bg-accent-gold text-black text-[10px] font-black uppercase tracking-[0.4em] rounded-full shadow-[0_10px_30px_rgba(212,175,55,0.3)] z-10 whitespace-nowrap">
+                                    DISPONIBLE // LAB SÉLECTION
                                 </div>
 
-                                <h1 className="text-5xl font-black uppercase tracking-tighter mb-4 leading-none text-center md:text-left">
-                                    {annonce.marque} <br />
-                                    <span className="gold-gradient">{annonce.modele}</span>
-                                </h1>
-
-                                <div className="text-3xl font-light text-white/80 mb-10 tracking-tight text-center md:text-left">
-                                    {formatPrix(annonce.prix)}
-                                </div>
-
-                                {/* Specs Grid */}
-                                <div className="grid grid-cols-2 gap-4 mb-10">
-                                    {specs.map((spec, i) => (
-                                        <div key={i} className="bg-white/5 border border-white/5 p-4 rounded-2xl flex flex-col items-center md:items-start text-center md:text-left">
-                                            <div className="text-accent-gold mb-2">{spec.icon}</div>
-                                            <div className="text-[10px] text-white/30 uppercase tracking-widest font-bold mb-1">{spec.label}</div>
-                                            <div className="text-sm text-white font-medium">{spec.value}</div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* Call to action */}
-                                <div className="space-y-4">
-                                    <a
-                                        href="tel:0659330312"
-                                        className="gold-button w-full py-5 rounded-2xl flex items-center justify-center gap-3 font-black text-xs uppercase tracking-[0.2em] shadow-[0_4px_30px_rgba(212,175,55,0.1)] hover:shadow-[0_4px_40px_rgba(212,175,55,0.2)] transition-all"
-                                    >
-                                        <Phone size={16} /> APPELER POUR RÉSERVER
-                                    </a>
-                                    <Link to="/contact" className="w-full flex items-center justify-center gap-3 py-5 bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-all rounded-2xl border border-white/10 text-[10px] font-bold uppercase tracking-widest">
-                                        <MessageSquare size={16} /> Demander plus d'infos
-                                    </Link>
-                                </div>
-
-                                <div className="mt-8 flex items-center justify-center gap-8 border-t border-white/5 pt-8">
-                                    <div className="flex-center-col gap-2">
-                                        <div className="flex text-accent-gold"><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /></div>
-                                        <span className="text-[8px] text-white/20 uppercase font-black tracking-widest">CarXLab Quality</span>
+                                <div className="space-y-10 text-center md:text-left">
+                                    <div className="space-y-4">
+                                        <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
+                                            {annonce.marque} <br />
+                                            <span className="gold-gradient">{annonce.modele}</span>
+                                        </h1>
+                                        <div className="h-px w-20 bg-accent-gold/20 mx-auto md:mx-0" />
                                     </div>
-                                    <div className="h-8 w-[1px] bg-white/5" />
-                                    <div className="flex-center-col gap-1">
-                                        <span className="text-white font-black text-sm uppercase">12 MOIS</span>
-                                        <span className="text-[8px] text-white/20 uppercase font-bold">Garantie incluse</span>
+
+                                    <div className="text-4xl font-light text-white tracking-tighter">
+                                        {formatPrix(annonce.prix)}
+                                    </div>
+
+                                    {/* Specs List (Replaced grid for more air) */}
+                                    <div className="flex flex-col gap-6 pt-10 border-t border-white/5">
+                                        {specs.map((spec, i) => (
+                                            <div key={i} className="flex items-center justify-between group">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="text-accent-gold/40 group-hover:text-accent-gold transition-colors">{spec.icon}</div>
+                                                    <span className="text-[10px] text-white/20 uppercase tracking-[0.4em] font-black">{spec.label}</span>
+                                                </div>
+                                                <span className="text-sm text-white/60 font-medium tracking-widest uppercase">{spec.value}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Actions */}
+                                    <div className="space-y-6 pt-10">
+                                        <a
+                                            href="tel:0659330312"
+                                            className="gold-button w-full py-8 text-[10px] tracking-[0.4em] font-black rounded-2xl flex items-center justify-center gap-4"
+                                        >
+                                            <Phone size={18} /> RÉSERVER CE VÉHICULE
+                                        </a>
+                                        <div className="flex flex-col items-center gap-4 mt-6">
+                                            <p className="text-[9px] text-white/10 uppercase font-black tracking-[0.5em]">Garanties & Financements Disponibles</p>
+                                        </div>
                                     </div>
                                 </div>
                             </motion.div>
 
-                            {/* Conseil Expert */}
-                            <div className="mt-8 p-6 bg-accent-gold/5 border border-accent-gold/10 rounded-2xl flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-4">
-                                <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-accent-gold/30 mx-auto md:mx-0">
-                                    <div className="w-full h-full bg-accent-gold/20 flex-center text-accent-gold font-black italic">CX</div>
+                            {/* Conseil Expert - Minimal Design */}
+                            <div className="px-10 space-y-8">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-full bg-accent-gold/10 border border-accent-gold/20 flex-center text-accent-gold font-black italic">CX</div>
+                                    <div>
+                                        <p className="text-[10px] font-black uppercase text-accent-gold tracking-[0.4em]">Expert CarXLab</p>
+                                        <p className="text-[8px] text-white/20 uppercase font-bold tracking-widest italic">Authenticité Certifiée</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p className="text-[10px] font-black uppercase text-accent-gold tracking-widest mb-1">L'avis CarXLab</p>
-                                    <p className="text-xs text-white/40 leading-relaxed italic">
-                                        "Un modèle d'exception dans une configuration rare. Nous avons vérifié les 120 points de contrôle caractéristiques de notre exigence."
-                                    </p>
-                                </div>
+                                <p className="text-sm text-white/30 leading-relaxed font-light italic">
+                                    "Cette configuration est particulièrement recherchée. Nous avons validé l'intégralité du carnet d'entretien conformément à notre charte Qualité Lab."
+                                </p>
                             </div>
                         </div>
                     </div>
