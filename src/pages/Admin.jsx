@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Lock, Plus, Trash2, Eye, EyeOff, Upload, X, Check,
-    Car, AlertCircle, LogOut, RefreshCw,
+    Car, AlertCircle, LogOut, RefreshCw, Pencil
 } from 'lucide-react';
 import { uploadToCloudinary } from '../services/cloudinary';
 import { processCarImage } from '../services/imageProcessor';
@@ -112,9 +112,9 @@ const Login = ({ onLogin }) => {
     );
 };
 
-// ─── Formulaire Nouvelle Annonce ─────────────────────────────────────────────
-const AnnonceForm = ({ onSuccess, onCancel }) => {
-    const [form, setForm] = useState(defaultForm);
+// ─── Formulaire Annonce (Ajout / Modification) ──────────────────────────────
+const AnnonceForm = ({ onSuccess, onCancel, editData = null }) => {
+    const [form, setForm] = useState(editData ? { ...defaultForm, ...editData } : defaultForm);
     const [exteriorPhotos, setExteriorPhotos] = useState([]);
     const [interiorPhotos, setInteriorPhotos] = useState([]);
     const [uploading, setUploading] = useState(false);
@@ -162,33 +162,55 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (exteriorPhotos.length === 0 && interiorPhotos.length === 0) {
-            return alert('Veuillez ajouter au moins une photo.');
-        }
         setUploading(true);
+
         try {
-            const carId = `car_${Date.now()}`;
-            const uploadPromises = [];
+            const carId = editData ? editData.id : `car-${Date.now()}`;
 
-            // Upload Extérieurs
-            exteriorPhotos.forEach(({ file }, index) => {
-                const metadata = { ...form, carId, type: 'exterior', isMain: index === 0 };
-                uploadPromises.push(uploadToCloudinary(file, metadata));
-            });
+            // 1. Si on est en mode édition, on met d'abord à jour les métadonnées des photos EXISTANTES
+            if (editData && editData.publicIds) {
+                await fetch('/api/annonces', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        publicIds: editData.publicIds,
+                        context: {
+                            carId,
+                            ...form,
+                        }
+                    })
+                });
+            }
 
-            // Upload Intérieurs
-            interiorPhotos.forEach(({ file }) => {
-                const metadata = { ...form, carId, type: 'interior', isMain: false };
-                uploadPromises.push(uploadToCloudinary(file, metadata));
-            });
+            // 2. Upload des NOUVELLES photos (Extérieur + Intérieur)
+            const allNewPhotos = [
+                ...exteriorPhotos.map(p => ({ ...p, type: 'exterior' })),
+                ...interiorPhotos.map(p => ({ ...p, type: 'interior' }))
+            ];
 
-            await Promise.all(uploadPromises);
+            for (let i = 0; i < allNewPhotos.length; i++) {
+                const p = allNewPhotos[i];
+                const isMain = !editData && i === 0 && p.type === 'exterior'; // Seule la 1ère photo d'un NOUVEL ajout est main par défaut
+                
+                await uploadToCloudinary(p.file, {
+                    ...form,
+                    carId,
+                    type: p.type,
+                    isMain: isMain.toString()
+                });
+            }
+
             setSuccess(true);
-            setTimeout(() => { onSuccess(); }, 2000);
+            setTimeout(() => {
+                onSuccess();
+                setUploading(false);
+            }, 1000);
+
         } catch (err) {
-            alert("Erreur : " + err.message);
+            console.error('Erreur:', err);
+            alert('Une erreur est survenue lors de la publication.');
+            setUploading(false);
         }
-        setUploading(false);
     };
 
     const inputCls = 'w-full bg-white/5 border border-white/10 p-3 rounded-xl focus:border-accent-gold outline-none text-white/80 text-sm transition-all';
@@ -208,9 +230,7 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-20">
-            {/* 1. VISUELS SECTION */}
             <div className="grid lg:grid-cols-2 gap-10 md:gap-16">
-                {/* Photos EXTÉRIER */}
                 <div className="glass-panel p-8 md:p-10 rounded-3xl border border-white/5 relative overflow-hidden group">
                     <div className="absolute top-0 left-0 w-20 h-[2px] bg-accent-gold" />
                     <div className="flex items-center gap-4 mb-8">
@@ -240,7 +260,7 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
                                 >
                                     <X size={14} />
                                 </button>
-                                {i === 0 && (
+                                {i === 0 && !editData && (
                                     <div className="absolute bottom-0 inset-x-0 bg-accent-gold py-1 text-[8px] font-black text-black text-center uppercase tracking-widest">
                                         Principale
                                     </div>
@@ -263,7 +283,6 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
                     </div>
                 </div>
 
-                {/* Photos INTÉRIEUR */}
                 <div className="glass-panel p-8 md:p-10 rounded-3xl border border-white/5 relative overflow-hidden group">
                     <div className="absolute top-0 left-0 w-20 h-[2px] bg-white/20" />
                     <div className="flex items-center gap-4 mb-8">
@@ -307,7 +326,6 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
                 </div>
             </div>
 
-            {/* 2. INFOS SECTION */}
             <div className="glass-panel p-10 md:p-16 rounded-[2.5rem] border border-white/5 relative bg-white/[0.01]">
                 <div className="flex items-center gap-6 mb-16">
                     <span className="h-[2px] w-12 bg-accent-gold" />
@@ -352,7 +370,6 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
                     </div>
                 </div>
 
-                {/* Description integrated */}
                 <div className="mt-16 pt-16 border-t border-white/5 space-y-4">
                     <label className={labelCls}>Présentation & Options</label>
                     <textarea
@@ -365,11 +382,9 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
                 </div>
             </div>
 
-            {/* Hidden Inputs */}
             <input ref={extInputRef} type="file" multiple accept="image/*" className="hidden" onChange={(e) => handleAddExterior(e.target.files)} />
             <input ref={intInputRef} type="file" multiple accept="image/*" className="hidden" onChange={(e) => handleAddInterior(e.target.files)} />
 
-            {/* Actions Sticky Footer or Large Buttons */}
             <div className="flex flex-col sm:grid sm:grid-cols-2 gap-6 pt-10">
                 <button
                     type="button"
@@ -383,7 +398,7 @@ const AnnonceForm = ({ onSuccess, onCancel }) => {
                     disabled={uploading}
                     className="gold-button py-6 text-[10px] tracking-[0.4em] font-black rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_20px_40px_rgba(212,175,55,0.15)]"
                 >
-                    {uploading ? "TRANSFÈRE VERS LE CLOUD..." : "VALIDER & PUBLIER L'ANNONCE"}
+                    {uploading ? (editData ? "MISE À JOUR..." : "TRANSFÈRE VERS LE CLOUD...") : (editData ? "ENREGISTRER LES MODIFICATIONS" : "VALIDER & PUBLIER L'ANNONCE")}
                 </button>
             </div>
         </form>
@@ -395,6 +410,7 @@ const AdminDashboard = ({ onLogout }) => {
     const [annonces, setAnnonces] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
+    const [editAnnonce, setEditAnnonce] = useState(null);
     const [deleteId, setDeleteId] = useState(null);
 
     const fetchAnnonces = async () => {
@@ -432,7 +448,6 @@ const AdminDashboard = ({ onLogout }) => {
             <div className="absolute inset-0 lab-grid opacity-20 pointer-events-none" />
             <div className="scan-overlay" />
 
-            {/* Header */}
             <header className="sticky top-0 z-[60] border-b border-white/5 bg-black/80 backdrop-blur-3xl">
                 <div className="main-container py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -463,7 +478,6 @@ const AdminDashboard = ({ onLogout }) => {
             </header>
 
             <div className="main-container py-20">
-                {/* Top Bar */}
                 <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 mb-20">
                     <div>
                         <h1 className="text-4xl md:text-6xl lg:text-8xl font-black uppercase tracking-tight leading-[1.1]">
@@ -483,7 +497,7 @@ const AdminDashboard = ({ onLogout }) => {
                             <RefreshCw size={18} />
                         </button>
                         <button
-                            onClick={() => setShowForm(!showForm)}
+                            onClick={() => { setEditAnnonce(null); setShowForm(!showForm); }}
                             className={`flex-1 md:flex-none flex items-center justify-center gap-3 px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition-all shadow-2xl ${showForm ? 'bg-white/5 text-white/50 border border-white/10' : 'gold-button'
                                 }`}
                         >
@@ -493,7 +507,6 @@ const AdminDashboard = ({ onLogout }) => {
                     </div>
                 </div>
 
-                {/* Form Panel */}
                 <AnimatePresence>
                     {showForm && (
                         <motion.div
@@ -505,15 +518,18 @@ const AdminDashboard = ({ onLogout }) => {
                             <div className="glass-panel border border-accent-gold/15 rounded-3xl p-10 md:p-16">
                                 <div className="flex items-center gap-4 mb-12">
                                     <span className="h-[2px] w-10 bg-accent-gold" />
-                                    <h2 className="text-base font-black uppercase tracking-[0.3em]">Nouvelle Annonce</h2>
+                                    <h2 className="text-base font-black uppercase tracking-[0.3em]">{editAnnonce ? "Modifier l'Annonce" : "Nouvelle Annonce"}</h2>
                                 </div>
-                                <AnnonceForm onSuccess={handleSuccess} onCancel={() => setShowForm(false)} />
+                                <AnnonceForm 
+                                    onSuccess={() => { setEditAnnonce(null); handleSuccess(); }} 
+                                    onCancel={() => { setEditAnnonce(null); setShowForm(false); }} 
+                                    editData={editAnnonce}
+                                />
                             </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
 
-                {/* Annonces Grid */}
                 <div>
                     <div className="flex items-center gap-6 mb-12">
                         <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Annonces Publiées</span>
@@ -542,7 +558,6 @@ const AdminDashboard = ({ onLogout }) => {
                                     transition={{ delay: i * 0.05 }}
                                     className="group glass-panel border border-white/5 hover:border-white/10 rounded-2xl overflow-hidden transition-all"
                                 >
-                                    {/* Image */}
                                     <div className="relative aspect-[16/10] overflow-hidden bg-white/3">
                                         <img
                                             src={annonce.url}
@@ -561,11 +576,8 @@ const AdminDashboard = ({ onLogout }) => {
                                                 {annonce.photos?.filter(p => p.type === 'interior').length || 0} INT.
                                             </span>
                                         </div>
-
-
                                     </div>
 
-                                    {/* Infos */}
                                     <div className="p-10">
                                         <h3 className="font-black text-2xl uppercase tracking-tight mb-6">
                                             {annonce.marque} <span className="text-white/60 font-semibold">{annonce.modele}</span>
@@ -584,7 +596,6 @@ const AdminDashboard = ({ onLogout }) => {
                                             </p>
                                         )}
 
-                                        {/* Nouveau bouton de suppression explicite */}
                                         <div className="mt-6 pt-4 border-t border-white/5">
                                             {deleteId === annonce.id ? (
                                                 <div className="flex gap-2">
@@ -602,13 +613,20 @@ const AdminDashboard = ({ onLogout }) => {
                                                     </button>
                                                 </div>
                                             ) : (
-                                                <button
-                                                    onClick={() => setDeleteId(annonce.id)}
-                                                    className="w-full flex items-center justify-center gap-2 py-2.5 bg-white/5 hover:bg-white/10 text-white/40 hover:text-red-400 group/btn transition-all text-[10px] font-black uppercase tracking-widest rounded-lg"
-                                                >
-                                                    <Trash2 size={12} className="group-hover/btn:scale-110 transition-transform" />
-                                                    Supprimer l'annonce
-                                                </button>
+                                                <div className="flex gap-4">
+                                                    <button
+                                                        onClick={() => { setEditAnnonce(annonce); setShowForm(true); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                                                        className="flex-1 py-4 bg-white/5 hover:bg-white/10 text-white/60 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all border border-white/5 flex items-center justify-center gap-2"
+                                                    >
+                                                        <Pencil size={12} /> Modifier
+                                                    </button>
+                                                    <button
+                                                        onClick={() => setDeleteId(annonce.id)}
+                                                        className="px-6 py-4 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all border border-red-500/10"
+                                                    >
+                                                        <Trash2 size={12} />
+                                                    </button>
+                                                </div>
                                             )}
                                         </div>
                                     </div>
